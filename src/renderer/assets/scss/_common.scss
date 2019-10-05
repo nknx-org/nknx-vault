@@ -1,0 +1,55 @@
+/*========== Body ==========*/
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: $body-bg;
+  color: $body-color;
+  * {
+    line-height: normal;
+    font-family: $body-font;
+    font-style: normal;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: $h1-fz;
+  font-weight: $fw-semi-bold;
+  line-height: 64px;
+}
+
+h2 {
+  font-size: $h2-fz;
+  font-weight: $fw-semi-bold;
+  line-height: 43px;
+}
+
+h3 {
+  font-size: $h3-fz;
+  font-weight: $fw-semi-bold;
+  line-height: 28px;
+}
+
+h4 {
+  font-size: $h4-fz;
+  font-weight: $fw-semi-bold;
+  line-height: 24px;
+}
+
+h5 {
+  font-size: $h5-fz;
+  font-weight: normal;
+  line-height: 24px;
+}
+
+h1 {
+  font-size: $h6-fz;
+  font-weight: normal;
+  line-height: 21px;
+}
