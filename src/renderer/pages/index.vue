@@ -1,14 +1,17 @@
 <template>
-  <div>login</div>
+  <div>
+    <h1 class="title_dark">Heading</h1>
+    <p>text?</p>
+  </div>
 </template>
 
 <script>
 export default {
-  layout: 'login',
+  layout: "login",
   components: {},
-  data () {
-    return {}
+  data() {
+    return {};
   },
   methods: {}
-}
+};
 </script>

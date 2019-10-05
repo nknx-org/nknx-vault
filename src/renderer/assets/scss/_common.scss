@@ -19,37 +19,53 @@ a {
 }
 
 h1 {
+  font-family: $heading-font;
   font-size: $h1-fz;
   font-weight: $fw-semi-bold;
   line-height: 64px;
 }
 
 h2 {
+  font-family: $heading-font;
   font-size: $h2-fz;
   font-weight: $fw-semi-bold;
   line-height: 43px;
 }
 
 h3 {
+  font-family: $heading-font;
   font-size: $h3-fz;
   font-weight: $fw-semi-bold;
   line-height: 28px;
 }
 
 h4 {
+  font-family: $heading-font;
   font-size: $h4-fz;
   font-weight: $fw-semi-bold;
   line-height: 24px;
 }
 
 h5 {
+  font-family: $heading-font;
   font-size: $h5-fz;
   font-weight: normal;
   line-height: 24px;
 }
 
-h1 {
+h6 {
+  font-family: $heading-font;
   font-size: $h6-fz;
   font-weight: normal;
   line-height: 21px;
+}
+
+.title {
+  &_dark {
+    color: $dark;
+  }
+
+  &_light {
+    color: $white;
+  }
 }
