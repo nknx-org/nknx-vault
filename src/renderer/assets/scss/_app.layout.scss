@@ -1,0 +1,64 @@
+.layout {
+  &-login {
+    background-color: $primary;
+
+    &__wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    &__logo {
+      display: flex;
+      align-items: center;
+      cursor: default;
+      user-select: none;
+    }
+
+    &__title {
+      font-size: $fz-lg;
+      font-family: $heading-font;
+      font-weight: $fw-semi-bold;
+      line-height: 21px;
+      color: $white;
+      margin-left: $padding-micro;
+    }
+
+    &__header {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      padding: $padding-big;
+    }
+
+    &__btn {
+      appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      background-color: transparent;
+      outline: none;
+      color: $white;
+      cursor: pointer;
+      text-transform: uppercase;
+      line-height: 21px;
+      font-size: $fz-lg;
+      font-family: $heading-font;
+      padding: $padding-default $padding-big;
+      // transition: $transition-1;
+      border-radius: 100em;
+
+      &:hover {
+        background-color: $grey-light;
+        color: $primary;
+      }
+
+      &:active {
+        background-color: $grey-dark;
+      }
+
+      &:first-child {
+        margin-right: 80px;
+      }
+    }
+  }
+}
