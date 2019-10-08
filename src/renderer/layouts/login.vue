@@ -3,7 +3,7 @@
     <div class="layout-login__wrapper">
       <div class="layout-login__header">
         <div class="layout-login__logo">
-          <logo />
+          <Logo />
           <span class="layout-login__title">NKNX VALUT</span>
         </div>
         <div class="layout-login__menu">
@@ -11,15 +11,15 @@
           <Button class="layout-login__btn">{{$t('import')}}</Button>
         </div>
       </div>
-      <nuxt />
+      <nuxt class="layout-login__content" />
     </div>
   </div>
 </template>
 
 <script>
-import logo from "~/assets/icons/logo.svg";
+import Logo from "~/assets/icons/logo.svg";
 
 export default {
-  components: { logo }
+  components: { Logo }
 };
 </script>

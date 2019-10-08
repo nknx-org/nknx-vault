@@ -44,6 +44,7 @@ $fz-sm: 0.8125rem !default; // 13px
 $fz-md: 0.875rem !default; // 14px
 $fz-base: 1rem !default; // Assumes the browser default, typically `16px`
 $fz-lg: 1.125rem !default; // 18px
+$fz-llg: 1.5rem !default; // 24px;
 
 // Setting For Heading Element
 $heading-font: "Rubik", Arial;
@@ -78,7 +79,8 @@ $card-br: 8px;
 $padding-micro: 8px;
 $padding-small: 12px;
 $padding-default: 16px;
+$padding-lg: 18px;
 $padding-normal: 24px;
-$padding-medium: 34px;
+$padding-medium: 32px;
 $padding-big: 40px;
 $padding-max: 64px;

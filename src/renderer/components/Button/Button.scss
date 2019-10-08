@@ -1,0 +1,65 @@
+.button {
+  padding: $padding-lg $padding-big;
+  border-radius: 100em;
+  text-align: center;
+  transition: $transition-1;
+  cursor: pointer !important;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background: $white;
+  font-size: $fz-md;
+  justify-content: center;
+
+  @include size-md {
+    font-size: $fz-base;
+  }
+
+  &__icon {
+    margin-right: 10px;
+  }
+
+  &_disabled {
+    cursor: not-allowed !important;
+  }
+
+  &_theme {
+    &_success {
+      color: $white;
+      background: $success;
+
+      &:hover {
+        background: lighten($success, 10%);
+      }
+
+      &:active {
+        background: darken($success, 10%);
+      }
+    }
+
+    &_ghost {
+      color: $white;
+      border: 2px solid $secondary;
+      background: transparent;
+
+      &:hover {
+        color: $secondary;
+        background: $white;
+        border-color: $white;
+      }
+
+      &:active {
+        color: $secondary;
+        background: darken($white, 10%);
+        border-color: darken($white, 10%);
+      }
+    }
+  }
+
+  &_full {
+    width: 100%;
+  }
+}

@@ -1,0 +1,41 @@
+.welcome {
+  &__content {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+  }
+
+  &__back {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &__left {
+    padding-top: 150px;
+    position: relative;
+  }
+
+  &__descr {
+    margin-top: $padding-medium;
+    color: $white;
+    font-size: $fz-llg;
+    margin-bottom: $padding-big;
+  }
+
+  &__share {
+    max-width: 100%;
+    position: relative;
+    top: 70px;
+  }
+
+  &__controls {
+    position: relative;
+    display: flex;
+  }
+
+  &__btn {
+    &:not(:first-child) {
+      margin-left: $padding-default;
+    }
+  }
+}
