@@ -2,6 +2,7 @@
   &__content {
     display: grid;
     grid-template-columns: 0.8fr 1fr;
+    padding-bottom: 250px;
   }
 
   &__back {
@@ -31,6 +32,25 @@
   &__controls {
     position: relative;
     display: flex;
+  }
+
+  &__disclaimer {
+    position: relative;
+
+    &-text {
+      position: relative;
+      color: $grey-dark;
+      font-size: $fz-md;
+      max-width: 568px;
+      padding-bottom: $padding-big;
+    }
+
+    &-fragment {
+      position: absolute;
+      left: -50px;
+      bottom: -30px;
+      height: 300px;
+    }
   }
 
   &__btn {

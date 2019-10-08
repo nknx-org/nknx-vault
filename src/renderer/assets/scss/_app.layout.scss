@@ -1,6 +1,7 @@
 .layout {
   &-login {
     background-color: $primary;
+    overflow: hidden;
 
     &__wrapper {
       max-width: 1400px;
@@ -48,7 +49,6 @@
       font-size: $fz-lg;
       font-family: $heading-font;
       padding: $padding-default $padding-big;
-      // transition: $transition-1;
       border-radius: 100em;
 
       &:hover {
