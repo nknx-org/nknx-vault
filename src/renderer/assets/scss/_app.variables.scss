@@ -74,6 +74,9 @@ $body-font: $html-font-family;
 
 // Card
 $card-br: 8px;
+$card-bg-default: $white;
+$card-shadow: $shadow-1;
+$card-border: 1px solid #ececec;
 
 // App Spacing
 $padding-micro: 8px;
@@ -84,3 +87,6 @@ $padding-normal: 24px;
 $padding-medium: 32px;
 $padding-big: 40px;
 $padding-max: 64px;
+
+// Modal
+$modal-width: 592px;

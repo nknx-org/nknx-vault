@@ -13,6 +13,10 @@ body {
   }
 }
 
+b {
+  font-weight: bold;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -67,5 +71,62 @@ h6 {
 
   &_light {
     color: $white;
+  }
+}
+
+// Modals
+
+.modal {
+  max-width: 592px;
+  margin: 0 auto;
+
+  &__title {
+    color: $dark;
+    text-align: center;
+    margin-bottom: $padding-normal;
+  }
+
+  &__descr {
+    margin-bottom: $padding-normal;
+  }
+
+  &__label {
+    font-weight: bold;
+    font-size: $fz-lg;
+    display: block;
+
+    &:not(:last-of-type) {
+      margin-bottom: $padding-default;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    border-radius: $card-br;
+    border: $card-border;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    transition: $transition-1;
+    padding: $padding-default;
+    resize: none;
+    margin-top: $padding-micro;
+
+    &:focus {
+      border-color: $secondary;
+    }
+  }
+
+  &__checkbox {
+    margin-top: $padding-normal;
+  }
+
+  &__footer {
+    margin-top: $padding-medium;
+    display: flex;
+    justify-content: flex-end;
   }
 }

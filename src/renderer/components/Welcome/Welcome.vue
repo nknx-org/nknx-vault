@@ -9,7 +9,12 @@
             class="welcome__descr"
           >No sign up. No catch. Just an effective, community driven desktop-based wallet, putting the control in your hands ready to join the networking revolution.</p>
           <div class="welcome__controls">
-            <Button class="welcome__btn" theme="success">{{$t('createWallet')}}</Button>
+            <Button
+              class="welcome__btn"
+              type="router"
+              url="createWallet"
+              theme="success"
+            >{{$t('createWallet')}}</Button>
             <Button class="welcome__btn" theme="ghost">{{$t('import')}}</Button>
           </div>
         </div>

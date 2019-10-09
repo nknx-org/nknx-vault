@@ -24,6 +24,16 @@
 
   &_disabled {
     cursor: not-allowed !important;
+    color: $grey-darkest !important;
+    background: $base !important;
+
+    &:hover {
+      background: $base !important;
+    }
+
+    &:active {
+      background: $base !important;
+    }
   }
 
   &_theme {
