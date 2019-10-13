@@ -6,10 +6,10 @@
       type="checkbox"
       :checked="value"
       :name="name"
-    />
-    <label class="checkbox__label"></label>
+    >
+    <label class="checkbox__label" />
     <span class="checkbox__text">
-      <slot></slot>
+      <slot />
     </span>
   </div>
 </template>
@@ -27,22 +27,22 @@ export default {
     },
     name: {
       type: String,
-      default: ""
+      default: ''
     },
     label: {
       type: String,
-      default: ""
+      default: ''
     }
   },
   computed: {
     radioButtonValue: {
-      get: function() {
-        return this.value;
+      get () {
+        return this.value
       },
-      set: function() {
-        this.$emit("change", this.label);
+      set () {
+        this.$emit('change', this.label)
       }
     }
   }
-};
+}
 </script>

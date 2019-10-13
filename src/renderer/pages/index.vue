@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import Welcome from "~/components/Welcome/Welcome.vue";
+import Welcome from '~/components/Welcome/Welcome.vue'
 
 export default {
-  layout: "login",
+  layout: 'login',
   components: { Welcome },
-  data() {
-    return {};
+  data () {
+    return {}
   },
   methods: {}
-};
+}
 </script>

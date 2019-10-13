@@ -3,14 +3,14 @@
 </template>
 
 <script>
-import CreateWalletModal from "~/components/Modals/CreateWalletModal.vue";
+import CreateWalletModal from '~/components/Modals/CreateWalletModal.vue'
 
 export default {
-  layout: "login",
+  layout: 'login',
   components: { CreateWalletModal },
-  data() {
-    return {};
+  data () {
+    return {}
   },
   methods: {}
-};
+}
 </script>
