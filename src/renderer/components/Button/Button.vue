@@ -36,7 +36,7 @@ export default {
   props: {
     theme: {
       type: String,
-      default: "primary"
+      default: 'primary'
     },
     disabled: {
       type: Boolean,
@@ -44,11 +44,11 @@ export default {
     },
     type: {
       type: String,
-      default: "button"
+      default: 'button'
     },
     url: {
       type: String,
-      default: ""
+      default: ''
     },
     full: {
       type: Boolean,
@@ -60,17 +60,17 @@ export default {
     }
   },
   data: () => {
-    return {};
+    return {}
   },
-  mounted() {},
+  mounted () {},
   methods: {
-    onClickButton(event) {
+    onClickButton (event) {
       if (this.disabled !== true) {
-        this.click();
+        this.click()
       } else {
-        event.preventDefault();
+        event.preventDefault()
       }
     }
   }
-};
+}
 </script>

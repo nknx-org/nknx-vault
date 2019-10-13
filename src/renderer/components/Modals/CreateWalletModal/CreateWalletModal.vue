@@ -13,11 +13,11 @@
             v-model="password"
             class="modal__controller"
             :type="!passwordVisible ? 'password' : 'text'"
-          />
+          >
           <span
             :class="['modal__input-action', passwordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
             @click="togglePasswordVisible"
-          ></span>
+          />
         </div>
       </label>
       <label class="modal__label">
@@ -27,11 +27,11 @@
             v-model="passwordConfirm"
             class="modal__controller"
             :type="!passwordConfirmVisible ? 'password' : 'text'"
-          />
+          >
           <span
             :class="['modal__input-action', passwordConfirmVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
             @click="togglePasswordConfirmVisible"
-          ></span>
+          />
         </div>
       </label>
       <Checkbox
@@ -39,7 +39,9 @@
         name="isReadme"
         :value="isReadme"
         @change="changeIsReadme"
-      >{{ $t('iHaveBackedUpMyPassword') }}</Checkbox>
+      >
+        {{ $t('iHaveBackedUpMyPassword') }}
+      </Checkbox>
     </div>
 
     <div class="modal__footer">
@@ -47,60 +49,61 @@
         :click="createWallet"
         theme="success"
         :disabled="!isReadme || !isPassword"
-      >{{ $t('createWallet') }}</Button>
+      >
+        {{ $t('createWallet') }}
+      </Button>
     </div>
   </Card>
 </template>
 
 <script>
-import Card from "~/components/Card/Card.vue";
-import Button from "~/components/Button/Button.vue";
-import Checkbox from "~/components/Controls/Checkbox/Checkbox.vue";
-
-import nknWallet from "nkn-wallet";
+import nknWallet from 'nkn-wallet'
+import Card from '~/components/Card/Card.vue'
+import Button from '~/components/Button/Button.vue'
+import Checkbox from '~/components/Controls/Checkbox/Checkbox.vue'
 
 export default {
   components: { Card, Checkbox, Button },
-  data() {
+  data () {
     return {
       isReadme: false,
       passwordVisible: false,
       passwordConfirmVisible: false,
-      password: "",
-      passwordConfirm: ""
-    };
+      password: '',
+      passwordConfirm: ''
+    }
   },
   computed: {
-    isPassword() {
-      const password = this.password;
-      const passwordConfirm = this.passwordConfirm;
+    isPassword () {
+      const password = this.password
+      const passwordConfirm = this.passwordConfirm
 
       if (
         password === passwordConfirm &&
         password.length > 1 &&
         passwordConfirm.length > 1
       ) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     }
   },
   methods: {
-    changeIsReadme() {
-      this.isReadme = !this.isReadme;
+    changeIsReadme () {
+      this.isReadme = !this.isReadme
     },
-    togglePasswordVisible() {
-      this.passwordVisible = !this.passwordVisible;
+    togglePasswordVisible () {
+      this.passwordVisible = !this.passwordVisible
     },
-    togglePasswordConfirmVisible() {
-      this.passwordConfirmVisible = !this.passwordConfirmVisible;
+    togglePasswordConfirmVisible () {
+      this.passwordConfirmVisible = !this.passwordConfirmVisible
     },
-    createWallet() {
-      const password = this.password;
-      const wallet = nknWallet.newWallet(password);
-      this.$emit("getWallet", { wallet, password });
+    createWallet () {
+      const password = this.password
+      const wallet = nknWallet.newWallet(password)
+      this.$emit('getWallet', { wallet, password })
     }
   }
-};
+}
 </script>

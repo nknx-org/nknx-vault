@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import Logo from "~/assets/icons/logo.svg";
+import Logo from '~/assets/icons/logo.svg'
 
 export default {
   components: { Logo }
-};
+}
 </script>

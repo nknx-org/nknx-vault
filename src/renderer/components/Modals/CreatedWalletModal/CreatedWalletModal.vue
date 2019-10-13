@@ -8,31 +8,31 @@
       <label class="modal__label">
         {{ $t('publicAddress') }}
         <div class="modal__input">
-          <input v-model="wallet.address" readonly="readonly" class="modal__controller" type="text" />
+          <input v-model="wallet.address" readonly="readonly" class="modal__controller" type="text">
           <span
-            class="modal__input-action fe fe-copy"
             v-tooltip="{
-  content: $t('copyPublicAddress'),
-  placement: 'bottom-center',
-  offset: 10,
-}"
+              content: $t('copyPublicAddress'),
+              placement: 'bottom-center',
+              offset: 10,
+            }"
+            class="modal__input-action fe fe-copy"
             @click="copyText(wallet.address)"
-          ></span>
+          />
         </div>
       </label>
       <label class="modal__label">
         {{ $t('privateKey') }}
         <div class="modal__input">
-          <input v-model="pk" readonly="readonly" class="modal__controller" type="text" />
+          <input v-model="pk" readonly="readonly" class="modal__controller" type="text">
           <span
-            class="modal__input-action fe fe-copy"
             v-tooltip="{
-  content: $t('copyPrivateKey'),
-  placement: 'bottom-center',
-  offset: 10,
-}"
+              content: $t('copyPrivateKey'),
+              placement: 'bottom-center',
+              offset: 10,
+            }"
+            class="modal__input-action fe fe-copy"
             @click="copyText(pk)"
-          ></span>
+          />
         </div>
       </label>
       <label class="modal__label">
@@ -43,11 +43,11 @@
             readonly="readonly"
             class="modal__controller"
             :type="!passwordVisible ? 'password' : 'text'"
-          />
+          >
           <span
             :class="['modal__input-action', passwordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
             @click="togglePasswordVisible"
-          ></span>
+          />
         </div>
       </label>
     </div>
@@ -59,13 +59,12 @@
 </template>
 
 <script>
-import Card from "~/components/Card/Card.vue";
-import Button from "~/components/Button/Button.vue";
-
-import nknWallet from "nkn-wallet";
-import FileSaver from "file-saver";
+import FileSaver from 'file-saver'
+import Card from '~/components/Card/Card.vue'
+import Button from '~/components/Button/Button.vue'
 
 export default {
+  components: { Card, Button },
   props: {
     wallet: {
       type: Object,
@@ -73,33 +72,32 @@ export default {
     },
     password: {
       type: String,
-      default: ""
+      default: ''
     }
   },
-  components: { Card, Button },
-  data() {
-    return { passwordVisible: false, pk: "" };
-  },
-  created() {
-    this.pk = this.wallet.getPrivateKey();
+  data () {
+    return { passwordVisible: false, pk: '' }
   },
   computed: {},
+  created () {
+    this.pk = this.wallet.getPrivateKey()
+  },
   methods: {
-    togglePasswordVisible() {
-      this.passwordVisible = !this.passwordVisible;
+    togglePasswordVisible () {
+      this.passwordVisible = !this.passwordVisible
     },
-    downloadWallet() {
-      const jsonWallet = this.wallet.toJSON();
-      var blob = new Blob([jsonWallet], { type: "text/plain;charset=utf-8" });
-      FileSaver.saveAs(blob, "wallet.json");
+    downloadWallet () {
+      const jsonWallet = this.wallet.toJSON()
+      const blob = new Blob([jsonWallet], { type: 'text/plain;charset=utf-8' })
+      FileSaver.saveAs(blob, 'wallet.json')
     },
-    async copyText(text) {
+    async copyText (text) {
       try {
-        await this.$copyText(text);
+        await this.$copyText(text)
       } catch (e) {
-        console.error(e);
+        console.error(e)
       }
     }
   }
-};
+}
 </script>

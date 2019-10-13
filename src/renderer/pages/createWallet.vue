@@ -4,22 +4,22 @@
 </template>
 
 <script>
-import CreateWalletModal from "~/components/Modals/CreateWalletModal/CreateWalletModal.vue";
-import CreatedWalletModal from "~/components/Modals/CreatedWalletModal/CreatedWalletModal.vue";
+import CreateWalletModal from '~/components/Modals/CreateWalletModal/CreateWalletModal.vue'
+import CreatedWalletModal from '~/components/Modals/CreatedWalletModal/CreatedWalletModal.vue'
 
 export default {
-  layout: "login",
+  layout: 'login',
   components: { CreateWalletModal, CreatedWalletModal },
-  data() {
+  data () {
     return {
       wallet: false
-    };
+    }
   },
   methods: {
-    getWallet(wallet) {
-      this.wallet = wallet.wallet;
-      this.password = wallet.password;
+    getWallet (wallet) {
+      this.wallet = wallet.wallet
+      this.password = wallet.password
     }
   }
-};
+}
 </script>
