@@ -4,7 +4,7 @@
       <div class="welcome__content">
         <div class="welcome__left">
           <back class="welcome__back" />
-          <h1 class="title_light">Store and send NKN on your terms with a new kind of wallet</h1>
+          <h2 class="title_light">Store and send NKN on your terms with a new kind of wallet</h2>
           <p
             class="welcome__descr"
           >
@@ -29,7 +29,7 @@
         <p
           class="welcome__disclaimer-text"
         >
-          Disclaimer: Use this service at your own risk. Please make a backup of your wallet and store your password in a safe place. If you lose or forget the password to your generated wallet rile you will lose access to your funds. New Kind of Wallet is not held responsible for any losses that may occur.
+          Disclaimer: Use this service at your own risk. Please make a backup of your wallet and store your password in a safe place. If you lose or forget the password to your generated wallet file you will lose access to your funds. NKNx Vault is not held responsible for any losses that may occur.
         </p>
       </div>
     </div>

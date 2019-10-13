@@ -2,31 +2,32 @@
   &__content {
     display: grid;
     grid-template-columns: 0.8fr 1fr;
-    padding-bottom: 250px;
+    padding-bottom: 25px;
   }
 
   &__back {
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 30px;
+    top: -90px;
+    width: 450px;
   }
 
   &__left {
-    padding-top: 150px;
+    padding-top: 75px;
     position: relative;
   }
 
   &__descr {
     margin-top: $padding-medium;
     color: $white;
-    font-size: $fz-llg;
+    font-size: $fz-lg;
     margin-bottom: $padding-big;
   }
 
   &__share {
     max-width: 100%;
     position: relative;
-    top: 70px;
+    top: -10px;
   }
 
   &__controls {
@@ -41,14 +42,14 @@
       position: relative;
       color: $grey-dark;
       font-size: $fz-md;
-      max-width: 568px;
+      max-width: 480px;
       padding-bottom: $padding-big;
     }
 
     &-fragment {
       position: absolute;
-      left: -50px;
-      bottom: -30px;
+      left: -40px;
+      bottom: -75px;
       height: 300px;
     }
   }
