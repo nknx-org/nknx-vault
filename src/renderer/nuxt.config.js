@@ -30,6 +30,7 @@ module.exports = {
     '@nuxtjs/style-resources',
     'nuxt-svg-loader',
     '@nuxtjs/axios',
+    'nuxt-clipboard2',
     [
       '@nuxtjs/moment',
       {
@@ -161,5 +162,8 @@ module.exports = {
   },
   axios: {
     baseURL: 'https://api.nknx.nkn.org/'
+  },
+  build: {
+    vendor: ['v-tooltip']
   }
 }

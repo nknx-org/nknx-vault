@@ -44,6 +44,9 @@
     "webpack-node-externals": "1.7.2"
   },
   "dependencies": {
+    "file-saver": "^2.0.2",
+    "nkn-wallet": "^0.4.6",
+    "nuxt-clipboard2": "^0.2.1",
     "nuxt-i18n": "^6.3.0",
     "v-tooltip": "^2.0.2"
   }

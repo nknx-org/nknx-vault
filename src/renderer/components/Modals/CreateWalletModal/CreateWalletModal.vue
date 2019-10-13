@@ -43,7 +43,11 @@
     </div>
 
     <div class="modal__footer">
-      <Button theme="success" :disabled="!isReadme || !isPassword">{{ $t('createWallet') }}</Button>
+      <Button
+        :click="createWallet"
+        theme="success"
+        :disabled="!isReadme || !isPassword"
+      >{{ $t('createWallet') }}</Button>
     </div>
   </Card>
 </template>
@@ -52,6 +56,8 @@
 import Card from "~/components/Card/Card.vue";
 import Button from "~/components/Button/Button.vue";
 import Checkbox from "~/components/Controls/Checkbox/Checkbox.vue";
+
+import nknWallet from "nkn-wallet";
 
 export default {
   components: { Card, Checkbox, Button },
@@ -89,6 +95,11 @@ export default {
     },
     togglePasswordConfirmVisible() {
       this.passwordConfirmVisible = !this.passwordConfirmVisible;
+    },
+    createWallet() {
+      const password = this.password;
+      const wallet = nknWallet.newWallet(password);
+      this.$emit("getWallet", { wallet, password });
     }
   }
 };
