@@ -101,6 +101,27 @@ h6 {
   }
 
   &__input {
+    position: relative;
+    box-sizing: border-box;
+
+    &-action {
+      position: absolute;
+      right: $padding-default;
+      top: 23px;
+      cursor: pointer;
+      transition: $transition-1;
+
+      &:hover {
+        color: $primary;
+      }
+
+      &:active {
+        color: $secondary;
+      }
+    }
+  }
+
+  &__controller {
     width: 100%;
     box-sizing: border-box;
     outline: none;
@@ -114,6 +135,7 @@ h6 {
     padding: $padding-default;
     resize: none;
     margin-top: $padding-micro;
+    position: relative;
 
     &:focus {
       border-color: $secondary;

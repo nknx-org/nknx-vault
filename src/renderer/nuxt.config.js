@@ -25,7 +25,7 @@ module.exports = {
     '@/assets/scss/main.scss'
   ],
   loading: false,
-  plugins: ['~plugins/i18n.js'],
+  plugins: ['~plugins/i18n.js', '~plugins/v-tooltip'],
   modules: [
     '@nuxtjs/style-resources',
     'nuxt-svg-loader',
