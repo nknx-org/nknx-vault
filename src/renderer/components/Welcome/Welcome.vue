@@ -4,21 +4,15 @@
       <div class="welcome__content">
         <div class="welcome__left">
           <back class="welcome__back" />
-          <h2 class="title_light">Store and send NKN on your terms with a new kind of wallet</h2>
-          <p
-            class="welcome__descr"
-          >
-            No sign up. No catch. Just an effective, community driven desktop-based wallet, putting the control in your hands ready to join the networking revolution.
-          </p>
+          <h2 class="title_light">{{$t('welcomeHeading')}}</h2>
+          <p class="welcome__descr">{{$t('welcomeDescription')}}</p>
           <div class="welcome__controls">
             <Button
               class="welcome__btn"
               type="router"
               url="createWallet"
               theme="success"
-            >
-              {{ $t('createWallet') }}
-            </Button>
+            >{{ $t('createWallet') }}</Button>
             <Button class="welcome__btn" theme="ghost">{{ $t('import') }}</Button>
           </div>
         </div>
@@ -26,11 +20,7 @@
       </div>
       <div class="welcome__disclaimer">
         <Fragment class="welcome__disclaimer-fragment" />
-        <p
-          class="welcome__disclaimer-text"
-        >
-          Disclaimer: Use this service at your own risk. Please make a backup of your wallet and store your password in a safe place. If you lose or forget the password to your generated wallet file you will lose access to your funds. NKNx Vault is not held responsible for any losses that may occur.
-        </p>
+        <p class="welcome__disclaimer-text">{{$t('welcomeDisclaimer')}}</p>
       </div>
     </div>
   </div>
@@ -41,16 +31,16 @@
 </style>
 
 <script>
-import Back from '~/assets/icons/logo-back.svg'
-import Share from '~/assets/icons/share.svg'
-import Fragment from '~/assets/icons/welcome-fragment.svg'
-import Button from '~/components/Button/Button.vue'
+import Back from "~/assets/icons/logo-back.svg";
+import Share from "~/assets/icons/share.svg";
+import Fragment from "~/assets/icons/welcome-fragment.svg";
+import Button from "~/components/Button/Button.vue";
 
 export default {
   components: { Back, Share, Button, Fragment },
-  data () {
-    return {}
+  data() {
+    return {};
   },
   methods: {}
-}
+};
 </script>

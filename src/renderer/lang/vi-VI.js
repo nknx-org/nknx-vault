@@ -1,12 +1,21 @@
-import axios from 'axios'
-export default () => {
-  return new Promise(function (resolve) {
-    axios
-      .get(
-        'https://translation.nknx.org/vi.json'
-      )
-      .then(function (response) {
-        resolve(response.data)
-      })
-  })
+export default {
+  welcomeHeading: 'Store and send NKN on your terms with a new kind of wallet',
+  welcomeDescription: 'No sign up. No catch. Just an effective, community driven desktop-based wallet, putting the control in your hands ready to join the networking revolution.',
+  welcomeDisclaimer: 'Disclaimer: Use this service at your own risk. Please make a backup of your wallet and store your password in a safe place. If you lose or forget the password to your generated wallet file you will lose access to your funds. NKNx Vault is not held responsible for any losses that may occur.',
+  createWallet: 'Create Wallet',
+  create: 'Create',
+  import: 'Import',
+  createNewWallet: 'Create new wallet',
+  createNewWalletDescription: 'Before creating a new wallet make sure to choose a strong password. You will NOT be able to change this once the wallet has been generated.',
+  choosePassword: 'Choose a password',
+  confirmYourPassword: 'Confirm your password',
+  iHaveBackedUpMyPassword: 'I have backed up my password somewhere safe',
+  walletCreated: 'Wallet created!',
+  walletCreatedDescription: 'Save these details! If you lose these credentials, you lose access to your assets.',
+  publicAddress: 'Public Address',
+  copyPublicAddress: 'Copy Public Address',
+  privateKey: 'Private Key',
+  copyPrivateKey: 'Copy Private Key',
+  walletPassword: 'Wallet Password',
+  downloadWallet: 'Download Wallet'
 }
