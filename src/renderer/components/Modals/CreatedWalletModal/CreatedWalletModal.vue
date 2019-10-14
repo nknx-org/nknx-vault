@@ -14,7 +14,7 @@
               offset: 10,
             }"
             class="modal__input-action fe fe-copy"
-            @click="copyText(wallet.address)"
+            @click="copyText(wallet.address), toggleSnack($t('copyWalletAddressSuccess'))"
           />
         </div>
       </label>
@@ -29,7 +29,7 @@
               offset: 10,
             }"
             class="modal__input-action fe fe-copy"
-            @click="copyText(pk)"
+            @click="copyText(pk), toggleSnack($t('copyWalletPkSuccess'))"
           />
         </div>
       </label>
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 import FileSaver from 'file-saver'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
@@ -81,6 +83,9 @@ export default {
     this.pk = this.wallet.getPrivateKey()
   },
   methods: {
+    ...mapMutations({
+      setSnack: 'snackbar/setSnack'
+    }),
     togglePasswordVisible () {
       this.passwordVisible = !this.passwordVisible
     },
@@ -88,6 +93,9 @@ export default {
       const jsonWallet = this.wallet.toJSON()
       const blob = new Blob([jsonWallet], { type: 'text/plain;charset=utf-8' })
       FileSaver.saveAs(blob, 'wallet.json')
+    },
+    toggleSnack (text) {
+      this.setSnack(text)
     },
     async copyText (text) {
       try {

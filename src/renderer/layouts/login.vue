@@ -12,14 +12,16 @@
         </div>
       </div>
       <nuxt class="layout-login__content" />
+      <Snackbar />
     </div>
   </div>
 </template>
 
 <script>
 import Logo from '~/assets/icons/logo.svg'
+import Snackbar from '~/components/Snackbar/Snackbar.vue'
 
 export default {
-  components: { Logo }
+  components: { Logo, Snackbar }
 }
 </script>
