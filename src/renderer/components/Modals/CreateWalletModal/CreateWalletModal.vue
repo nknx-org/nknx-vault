@@ -97,6 +97,9 @@ export default {
       this.passwordConfirmVisible = !this.passwordConfirmVisible
     },
     createWallet () {
+      nknWallet.configure({
+        rpcAddr: 'https://mainnet-rpc-node-0001.nkn.org/mainnet/api/wallet'
+      })
       const password = this.password
       const wallet = nknWallet.newWallet(password)
       this.$emit('getWallet', { wallet, password })
