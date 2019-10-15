@@ -270,6 +270,68 @@ h6 {
     }
   }
 
+  &__file{
+    height: 180px;
+    outline: none;
+    appearance: none;
+    visibility: hidden;
+    position: absolute;
+
+    &-wrapper{
+      height: 180px;
+      background: $grey-light;
+      border-radius: $card-br;
+      border: 1px dashed $grey-dark;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover{
+
+        .modal__file-icon{
+          opacity: 0.3;
+        }
+      }
+
+      &:active{
+
+        .modal__file-icon{
+          opacity: 0.5;
+        }
+      }
+    }
+
+    &-content{
+      display: flex;
+      justify-content: center;
+      flex-flow: column wrap;
+      align-items: center;
+    }
+
+    &-icon{
+      transition: $transition-1;
+      opacity: 0.15;
+    }
+
+    &-title{
+      font-size: $fz-lg;
+      font-weight: $fw-normal;
+      font-family: $heading-font;
+      margin-top: $padding-default;
+      margin-bottom: 4px;
+    }
+
+    &-descr{
+      font-weight: $fw-normal;
+
+      &_accent{
+        color: $secondary;
+        text-decoration: underline;
+      }
+    }
+  }
+
   &__checkbox {
     margin-top: $padding-normal;
   }

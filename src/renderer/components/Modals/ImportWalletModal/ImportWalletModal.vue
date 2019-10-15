@@ -36,11 +36,58 @@
       </div>
     </template>
 
+    <template v-if="currentView === 'json'">
+      <div class="modal__body">
+        <label class="modal__label">
+          <div class="modal__input">
+            <input
+              class="modal__file"
+              accept=".json"
+              type="file"
+              @change="uploadWallet"
+            >
+            <div class="modal__file-wrapper">
+              <div class="modal__file-content">
+                <WalletIcon class="modal__file-icon" />
+                <div class="modal__file-title"><span v-if="!walletFileName"> {{ $t('dndYourWalletFile') }}</span> <span v-if="isWalletFile && walletFileName">{{ $t('walletFileUploadSuccess') }}</span> <span v-if="!isWalletFile && walletFileName">{{ $t('walletFileUploadFail') }}</span></div>
+                <p v-if="!walletFileName" class="modal__file-descr">{{ $t('or') }} <span class="modal__file-descr_accent">{{ $t('browseFiles') }}</span></p>
+                <p v-else class="modal__file-descr_accent">{{ walletFileName }}</p>
+              </div>
+            </div>
+          </div>
+        </label>
+        <label class="modal__label">
+          {{ $t('enterWalletFilePassword') }}
+          <div class="modal__input">
+            <input
+              v-model="password"
+              class="modal__controller"
+              :type="!passwordVisible ? 'password' : 'text'"
+            >
+            <span
+              :class="['modal__input-action', passwordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
+              @click="togglePasswordVisible"
+            />
+          </div>
+        </label>
+      </div>
+    </template>
+
     <div class="modal__footer">
       <Button
-        :click="unlockWallet"
+        v-if="currentView ==='pk'"
+        :click="unlockWalletFromPk"
         theme="secondary"
         :disabled="!isPk"
+        icon="unlock"
+      >
+        {{ $t('unlock') }}
+      </Button>
+      <Button
+        v-else
+        :click="unlockWalletFromJson"
+        theme="secondary"
+        :disabled="!isWalletFile || !isPassword"
         icon="unlock"
       >
         {{ $t('unlock') }}
@@ -50,23 +97,40 @@
 </template>
 
 <script>
+import fs from 'fs'
 import nknWallet from 'nkn-wallet'
 
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
+import WalletIcon from '~/assets/icons/wallet.svg'
 
 export default {
-  components: { Card, Button },
+  components: { Card, Button, WalletIcon },
   props: {
 
   },
   data () {
-    return { currentView: 'pk', pkVisible: false, pk: '' }
+    return { currentView: 'pk',
+      pkVisible: false,
+      pk: '',
+      walletFile: false,
+      walletFileName: false,
+      passwordVisible: false,
+      password: ''
+    }
   },
   computed: {
     isPk () {
-      const pk = this.pk
+      const pk = this.pk.trim()
       return pk.length === 64
+    },
+    isWalletFile () {
+      const wallet = this.walletFile
+      return wallet.hasOwnProperty('Address')
+    },
+    isPassword () {
+      const password = this.password
+      return password.length > 1
     }
   },
   created () {
@@ -74,6 +138,8 @@ export default {
   methods: {
     clearData () {
       this.pk = ''
+      this.walletFile = false
+      this.walletFileName = false
     },
     switchView (val) {
       this.currentView = val
@@ -82,14 +148,34 @@ export default {
     togglePkVisible () {
       this.pkVisible = !this.pkVisible
     },
-    unlockWallet () {
-      const type = this.currentView
-      const pk = this.pk
-
-      if (type === 'pk') {
-        const wallet = nknWallet.restoreWalletBySeed(pk, 'nknx-password')
-        console.log(wallet)
+    togglePasswordVisible () {
+      this.passwordVisible = !this.passwordVisible
+    },
+    uploadWallet (file) {
+      if (file.target.files.length < 1) {
+        return
       }
+      const walletFilePath = file.target.files[0].path
+      const walletFileName = file.target.files[0].name
+
+      let walletJson = fs.readFileSync(walletFilePath)
+      walletJson = JSON.parse(walletJson)
+
+      this.walletFileName = walletFileName
+      this.walletFile = walletJson
+    },
+    unlockWalletFromPk () {
+      const pk = this.pk
+      const wallet = nknWallet.restoreWalletBySeed(pk, 'nknx-password')
+      console.log(wallet)
+    },
+    unlockWalletFromJson () {
+      const walletJson = JSON.stringify(this.walletFile)
+      const password = this.password
+
+      const wallet = nknWallet.loadJsonWallet(walletJson, password)
+
+      console.log(wallet)
     }
   }
 }
