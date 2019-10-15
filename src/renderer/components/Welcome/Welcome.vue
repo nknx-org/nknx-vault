@@ -15,7 +15,9 @@
             >
               {{ $t('createWallet') }}
             </Button>
-            <Button class="welcome__btn" theme="ghost">{{ $t('import') }}</Button>
+            <Button class="welcome__btn" type="router" url="importWallet" theme="ghost">
+              {{ $t('import') }}
+            </Button>
           </div>
         </div>
         <share class="welcome__share" />
