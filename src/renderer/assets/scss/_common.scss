@@ -176,6 +176,31 @@ h6 {
   max-width: 592px;
   margin: 0 auto;
 
+    &-switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: $padding-big;
+
+    &__button {
+      font-weight: bold;
+      color: $grey-dark;
+      padding: 0 $padding-medium $padding-micro $padding-medium;
+      border-bottom: 2px solid $grey-dark;
+      transition: $transition-1;
+      cursor: pointer;
+
+      &_active {
+        border-color: $primary;
+        color: $primary;
+      }
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
   &__title {
     color: $dark;
     text-align: center;

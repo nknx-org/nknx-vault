@@ -7,8 +7,8 @@
           <span class="layout-login__title">NKNX VAULT</span>
         </div>
         <div class="layout-login__menu">
-          <Button class="layout-login__btn">{{ $t('create') }}</Button>
-          <Button class="layout-login__btn">{{ $t('import') }}</Button>
+          <nuxt-link class="layout-login__btn" to="/createWallet">{{ $t('create') }}</nuxt-link>
+          <nuxt-link class="layout-login__btn" to="/importWallet">{{ $t('import') }}</nuxt-link>
         </div>
       </div>
       <nuxt class="layout-login__content" />
