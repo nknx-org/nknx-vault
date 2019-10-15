@@ -20,6 +20,7 @@
 
   &__icon {
     margin-right: 10px;
+    height: 18px;
   }
 
   &_disabled {
@@ -33,6 +34,14 @@
 
     &:active {
       background: $base !important;
+    }
+    
+    .button__icon {
+      path {
+        fill: $grey-darkest !important;
+      }
+
+      color: $grey-darkest !important;
     }
   }
 
@@ -49,6 +58,28 @@
         background: darken($success, 10%);
       }
     }
+    
+    &_secondary {
+      color: $white;
+      background: $secondary;
+
+        &:hover {
+          background: lighten($secondary, 10%);
+        }
+
+        &:active {
+          background: darken($secondary, 10%);
+        }
+
+        .button__icon {
+          path {
+            fill: $white;
+        }
+
+          color: $white;
+      }
+    }
+ 
 
     &_ghost {
       color: $white;

@@ -5,6 +5,7 @@
     :class="[theme ? `button_theme_${theme}` : null, full ? `button_full` : null, disabled === true ? 'button_disabled' : null]"
     @click="onClickButton"
   >
+    <Unlock v-if="icon === 'unlock'" class="button__icon" />
     <slot />
   </button>
   <a
@@ -13,7 +14,8 @@
     target="_blank"
     class="button"
     :class="[theme ? `button_theme_${theme}` : null, full ? `button_full` : null]"
-  >
+  >    <Unlock v-if="icon === 'unlock'" class="button__icon" />
+
     <slot />
   </a>
   <nuxt-link
@@ -22,6 +24,7 @@
     class="button"
     :class="[theme ? `button_theme_${theme}` : null, full ? `button_full` : null]"
   >
+    <Unlock v-if="icon === 'unlock'" class="button__icon" />
     <slot />
   </nuxt-link>
 </template>
@@ -31,8 +34,10 @@
 </style>
 
 <script>
+import Unlock from '~/assets/icons/unlock.svg'
+
 export default {
-  components: {},
+  components: { Unlock },
   props: {
     theme: {
       type: String,
@@ -53,6 +58,10 @@ export default {
     full: {
       type: Boolean,
       default: false
+    },
+    icon: {
+      type: String,
+      default: ''
     },
     click: {
       type: Function,
