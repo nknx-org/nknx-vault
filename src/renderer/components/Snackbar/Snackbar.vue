@@ -1,7 +1,7 @@
 <template>
-  <div :class="['snackbar', show ? 'snackbar__visible' : null]">
+  <div :class="['snackbar snackbar_' + color, show ? 'snackbar__visible' : null]">
     <p class="snackbar__text">
-      {{ message }}
+      {{ $t(message) }}
     </p>
     <button class="snackbar__button" @click="show = false"><span class="snackbar__close fe fe-x" /></button>
   </div>
@@ -16,7 +16,8 @@ export default {
   data () {
     return {
       show: false,
-      message: ''
+      message: '',
+      color: 'alert'
     }
   },
   created () {
@@ -26,7 +27,15 @@ export default {
         const msg = this.$store.state.snackbar.snack
         if (msg !== '') {
           this.show = true
+          this.color = this.$store.state.snackbar.color
           this.message = this.$store.state.snackbar.snack
+          const self = this
+          setTimeout(function () {
+            self.show = false
+            self.message = ''
+            self.color = 'alert'
+          }, 4000)
+
           this.$store.commit('snackbar/setSnack', '')
         }
       }

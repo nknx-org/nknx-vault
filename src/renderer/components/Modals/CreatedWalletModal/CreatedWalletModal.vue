@@ -95,7 +95,10 @@ export default {
       FileSaver.saveAs(blob, 'wallet.json')
     },
     toggleSnack (text) {
-      this.setSnack(text)
+      this.setSnack({
+        snack: text,
+        color: 'alert'
+      })
     },
     async copyText (text) {
       try {

@@ -1,9 +1,10 @@
 export const state = () => ({
-  snack: ''
+  snack: '',
+  color: 'alert'
 })
 
 export const mutations = {
-  setSnack (state, snack) {
-    state.snack = snack
+  setSnack (state, payload) {
+    state = Object.assign(state, payload)
   }
 }

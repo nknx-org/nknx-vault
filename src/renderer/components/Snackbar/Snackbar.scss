@@ -16,6 +16,16 @@
   transition: $transition-1;
   transform: translateY(200px);
 
+  &_error{
+    background-color: $error;
+  }
+  &_success{
+    background-color: $success;
+  }
+  &_alert{
+    background-color: $alert;
+  }
+
   &__visible{
     transform: translateY(0px);
   }

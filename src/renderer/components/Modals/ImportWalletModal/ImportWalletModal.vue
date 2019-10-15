@@ -99,6 +99,7 @@
 <script>
 import fs from 'fs'
 import nknWallet from 'nkn-wallet'
+import { mapMutations } from 'vuex'
 
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
@@ -136,6 +137,9 @@ export default {
   created () {
   },
   methods: {
+    ...mapMutations({
+      setSnack: 'snackbar/setSnack'
+    }),
     clearData () {
       this.pk = ''
       this.walletFile = false
@@ -173,7 +177,15 @@ export default {
       const walletJson = JSON.stringify(this.walletFile)
       const password = this.password
 
-      const wallet = nknWallet.loadJsonWallet(walletJson, password)
+      let wallet = null
+      try {
+        wallet = nknWallet.loadJsonWallet(walletJson, password)
+      } catch (e) {
+        this.setSnack({
+          snack: 'walletErr' + e.code,
+          color: 'error'
+        })
+      }
 
       console.log(wallet)
     }
