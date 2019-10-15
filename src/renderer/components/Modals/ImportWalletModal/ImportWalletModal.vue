@@ -66,7 +66,7 @@ export default {
   computed: {
     isPk () {
       const pk = this.pk
-      return !(pk.length < 24)
+      return pk.length === 64
     }
   },
   created () {
