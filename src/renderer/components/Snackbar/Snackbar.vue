@@ -1,5 +1,5 @@
 <template>
-  <div :class="['snackbar snackbar_' + color, show ? 'snackbar__visible' : null]">
+  <div :class="['snackbar snackbar_color_' + color, show ? 'snackbar_visible' : null]">
     <p class="snackbar__text">
       {{ $t(message) }}
     </p>
@@ -30,13 +30,17 @@ export default {
           this.color = this.$store.state.snackbar.color
           this.message = this.$store.state.snackbar.snack
           const self = this
+
           setTimeout(function () {
             self.show = false
             self.message = ''
             self.color = 'alert'
-          }, 4000)
 
-          this.$store.commit('snackbar/setSnack', '')
+            self.$store.dispatch('snackbar/updateSnack', {
+              snack: '',
+              color: 'alert'
+            })
+          }, 4000)
         }
       }
     )

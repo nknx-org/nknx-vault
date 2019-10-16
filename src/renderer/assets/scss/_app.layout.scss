@@ -61,4 +61,12 @@
       }
     }
   }
+
+  &-dashboard{
+
+    &__content{
+      padding: 120px 72px 120px calc(72px + 64px);
+      background: $white;
+    }
+  }
 }

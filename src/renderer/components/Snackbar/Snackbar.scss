@@ -1,7 +1,6 @@
 .snackbar{
   position: fixed;
   bottom: 0;
-  background: $alert;
   box-shadow: $shadow-2;
   width: 500px;
   left: calc(50% - (500px / 2));
@@ -16,17 +15,22 @@
   transition: $transition-1;
   transform: translateY(200px);
 
-  &_error{
-    background-color: $error;
-  }
-  &_success{
-    background-color: $success;
-  }
-  &_alert{
-    background-color: $alert;
-  }
+  &_color{
+    &_error{
+      background-color: $error;
+    }
 
-  &__visible{
+    &_success{
+      background-color: $success;
+    }
+
+    &_alert{
+      background-color: $alert;
+    }
+  }
+  
+
+  &_visible{
     transform: translateY(0px);
   }
 

@@ -99,7 +99,6 @@
 <script>
 import fs from 'fs'
 import nknWallet from 'nkn-wallet'
-import { mapMutations } from 'vuex'
 
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
@@ -107,11 +106,9 @@ import WalletIcon from '~/assets/icons/wallet.svg'
 
 export default {
   components: { Card, Button, WalletIcon },
-  props: {
-
-  },
   data () {
-    return { currentView: 'pk',
+    return {
+      currentView: 'pk',
       pkVisible: false,
       pk: '',
       walletFile: false,
@@ -137,9 +134,6 @@ export default {
   created () {
   },
   methods: {
-    ...mapMutations({
-      setSnack: 'snackbar/setSnack'
-    }),
     clearData () {
       this.pk = ''
       this.walletFile = false
@@ -170,8 +164,17 @@ export default {
     },
     unlockWalletFromPk () {
       const pk = this.pk
-      const wallet = nknWallet.restoreWalletBySeed(pk, 'nknx-password')
-      console.log(wallet)
+
+      let wallet = null
+      try {
+        wallet = nknWallet.restoreWalletBySeed(pk, 'nknx-password')
+        this.logIn(wallet)
+      } catch (e) {
+        this.$store.dispatch('snackbar/updateSnack', {
+          snack: 'walletErr' + e.code,
+          color: 'error'
+        })
+      }
     },
     unlockWalletFromJson () {
       const walletJson = JSON.stringify(this.walletFile)
@@ -180,14 +183,17 @@ export default {
       let wallet = null
       try {
         wallet = nknWallet.loadJsonWallet(walletJson, password)
+        this.logIn(wallet)
       } catch (e) {
-        this.setSnack({
+        this.$store.dispatch('snackbar/updateSnack', {
           snack: 'walletErr' + e.code,
           color: 'error'
         })
       }
-
-      console.log(wallet)
+    },
+    logIn (wallet) {
+      this.$store.dispatch('wallet/updateActiveWallet', wallet)
+      this.$router.push('/dashboard')
     }
   }
 }

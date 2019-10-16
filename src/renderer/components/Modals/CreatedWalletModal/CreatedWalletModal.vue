@@ -57,8 +57,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 import FileSaver from 'file-saver'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
@@ -80,12 +78,9 @@ export default {
   },
   computed: {},
   created () {
-    this.pk = this.wallet.getPrivateKey()
+    this.pk = this.wallet.getSeed()
   },
   methods: {
-    ...mapMutations({
-      setSnack: 'snackbar/setSnack'
-    }),
     togglePasswordVisible () {
       this.passwordVisible = !this.passwordVisible
     },
@@ -95,7 +90,7 @@ export default {
       FileSaver.saveAs(blob, 'wallet.json')
     },
     toggleSnack (text) {
-      this.setSnack({
+      this.$store.dispatch('snackbar/updateSnack', {
         snack: text,
         color: 'alert'
       })
