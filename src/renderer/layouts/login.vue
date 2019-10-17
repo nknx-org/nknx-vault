@@ -22,6 +22,33 @@ import Logo from '~/assets/icons/logo.svg'
 import Snackbar from '~/components/Snackbar/Snackbar.vue'
 
 export default {
-  components: { Logo, Snackbar }
+  components: { Logo, Snackbar },
+  data: () => {
+    return {
+      updateInterval: 300000
+    }
+  },
+  destroyed () {
+    clearInterval(this.intervalPrice)
+    clearInterval(this.intervalDailyHistoryPrice)
+  },
+  mounted () {
+    this.updatePrice()
+    this.updateDailyHistoryPrice()
+
+    this.intervalPrice = setInterval(this.updatePrice, this.updateInterval)
+    this.intervalDailyHistoryPrice = setInterval(
+      this.updateDailyHistoryPrice,
+      this.updateInterval
+    )
+  },
+  methods: {
+    updatePrice () {
+      this.$store.dispatch('price/updateCurrentPrice')
+    },
+    updateDailyHistoryPrice () {
+      this.$store.dispatch('price/updateDailyHistoryPrice')
+    }
+  }
 }
 </script>

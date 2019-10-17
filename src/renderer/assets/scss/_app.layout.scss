@@ -63,10 +63,14 @@
   }
 
   &-dashboard{
-
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    min-height: 100vh;
+    
     &__content{
-      padding: 120px 72px 120px calc(72px + 64px);
+      padding: 60px $padding-medium 60px calc(#{$padding-medium} + 64px);
       background: $white;
+      grid-column: span 8;
     }
   }
 }

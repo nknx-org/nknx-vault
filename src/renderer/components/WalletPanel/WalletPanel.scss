@@ -1,0 +1,60 @@
+.wallet-panel{
+  grid-column: span 4;
+  padding: $padding-medium;
+  background: $primary;
+  color: $white;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+
+  &__row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:not(:last-child){
+      margin-bottom: $padding-big;
+    }
+  }
+
+  &__left{
+
+  }
+
+  &__right{
+    text-align: right;
+  }
+
+  &__name{
+    margin-bottom: $padding-micro;
+  }
+
+  &__symbol{
+    font-family: $heading-font;
+    font-size: $fz-md;
+  }
+
+  &__change{
+    &_positive{
+      color: $success-neon;
+    }
+
+    &_negative{
+      color: $error;
+
+      path{
+        fill: $error;
+      }
+
+      svg{
+        transform: rotate(180deg);
+      }
+    }
+
+    &-icon{
+      margin-right: $padding-micro;
+      position: relative;
+      bottom: 2px;
+    }
+  }
+}

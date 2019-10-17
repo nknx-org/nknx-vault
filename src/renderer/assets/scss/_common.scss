@@ -343,3 +343,19 @@ h6 {
     justify-content: flex-end;
   }
 }
+
+
+// Text
+
+.text{
+
+  &__title{
+    color: $grey-dark;
+    margin-bottom: 3px;
+  }
+  
+  &__heading{
+    font-weight: $fw-semi-bold;
+    font-family: $heading-font;
+  }
+}
