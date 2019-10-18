@@ -4,7 +4,7 @@
       <div class="welcome__content">
         <div class="welcome__left">
           <back class="welcome__back" />
-          <h2 class="title_light">{{ $t('welcomeHeading') }}</h2>
+          <h2 class="title_color_light">{{ $t('welcomeHeading') }}</h2>
           <p class="welcome__descr">{{ $t('welcomeDescription') }}</p>
           <div class="welcome__controls">
             <Button

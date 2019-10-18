@@ -1,7 +1,5 @@
 <template>
-  <aside
-    class="wallet-panel"
-  >
+  <aside class="wallet-panel">
     <div class="wallet-panel__top">
       <div class="wallet-panel__row">
         <div class="wallet-panel__left">
@@ -13,7 +11,10 @@
       <div class="wallet-panel__row">
         <div class="wallet-panel__left">
           <div class="text__title">{{ $t('currentBalance') }}</div>
-          <h3>{{ balance.toFixed(3) | commaNumber }} <span class="wallet-panel__symbol">NKN</span></h3>
+          <h3>
+            {{ balance.toFixed(3) | commaNumber }}
+            <span class="wallet-panel__symbol">NKN</span>
+          </h3>
         </div>
         <div class="wallet-panel__right">
           <div class="text__title">{{ $t('marketValue') }} (USD)</div>
@@ -30,27 +31,29 @@
         </div>
         <div class="wallet-panel__right">
           <div class="text__title">{{ $t('last7Days') }}</div>
-          <h4 class="wallet-panel__change" :class="weeklyChange > 0 ? 'wallet-panel__change_positive' : 'wallet-panel__change_negative'"><PriceArrow class="wallet-panel__change-icon" />{{ weeklyChange.toFixed(2) }}%</h4>
+          <h4
+            class="wallet-panel__change"
+            :class="weeklyChange > 0 ? 'wallet-panel__change_positive' : 'wallet-panel__change_negative'"
+          >
+            <PriceArrow class="wallet-panel__change-icon" />
+            {{ weeklyChange.toFixed(2) }}%
+          </h4>
         </div>
-      </div>
-      <div class="wallet-panel__price-chart">
-        <PriceChart />
       </div>
     </div>
   </aside>
 </template>
 
 <style lang="scss">
-@import './WalletPanel';
+@import "./WalletPanel";
 </style>
 
 <script>
 import { mapGetters } from 'vuex'
 import PriceArrow from '~/assets/icons/priceArrow.svg'
-import PriceChart from '~/components/Charts/PriceChart.vue'
 
 export default {
-  components: { PriceArrow, PriceChart },
+  components: { PriceArrow },
   data: () => {
     return {
       address: '',
@@ -77,15 +80,15 @@ export default {
   methods: {
     getWalletInfo (address) {
       const self = this
-      this.$axios.get(`https://api.nknx.nkn.org/addresses/${address}`).then(
-        resp => {
+      this.$axios
+        .get(`https://api.nknx.nkn.org/addresses/${address}`)
+        .then(resp => {
           self.balance = parseFloat(resp.data.balance)
           self.name = resp.data.name
           self.usdPrice = self.price.prices[0].price
           self.usdBalance = self.balance * self.usdPrice
           self.weeklyChange = self.price.prices[0].percent_change_7d
-        }
-      )
+        })
     }
   }
 }

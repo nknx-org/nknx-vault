@@ -6,7 +6,7 @@ html {
 body {
   background-color: $body-bg;
   color: $body-color;
-  
+
   * {
     line-height: normal;
     font-family: $body-font;
@@ -66,16 +66,22 @@ h6 {
 }
 
 .title {
-  &_dark {
-    color: $dark;
+  &_color {
+    &_dark {
+      color: $dark;
+    }
+
+    &_light {
+      color: $white;
+    }
   }
 
-  &_light {
-    color: $white;
+  &__page {
+    margin-bottom: $padding-medium;
   }
 }
 
-// Tooltip
+/*========== Tooltip ==========*/
 
 .tooltip {
   display: block !important;
@@ -171,13 +177,13 @@ h6 {
   }
 }
 
-// Modals
+/*========== Modals ==========*/
 
 .modal {
   max-width: 592px;
   margin: 0 auto;
 
-    &-switch {
+  &-switch {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -271,14 +277,14 @@ h6 {
     }
   }
 
-  &__file{
+  &__file {
     height: 180px;
     outline: none;
     appearance: none;
     visibility: hidden;
     position: absolute;
 
-    &-wrapper{
+    &-wrapper {
       height: 180px;
       background: $grey-light;
       border-radius: $card-br;
@@ -288,34 +294,32 @@ h6 {
       justify-content: center;
       cursor: pointer;
 
-      &:hover{
-
-        .modal__file-icon{
+      &:hover {
+        .modal__file-icon {
           opacity: 0.3;
         }
       }
 
-      &:active{
-
-        .modal__file-icon{
+      &:active {
+        .modal__file-icon {
           opacity: 0.5;
         }
       }
     }
 
-    &-content{
+    &-content {
       display: flex;
       justify-content: center;
       flex-flow: column wrap;
       align-items: center;
     }
 
-    &-icon{
+    &-icon {
       transition: $transition-1;
       opacity: 0.15;
     }
 
-    &-title{
+    &-title {
       font-size: $fz-lg;
       font-weight: $fw-normal;
       font-family: $heading-font;
@@ -323,10 +327,10 @@ h6 {
       margin-bottom: 4px;
     }
 
-    &-descr{
+    &-descr {
       font-weight: $fw-normal;
 
-      &_accent{
+      &_accent {
         color: $secondary;
         text-decoration: underline;
       }
@@ -344,18 +348,126 @@ h6 {
   }
 }
 
+/*========== Text ==========*/
 
-// Text
-
-.text{
-
-  &__title{
+.text {
+  &__title {
     color: $grey-dark;
     margin-bottom: 3px;
   }
-  
-  &__heading{
+
+  &__heading {
     font-weight: $fw-semi-bold;
     font-family: $heading-font;
+  }
+
+  &_align{
+
+    &_right{
+      text-align: right;
+    }
+
+    &_center{
+      text-align: center;
+    }
+
+    &_left{
+      text-align: left;
+    }
+  }
+
+  &__link {
+    color: $secondary;
+    transition: $transition-1;
+
+    &:after {
+      margin-left: $padding-micro;
+      position: relative;
+      top: 1px;
+      content: "\e95b";
+      font-family: "Feather" !important;
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-feature-settings: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    &:hover {
+      color: lighten($secondary, 10%);
+    }
+
+    &:active {
+      color: darken($secondary, 10%);
+    }
+  }
+}
+
+/*========== Tables ==========*/
+.page{
+
+  &-navigation{
+    margin-top: $padding-normal;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/*========== Tables ==========*/
+
+.table,
+table {
+  font-size: $fz-md;
+  width: 100%;
+  background: $white;
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $padding-default;
+  }
+
+  &__header,
+  thead {
+    border-bottom: $card-border;
+  }
+
+  &__row,
+  tr {
+    border-bottom: $card-border;
+  }
+
+  &__title,
+  th {
+    padding: $padding-lg $padding-default;
+    text-align: left;
+  }
+
+  &__item,
+  td {
+    padding: $padding-small $padding-default;
+    position: relative;
+    font-weight: $fw-bold;
+
+    &_overflow {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &_positive {
+      color: $success;
+    }
+
+    &_negative {
+      color: $error;
+    }
   }
 }

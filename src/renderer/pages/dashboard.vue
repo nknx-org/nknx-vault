@@ -1,23 +1,21 @@
 <template>
-  <div>{{ activeWallet }}</div>
+  <div>
+    <div class="text__title">{{ $t('overview') }}</div>
+    <h2 class="title_color_dark title__page">{{ $t('myWallet') }}</h2>
+    <Transactions />
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import Transactions from '~/components/Transactions/Transactions.vue'
 
 export default {
   layout: 'dashboard',
-  components: { },
+  components: { Transactions },
   data () {
-    return {
-    }
+    return {}
   },
-  computed: {
-    ...mapGetters({
-      activeWallet: 'wallet/getActiveWallet'
-    })
-  },
-  methods: {
-  }
+  computed: {},
+  methods: {}
 }
 </script>

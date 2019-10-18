@@ -7,9 +7,9 @@ const DEV_SERVER_URL = process.env.DEV_SERVER_URL // eslint-disable-line prefer-
 
 const winHandler = new BrowserWinHandler({
   height: 900,
-  width: 1280,
-  minWidth: 1280,
-  maxWidth: 1280,
+  width: 1380,
+  minWidth: 1380,
+  maxWidth: 1380,
   minHeight: 900
 })
 
