@@ -193,6 +193,7 @@ export default {
     },
     logIn (wallet) {
       this.$store.dispatch('wallet/updateActiveWallet', wallet)
+      this.$store.dispatch('wallet/updateWalletInfo', wallet.address)
       this.$router.push('/dashboard')
     }
   }

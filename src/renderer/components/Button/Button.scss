@@ -98,6 +98,24 @@
         border-color: darken($white, 10%);
       }
     }
+
+    &_ghost-secondary{
+      color: $secondary;
+      border: 2px solid $secondary;
+      background: transparent;
+
+      &:hover {
+        color: $white;
+        background: $secondary;
+        border-color: $secondary;
+      }
+
+      &:active {
+        color: $white;
+        background: darken($secondary, 10%);
+        border-color: darken($secondary, 10%);
+      }
+    }
   }
 
   &_full {

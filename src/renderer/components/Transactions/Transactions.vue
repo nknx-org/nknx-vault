@@ -62,31 +62,25 @@ export default {
       prevPage: null,
       currentPage: 1,
       from: 0,
-      to: 0,
-      totalTransactionsCount: 0
+      to: 0
     }
   },
   computed: {
     ...mapGetters({
-      activeWallet: 'wallet/getActiveWallet'
-    })
+      activeWallet: 'wallet/getActiveWallet',
+      walletInfo: 'wallet/getWalletInfo'
+    }),
+    totalTransactionsCount () {
+      return this.walletInfo.count_transactions || 0
+    }
   },
   created () {
     this.address = this.activeWallet.address
   },
   mounted () {
     this.getAddressTransactions(this.currentPage)
-    this.getWalletInfo(this.address)
   },
   methods: {
-    getWalletInfo (address) {
-      const self = this
-      this.$axios
-        .get(`https://api.nknx.nkn.org/addresses/${address}`)
-        .then(resp => {
-          self.totalTransactionsCount = resp.data.count_transactions
-        })
-    },
     getAddressTransactions (page) {
       const self = this
       // Checking if page exists

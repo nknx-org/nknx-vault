@@ -1,0 +1,22 @@
+.settings{
+
+  &__item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__descr{
+    margin-top: $padding-default;
+  }
+
+  &__left{
+
+  }
+
+  &__right{
+
+  }
+
+
+}
