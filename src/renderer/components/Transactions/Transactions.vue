@@ -9,13 +9,13 @@
     <table>
       <thead>
         <th>
-          {{ $t('date/time') }}
+          {{ $t('dateTime') }}
         </th>
         <th>
           {{ $t('type') }}
         </th>
         <th>
-          {{ $t('address') }}
+          {{ $t('addressTable') }}
         </th>
         <th class="text_align_right">
           {{ $t('amount') }}
@@ -24,7 +24,7 @@
       <tr v-for="tx in transactions" :key="tx.id">
         <td>{{ $moment(tx.created_at + "Z").format('YYYY-MM-DD hh:mm') }}</td>
         <td><span v-if="address === tx.recipientWallet">{{ $t('recieved') }}</span> <span v-else>{{ $t('sent') }}</span></td>
-        <td><span v-if="address === tx.recipientWallet">{{ tx.senderWallet }}</span> <span v-else>{{ tx.recipientWallet }}</span></td>
+        <td><span v-if="address === tx.recipientWallet && tx.senderWallet === 'NKNaaaaaaaaaaaaaaaaaaaaaaaaaaaeJ6gxa'">{{ $t('miningReward') }}</span><span v-else-if="address === tx.recipientWallet">{{ tx.senderWallet }}</span> <span v-else>{{ tx.recipientWallet }}</span></td>
         <td class="text_align_right" :class="address === tx.recipientWallet ? 'table__item_positive' : 'table__item_negative'">{{ tx.amount | nknValue | commaNumber }}</td>
       </tr>
     </table>
@@ -32,7 +32,7 @@
       <div
         class="page-navigation__info"
       >
-        {{ $t('showing') }} {{ from }} {{ $t('to') }} {{ to }} {{ $t('of') }} {{ totalTransactionsCount }} {{ $t('transactions') }}
+        {{ $t('pagShowing') }} {{ from }} {{ $t('pagTo') }} {{ to }} {{ $t('pagOf') }} {{ totalTransactionsCount }} {{ $t('pagTransactions') }}
       </div>
       <div class="page-navigation__pagination">
         <Pagination :page="prevPage" type="prev" @click.native="getAddressTransactions(prevPage)" />

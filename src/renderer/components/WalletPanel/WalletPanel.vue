@@ -3,7 +3,7 @@
     <div class="wallet-panel__top">
       <div class="wallet-panel__row">
         <div class="wallet-panel__left">
-          <div class="text__title">{{ $t('name') }}\{{ $t('address') }}</div>
+          <div class="text__title">{{ $t('name') }}/{{ $t('address') }}</div>
           <h3 v-if="name.length > 0" class="wallet-panel__name">{{ name }}</h3>
           <div class="text__heading">{{ address }}</div>
         </div>

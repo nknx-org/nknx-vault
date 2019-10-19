@@ -39,6 +39,26 @@ export default {
   walletFileUploadFail: 'Error loading wallet file',
   dndYourWalletFile: 'Drag and drop your wallet file',
   browseFiles: 'browse files',
-  or: 'or'
+  or: 'or',
+  name: 'Name',
+  address: 'Address',
+  currentBalance: 'Current balance',
+  marketValue: 'Market value',
+  last7Days: 'Last 7 days',
+  overview: 'Overview',
+  myWallet: 'My Wallet',
+  transactionsHistory: 'Transaction History',
+  blockchainExplorer: 'Blockchain explorer',
+  dateTime: 'Date/Time',
+  type: 'Type',
+  addressTable: 'Address',
+  amount: 'Amount',
+  recieved: 'Recieved',
+  sent: 'Sent',
+  miningReward: 'Mining Reward',
+  pagShowing: 'Showing',
+  pagTo: 'to',
+  pagOf: 'of',
+  pagTransactions: 'transactions'
 
 }
