@@ -4,7 +4,7 @@
       <div class="layout-login__header">
         <div class="layout-login__logo">
           <Logo />
-          <span class="layout-login__title">NKNX VAULT</span>
+          <span class="layout-login__title">NKNx<b>VAULT</b> <span class="small">- a new kind of wallet</span></span>
         </div>
         <div class="layout-login__menu">
           <nuxt-link class="layout-login__btn" to="/createWallet">{{ $t('create') }}</nuxt-link>

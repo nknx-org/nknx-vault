@@ -4,7 +4,7 @@
   >
     <div class="sidebar__top">
       <div class="sidebar__logo">
-        <Logo />
+        <LogoNKN />
       </div>
 
       <nuxt-link
@@ -31,14 +31,14 @@
 </style>
 
 <script>
-import Logo from '~/assets/icons/logo.svg'
+import LogoNKN from '~/assets/icons/logoNKN.svg'
 import WalletIcon from '~/assets/icons/wallet-default.svg'
 import TxIcon from '~/assets/icons/transactions.svg'
 import SettingsIcon from '~/assets/icons/settings.svg'
 import ExitIcon from '~/assets/icons/exit.svg'
 
 export default {
-  components: { Logo, WalletIcon, TxIcon, SettingsIcon, ExitIcon },
+  components: { LogoNKN, WalletIcon, TxIcon, SettingsIcon, ExitIcon },
   data: () => {
     return {
       routes: [

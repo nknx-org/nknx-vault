@@ -22,11 +22,18 @@
 
     &__title {
       font-size: $fz-lg;
+      letter-spacing: 0.1em;
       font-family: $heading-font;
-      font-weight: $fw-semi-bold;
+      font-weight: $fw-normal;
       line-height: 21px;
       color: $white;
       margin-left: $padding-micro;
+      b{
+        font-weight: $fw-bold;
+      }
+      .small{
+        font-size: 0.8em;
+      }
     }
 
     &__header {
