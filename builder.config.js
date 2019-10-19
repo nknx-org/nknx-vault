@@ -2,8 +2,8 @@ const ICONS_DIR = 'build/icons/'
 
 const windowsOS = {
   win: {
-    icon: ICONS_DIR + 'win-icon.ico',
-    publisherName: 'michal',
+    icon: ICONS_DIR + 'icon.ico',
+    publisherName: 'nknx',
     target: 'nsis'
   },
 
@@ -22,7 +22,7 @@ const linuxOS = {
 const macOS = {
   mac: {
     target: 'dmg',
-    icon: ICONS_DIR + 'con.icns'
+    icon: ICONS_DIR + 'icon.icns'
   },
   dmg: {
     contents: [
@@ -43,8 +43,8 @@ const macOS = {
 
 module.exports = {
   asar: false,
-  productName: 'My browser',
-  appId: 'org.michalzarach.my-browser',
+  productName: 'NKNx Vault',
+  appId: 'org.nknxorg.nknx-vault',
   artifactName: 'my-browser-${version}.${ext}',
   directories: {
     output: 'build'
