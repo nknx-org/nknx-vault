@@ -6,6 +6,12 @@
   overflow: hidden;
   position: relative;
 
+  &_shadow{
+    &_mini{
+      box-shadow: $shadow-2;
+    }
+  }
+
   &_padding {
     &_normal {
       padding: $padding-big $padding-medium;

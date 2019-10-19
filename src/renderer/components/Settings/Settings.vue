@@ -3,10 +3,11 @@
     <div class="settings__item">
       <div class="settings__left">
         <h3 class="title_color_dark">NKN {{ $t('nameService') }}</h3>
-        <p class="settings__descr"><span v-if="walletName.length > 0">Your address has a name, you can remove it bla bla bla</span> <span v-else>You currently do not have a name associated with your wallet.</span> </p>
+        <p class="settings__descr"><span v-if="walletName.length > 0">{{ $t('registeredWalletDescr') }}</span> <span v-else>{{ $t('unregisteredWalletDescr') }}</span> </p>
       </div>
-      <div class="settings__right"><Button theme="ghost-secondary"><span v-if="walletName.length > 0">{{ $t('deleteName') }}</span> <span v-else>{{ $t('registerName') }}</span></Button></div>
+      <div class="settings__right"><Button theme="ghost-secondary" @click.native="walletName.length > 0 ? openDeleteWalletNameModal : toggleRegisterWalletNameModal(true)"><span v-if="walletName.length > 0">{{ $t('deleteName') }}</span> <span v-else>{{ $t('registerName') }}</span></Button></div>
     </div>
+    <RegisterNameModal :open="isRegisterWalletNameModal" @toggleRegisterWalletNameModal="toggleRegisterWalletNameModal" />
   </div>
 </template>
 
@@ -17,11 +18,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import Button from '~/components/Button/Button.vue'
+import RegisterNameModal from '~/components/Modals/RegisterNameModal/RegisterNameModal.vue'
 
 export default {
-  components: { Button },
+  components: { Button, RegisterNameModal },
   data () {
     return {
+      isRegisterWalletNameModal: false
     }
   },
   computed: {
@@ -34,6 +37,9 @@ export default {
     }
   },
   methods: {
+    toggleRegisterWalletNameModal (bool) {
+      this.isRegisterWalletNameModal = bool
+    }
   }
 }
 </script>

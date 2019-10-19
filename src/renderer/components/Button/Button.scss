@@ -46,6 +46,18 @@
   }
 
   &_theme {
+    &_default {
+      color: $grey-darkest;
+
+      &:hover {
+        background: $base;
+      }
+
+      &:active {
+        background: darken($base, 10%);
+      }
+    }
+
     &_success {
       color: $white;
       background: $success;
