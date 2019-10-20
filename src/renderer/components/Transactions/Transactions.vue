@@ -7,7 +7,7 @@
       </div>
     </div>
     <table>
-      <thead>
+      <thead v-if="!loading">
         <th>
           {{ $t('dateTime') }}
         </th>
@@ -21,12 +21,21 @@
           {{ $t('amount') }}
         </th>
       </thead>
-      <tr v-for="tx in transactions" :key="tx.id">
-        <td>{{ $moment(tx.created_at + "Z").format('YYYY-MM-DD HH:mm') }}</td>
-        <td><span v-if="address === tx.recipientWallet">{{ $t('recieved') }}</span> <span v-else>{{ $t('sent') }}</span></td>
-        <td><span v-if="address === tx.recipientWallet && tx.senderWallet === 'NKNaaaaaaaaaaaaaaaaaaaaaaaaaaaeJ6gxa'">{{ $t('miningReward') }}</span><span v-else-if="address === tx.recipientWallet">{{ tx.senderWallet }}</span> <span v-else>{{ tx.recipientWallet }}</span></td>
-        <td class="text_align_right" :class="address === tx.recipientWallet ? 'table__item_positive' : 'table__item_negative'">{{ tx.amount | nknValue | commaNumber }}</td>
-      </tr>
+      <template v-if="loading">
+        <tr v-for="(headingLoader, index) in loaders" :key="index">
+          <td colspan="4" style="padding: 0">
+            <TableRowLoader />
+          </td>
+        </tr>
+      </template>
+      <template v-else>
+        <tr v-for="tx in transactions" :key="tx.id">
+          <td>{{ $moment(tx.created_at + "Z").format('YYYY-MM-DD HH:mm') }}</td>
+          <td><span v-if="address === tx.recipientWallet">{{ $t('recieved') }}</span> <span v-else>{{ $t('sent') }}</span></td>
+          <td><span v-if="address === tx.recipientWallet && tx.senderWallet === 'NKNaaaaaaaaaaaaaaaaaaaaaaaaaaaeJ6gxa'">{{ $t('miningReward') }}</span><span v-else-if="address === tx.recipientWallet">{{ tx.senderWallet }}</span> <span v-else>{{ tx.recipientWallet }}</span></td>
+          <td class="text_align_right" :class="address === tx.recipientWallet ? 'table__item_positive' : 'table__item_negative'">{{ tx.amount | nknValue | commaNumber }}</td>
+        </tr>
+      </template>
     </table>
     <div v-if="transactions.length > 0" class="page-navigation">
       <div
@@ -50,9 +59,10 @@
 import { mapGetters } from 'vuex'
 
 import Pagination from '~/components/Pagination/Pagination.vue'
+import TableRowLoader from '~/components/Loaders/TableRowLoader.vue'
 
 export default {
-  components: { Pagination },
+  components: { Pagination, TableRowLoader },
   data () {
     return {
       address: '',
@@ -62,7 +72,8 @@ export default {
       prevPage: null,
       currentPage: 1,
       from: 0,
-      to: 0
+      to: 0,
+      loaders: 11
     }
   },
   computed: {
