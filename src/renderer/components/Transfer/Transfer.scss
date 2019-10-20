@@ -1,0 +1,22 @@
+.transfer{
+
+  &__amount{
+    width: 250px;
+    margin-bottom: 0 !important;
+  }
+
+  &__address{
+    flex: 1;
+  }
+
+  &__icon{
+    margin: 0 $padding-big;
+    position: relative;
+    top: 46px;
+  }
+
+  &__controls{
+    display: flex;
+    justify-content: space-between;
+  }
+}

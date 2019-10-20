@@ -1,21 +1,22 @@
 <template>
-  <div>{{ activeWallet }}</div>
+  <div>
+    <div class="text__title">{{ $t('transactions') }}</div>
+    <h2 class="title_color_dark title__page">{{ $t('sendTokens') }}</h2>
+    <Transfer />
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import Transfer from '~/components/Transfer/Transfer.vue'
 
 export default {
   layout: 'dashboard',
-  components: { },
+  components: { Transfer },
   data () {
     return {
     }
   },
   computed: {
-    ...mapGetters({
-      activeWallet: 'wallet/getActiveWallet'
-    })
   },
   methods: {
   }
