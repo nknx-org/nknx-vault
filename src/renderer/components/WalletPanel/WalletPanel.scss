@@ -17,8 +17,23 @@
     }
   }
 
-  &__left{
+  &__copy{
+    margin-left: $padding-micro;
+    cursor: pointer;
+    transition: $transition-1;
 
+    &:hover{
+      opacity: 0.8;
+    }
+
+    &:active{
+      opacity: 0.5;
+    }
+  }
+
+  &__address{
+    display: flex;
+    align-items: center;
   }
 
   &__right{

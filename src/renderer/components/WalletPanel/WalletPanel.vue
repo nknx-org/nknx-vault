@@ -5,7 +5,17 @@
         <div class="wallet-panel__left">
           <div class="text__title">{{ $t('name') }}/{{ $t('address') }}</div>
           <h3 v-if="name.length > 0" class="wallet-panel__name">{{ name }}</h3>
-          <div class="text__heading">{{ address }}</div>
+          <div class="text__heading wallet-panel__address">
+            {{ address }} <span
+              v-tooltip="{
+                content: $t('copyPublicAddress'),
+                placement: 'bottom-center',
+                offset: 10,
+              }"
+              class="wallet-panel__copy fe fe-copy"
+              @click="copyText(address), toggleSnack($t('copyWalletAddressSuccess'))"
+            />
+          </div>
         </div>
       </div>
       <div class="wallet-panel__row">
@@ -91,6 +101,19 @@ export default {
   mounted () {
   },
   methods: {
+    toggleSnack (text) {
+      this.$store.dispatch('snackbar/updateSnack', {
+        snack: text,
+        color: 'alert'
+      })
+    },
+    async copyText (text) {
+      try {
+        await this.$copyText(text)
+      } catch (e) {
+        console.error(e)
+      }
+    }
   }
 }
 </script>
