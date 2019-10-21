@@ -56,6 +56,9 @@
 </style>
 
 <script>
+import fs from 'fs'
+import { remote } from 'electron'
+
 import { mapGetters } from 'vuex'
 
 import Pagination from '~/components/Pagination/Pagination.vue'
@@ -73,13 +76,15 @@ export default {
       currentPage: 1,
       from: 0,
       to: 0,
-      loaders: 11
+      loaders: 11,
+      offlineTxPath: ''
     }
   },
   computed: {
     ...mapGetters({
       activeWallet: 'wallet/getActiveWallet',
-      walletInfo: 'wallet/getWalletInfo'
+      walletInfo: 'wallet/getWalletInfo',
+      online: 'online/getOnline'
     }),
     totalTransactionsCount () {
       return this.walletInfo.count_transactions || 0
@@ -87,11 +92,46 @@ export default {
   },
   created () {
     this.address = this.activeWallet.address
+    this.$store.dispatch('online/updateOnline')
+    this.setLocalDataTxPath()
   },
   mounted () {
-    this.getAddressTransactions(this.currentPage)
+    if (this.online === true) {
+      this.getAddressTransactions(this.currentPage) // get online transactions
+    } else {
+      this.getLocalAddressTransactions()
+    }
   },
   methods: {
+    setLocalDataTxPath () {
+      const app = remote.app
+      const path = app.getPath('userData') + '\\transactions.json'
+      this.offlineTxPath = path
+    },
+    parseTransactionsData (response) {
+      const {
+        data,
+        current_page: currentPage,
+        prev_page_url: prevPage,
+        next_page_url: nextPage,
+        from,
+        to
+      } = response
+      this.transactions = data
+      this.from = from
+      this.to = to
+      this.currentPage = currentPage
+      this.prevPage = prevPage != null && this.online ? this.currentPage - 1 : null
+      this.nextPage = nextPage != null && this.online ? this.currentPage + 1 : null
+      this.loading = false
+    },
+    getLocalAddressTransactions () {
+      const path = this.offlineTxPath
+      const transactionsJson = fs.readFileSync(path)
+      const transactionsObj = JSON.parse(transactionsJson)
+
+      this.parseTransactionsData(transactionsObj)
+    },
     getAddressTransactions (page) {
       const self = this
       // Checking if page exists
@@ -106,21 +146,12 @@ export default {
       this.$axios
         .$get(`https://api.nknx.nkn.org/addresses/${this.address}/transfers?page=${page}`)
         .then(response => {
-          const {
-            data,
-            current_page: currentPage,
-            prev_page_url: prevPage,
-            next_page_url: nextPage,
-            from,
-            to
-          } = response
-          self.transactions = data
-          self.from = from
-          self.to = to
-          self.currentPage = currentPage
-          self.prevPage = prevPage != null ? self.currentPage - 1 : null
-          self.nextPage = nextPage != null ? self.currentPage + 1 : null
-          self.loading = false
+          if (self.currentPage === 1) {
+            const path = this.offlineTxPath
+            const jsonData = JSON.stringify(response)
+            fs.writeFileSync(path, jsonData)
+          }
+          self.parseTransactionsData(response)
         })
     }
   }
