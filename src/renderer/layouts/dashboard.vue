@@ -13,6 +13,9 @@ import Sidebar from '~/components/Sidebar/Sidebar.vue'
 import WalletPanel from '~/components/WalletPanel/WalletPanel.vue'
 
 export default {
-  components: { Snackbar, Sidebar, WalletPanel }
+  components: { Snackbar, Sidebar, WalletPanel },
+  created () {
+    this.$store.dispatch('online/updateOnline')
+  }
 }
 </script>

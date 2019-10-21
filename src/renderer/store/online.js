@@ -18,6 +18,6 @@ export const actions = {
   async updateOnline ({ commit }) {
     const isOnline = require('is-online')
     const online = await isOnline()
-    commit('setOnline', online.online)
+    commit('setOnline', online)
   }
 }

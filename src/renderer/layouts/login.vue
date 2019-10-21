@@ -32,6 +32,9 @@ export default {
     clearInterval(this.intervalPrice)
     clearInterval(this.intervalDailyHistoryPrice)
   },
+  created () {
+    this.$store.dispatch('online/updateOnline')
+  },
   mounted () {
     this.updatePrice()
     this.updateDailyHistoryPrice()

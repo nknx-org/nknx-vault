@@ -1,3 +1,7 @@
+import fs from 'fs'
+import { remote } from 'electron'
+const app = remote.app
+
 export const state = () => ({
   activeWallet: false,
   walletInfo: false
@@ -26,9 +30,22 @@ export const actions = {
     commit('setActiveWallet', wallet)
   },
   async updateWalletInfo ({ commit }, address) {
-    const data = await this.$axios.$get(
-      `https://api.nknx.nkn.org/addresses/${address}`
-    )
-    commit('setWalletInfo', data)
+    const online = this.state.online.online
+    const path = app.getPath('userData') + '\\walletInfo.json'
+
+    if (online === true) {
+      const data = await this.$axios.$get(
+        `https://api.nknx.nkn.org/addresses/${address}`
+      )
+
+      const jsonWalletInfo = JSON.stringify(data)
+      fs.writeFileSync(path, jsonWalletInfo)
+
+      commit('setWalletInfo', data)
+    } else {
+      const walletInfoJson = fs.readFileSync(path)
+      const walletInfoObj = JSON.parse(walletInfoJson)
+      commit('setWalletInfo', walletInfoObj)
+    }
   }
 }

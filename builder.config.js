@@ -45,7 +45,7 @@ module.exports = {
   asar: false,
   productName: 'NKNx Vault',
   appId: 'org.nknxorg.nknx-vault',
-  artifactName: 'my-browser-${version}.${ext}',
+  artifactName: 'nknx-vault-${version}.${ext}',
   directories: {
     output: 'build'
   },

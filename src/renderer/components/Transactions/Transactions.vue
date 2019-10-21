@@ -93,6 +93,9 @@ export default {
   created () {
     this.address = this.activeWallet.address
     this.$store.dispatch('online/updateOnline')
+    this.$store.dispatch('price/updateCurrentPrice')
+    this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)
+
     this.setLocalDataTxPath()
   },
   mounted () {
