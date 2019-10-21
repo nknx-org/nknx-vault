@@ -533,6 +533,13 @@ table {
   &__row,
   tr {
     border-bottom: $card-border;
+
+    &_loader{
+      
+      &:first-of-type{
+        height: 53px;
+      }
+    }
   }
 
   &__title,
@@ -551,6 +558,18 @@ table {
     padding: $padding-small $padding-default;
     position: relative;
     font-weight: $fw-bold;
+
+    &:last-child{
+      width: 1%;
+    }
+
+    &:nth-child(3){
+      width: 50%;
+    }
+
+    &_loader{
+      padding: 0;
+    }
 
     &_overflow {
       max-width: 200px;

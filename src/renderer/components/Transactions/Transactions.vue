@@ -22,8 +22,8 @@
         </th>
       </thead>
       <template v-if="loading">
-        <tr v-for="(headingLoader, index) in loaders" :key="index">
-          <td colspan="4" style="padding: 0">
+        <tr v-for="(headingLoader, index) in loaders" :key="index" class="table__row_loader">
+          <td class="table__item_loader" colspan="4">
             <TableRowLoader />
           </td>
         </tr>
