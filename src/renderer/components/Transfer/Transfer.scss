@@ -9,6 +9,19 @@
     flex: 1;
   }
 
+  &__info{
+    color: $secondary;
+    margin-left: 4px;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+    transition: $transition-1;
+
+    &:hover{
+      color: $primary;
+    }
+  }
+
   &__icon{
     margin: 0 $padding-big;
     position: relative;

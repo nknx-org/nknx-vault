@@ -4,7 +4,12 @@
 
     <div class="transfer__controls">
       <label class="modal__label transfer__amount">
-        {{ $t('amount') }}
+        {{ $t('amount') }} <span v-tooltip="{
+          content: $t('sendAmountTooltip'),
+          placement: 'top-center',
+          offset: 5,
+        }" class="transfer__info fe fe-info"
+        />
         <div class="modal__input modal__input_nkn">
           <input
             v-model="amount"
@@ -16,7 +21,12 @@
       </label>
       <TxIcon class="transfer__icon" />
       <label class="modal__label transfer__address">
-        {{ $t('toWalletAddress') }}
+        {{ $t('toWalletAddress') }} <span v-tooltip="{
+          content: $t('toWalletAddressTooltip'),
+          placement: 'top-center',
+          offset: 5,
+        }" class="transfer__info fe fe-info"
+        />
         <div class="modal__input">
           <input
             v-model.trim="address"

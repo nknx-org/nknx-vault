@@ -57,6 +57,7 @@
       font-family: $heading-font;
       padding: $padding-default $padding-big;
       border-radius: 100em;
+      transition: $transition-1;
 
       &:hover {
         background-color: $grey-light;
