@@ -22,7 +22,6 @@
         </div>
       </div>
     </div>
-
     <div class="wallet-panel__bot">
       <div class="wallet-panel__row">
         <div class="wallet-panel__left">
@@ -67,7 +66,11 @@ export default {
       dailyHistoryPrice: 'price/getDailyHistoryPrice'
     }),
     balance () {
-      return parseFloat(this.walletInfo.balance).toFixed(3) || 0
+      if (this.walletInfo !== false) {
+        return parseFloat(this.walletInfo.balance).toFixed(3) || 0
+      } else {
+        return 0
+      }
     },
     name () {
       return this.walletInfo.name || ''
