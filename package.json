@@ -51,6 +51,7 @@
   "dependencies": {
     "file-saver": "^2.0.2",
     "husky": "^3.0.9",
+    "is-online": "^8.2.0",
     "nkn-wallet": "^0.4.6",
     "nuxt-clipboard2": "^0.2.1",
     "nuxt-i18n": "^6.3.0",

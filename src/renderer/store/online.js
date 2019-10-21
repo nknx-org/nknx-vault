@@ -3,8 +3,8 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setOnline (state) {
-    state.online = navigator.onLine
+  setOnline (state, online) {
+    state.online = online
   }
 }
 
@@ -15,7 +15,9 @@ export const getters = {
 }
 
 export const actions = {
-  updateOnline ({ commit }) {
-    commit('setOnline')
+  async updateOnline ({ commit }) {
+    const isOnline = require('is-online')
+    const online = await isOnline()
+    commit('setOnline', online.online)
   }
 }
