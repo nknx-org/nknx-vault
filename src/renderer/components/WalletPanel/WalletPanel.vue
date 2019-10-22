@@ -65,7 +65,6 @@ export default {
   components: { PriceArrow },
   data: () => {
     return {
-      address: ''
     }
   },
   computed: {
@@ -75,6 +74,13 @@ export default {
       price: 'price/getCurrentPrice',
       dailyHistoryPrice: 'price/getDailyHistoryPrice'
     }),
+    address () {
+      if (this.walletInfo !== false) {
+        return this.walletInfo.address
+      } else {
+        return this.activeWallet.address
+      }
+    },
     balance () {
       if (this.walletInfo !== false) {
         return parseFloat(this.walletInfo.balance).toFixed(3) || 0
@@ -96,7 +102,6 @@ export default {
     }
   },
   created () {
-    this.address = this.activeWallet.address
   },
   mounted () {
   },

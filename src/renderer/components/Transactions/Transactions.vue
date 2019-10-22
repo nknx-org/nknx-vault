@@ -68,7 +68,6 @@ export default {
   components: { Pagination, TableRowLoader },
   data () {
     return {
-      address: '',
       transactions: [],
       loading: true,
       nextPage: null,
@@ -88,6 +87,13 @@ export default {
     }),
     totalTransactionsCount () {
       return this.walletInfo.count_transactions || 0
+    },
+    address () {
+      if (this.walletInfo !== false) {
+        return this.walletInfo.address
+      } else {
+        return this.activeWallet.address
+      }
     }
   },
   created () {
