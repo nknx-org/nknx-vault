@@ -18,19 +18,36 @@ export default {
   components: { Snackbar, Sidebar, WalletPanel },
   computed: {
     ...mapGetters({
-      online: 'online/getOnline'
+      online: 'online/getOnline',
+      activeWallet: 'wallet/getActiveWallet'
+
     })
+  },
+  watch: {
+    online () {
+      if (this.online === false) {
+        this.$store.dispatch('snackbar/updateSnack', {
+          snack: 'offlineModeAlert',
+          color: 'alert',
+          timeout: false
+        })
+        this.$store.dispatch('price/updateCurrentPrice')
+        this.$store.dispatch('price/updateDailyHistoryPrice')
+        this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)
+      } else {
+        this.$store.dispatch('snackbar/updateSnack', {
+          snack: 'onlineModeAlert',
+          color: 'success',
+          timeout: true
+        })
+      }
+    }
   },
   created () {
     this.$store.dispatch('online/updateOnline')
   },
   mounted () {
-    if (this.online === false) {
-      this.$store.dispatch('snackbar/updateSnack', {
-        snack: 'offlineModeAlert',
-        color: 'alert'
-      })
-    }
+
   }
 }
 </script>

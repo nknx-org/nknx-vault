@@ -172,7 +172,8 @@ export default {
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {
           snack: 'walletErr' + e.code,
-          color: 'error'
+          color: 'error',
+          timeout: true
         })
       }
     },
@@ -187,7 +188,8 @@ export default {
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {
           snack: 'walletErr' + e.code,
-          color: 'error'
+          color: 'error',
+          timeout: true
         })
       }
     },

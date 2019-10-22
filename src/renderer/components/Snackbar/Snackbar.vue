@@ -3,7 +3,7 @@
     <p class="snackbar__text">
       {{ $t(message) }}
     </p>
-    <button class="snackbar__button" @click="show = false"><span class="snackbar__close fe fe-x" /></button>
+    <button v-if="timeout === true" class="snackbar__button" @click="show = false"><span class="snackbar__close fe fe-x" /></button>
   </div>
 </template>
 
@@ -17,7 +17,8 @@ export default {
     return {
       show: false,
       message: '',
-      color: 'alert'
+      color: 'alert',
+      timeout: true
     }
   },
   created () {
@@ -29,18 +30,21 @@ export default {
           this.show = true
           this.color = this.$store.state.snackbar.color
           this.message = this.$store.state.snackbar.snack
+          this.timeout = this.$store.state.snackbar.timeout
           const self = this
 
-          setTimeout(function () {
-            self.show = false
-            self.message = ''
-            self.color = 'alert'
-
-            self.$store.dispatch('snackbar/updateSnack', {
-              snack: '',
-              color: 'alert'
-            })
-          }, 4000)
+          if (this.timeout === true) {
+            setTimeout(function () {
+              self.show = false
+              self.message = ''
+              self.color = 'alert'
+              self.timeout = true
+              self.$store.dispatch('snackbar/updateSnack', {
+                snack: '',
+                color: 'alert'
+              })
+            }, 4000)
+          }
         }
       }
     )

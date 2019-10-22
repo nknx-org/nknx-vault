@@ -1,6 +1,7 @@
 export const state = () => ({
   snack: '',
-  color: 'alert'
+  color: 'alert',
+  timeout: true
 })
 
 export const mutations = {

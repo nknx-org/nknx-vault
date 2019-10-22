@@ -96,8 +96,16 @@ export default {
       }
     }
   },
+  watch: {
+    online () {
+      if (this.online === false) {
+        this.getLocalAddressTransactions()
+      } else {
+        this.getAddressTransactions(this.currentPage)
+      }
+    }
+  },
   created () {
-    this.address = this.activeWallet.address
     this.$store.dispatch('online/updateOnline')
     this.$store.dispatch('price/updateCurrentPrice')
     this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)

@@ -81,7 +81,8 @@ export default {
         .then(data => {
           self.$store.dispatch('snackbar/updateSnack', {
             snack: 'walletNameRegSuccess' + data,
-            color: 'success'
+            color: 'success',
+            timeout: true
           })
           self.$emit('toggleRegisterWalletNameModal', false)
         })
@@ -89,7 +90,8 @@ export default {
           console.log(error)
           self.$store.dispatch('snackbar/updateSnack', {
             snack: 'walletNameRegError' + error.code,
-            color: 'error'
+            color: 'error',
+            timeout: true
           })
           self.$emit('toggleRegisterWalletNameModal', false)
         })

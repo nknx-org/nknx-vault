@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import Logo from '~/assets/icons/logo.svg'
 import Snackbar from '~/components/Snackbar/Snackbar.vue'
 
@@ -26,6 +28,28 @@ export default {
   data: () => {
     return {
       updateInterval: 300000
+    }
+  },
+  computed: {
+    ...mapGetters({
+      online: 'online/getOnline'
+    })
+  },
+  watch: {
+    online () {
+      if (this.online === false) {
+        this.$store.dispatch('snackbar/updateSnack', {
+          snack: 'offlineModeAlert',
+          color: 'alert',
+          timeout: false
+        })
+      } else {
+        this.$store.dispatch('snackbar/updateSnack', {
+          snack: 'onlineModeAlert',
+          color: 'success',
+          timeout: true
+        })
+      }
     }
   },
   destroyed () {

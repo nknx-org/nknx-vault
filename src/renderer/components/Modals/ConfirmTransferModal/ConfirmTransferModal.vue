@@ -77,7 +77,8 @@ export default {
         .then(data => {
           self.$store.dispatch('snackbar/updateSnack', {
             snack: 'walletTransferSuccess',
-            color: 'success'
+            color: 'success',
+            timeout: true
           })
           self.$emit('toggleTransferConfirmModal', false)
         })
@@ -85,7 +86,8 @@ export default {
           console.log(error)
           self.$store.dispatch('snackbar/updateSnack', {
             snack: 'walletTransferError' + error.code,
-            color: 'error'
+            color: 'error',
+            timeout: true
           })
           self.$emit('toggleTransferConfirmModal', false)
         })

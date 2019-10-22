@@ -109,7 +109,8 @@ export default {
     toggleSnack (text) {
       this.$store.dispatch('snackbar/updateSnack', {
         snack: text,
-        color: 'alert'
+        color: 'alert',
+        timeout: true
       })
     },
     async copyText (text) {
