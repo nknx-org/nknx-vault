@@ -3,7 +3,7 @@
     <div class="table__wrapper">
       <div class="table__top">
         <h3 class="title_color_dark">{{ $t('transactionsHistory') }}</h3>
-        <a href="https://explorer.nknx.org/" target="_blank" class="text__link">{{ $t('blockchainExplorer') }}</a>
+        <a href="https://explorer.nknx.org/" target="_blank" class="text__link" @click="openExplorer">{{ $t('blockchainExplorer') }}</a>
       </div>
     </div>
     <table>
@@ -57,7 +57,7 @@
 
 <script>
 import fs from 'fs'
-import { remote } from 'electron'
+import { remote, shell } from 'electron'
 
 import { mapGetters } from 'vuex'
 
@@ -120,6 +120,11 @@ export default {
     }
   },
   methods: {
+    openExplorer () {
+      event.preventDefault()
+      const link = event.target.href
+      shell.openExternal(link)
+    },
     setLocalDataTxPath () {
       const app = remote.app
       const path = app.getPath('userData') + '\\transactions.json'
