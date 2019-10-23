@@ -31,7 +31,7 @@
 </style>
 
 <script>
-import LogoNKN from '~/assets/icons/logoNKN.svg'
+import LogoNKN from '~/assets/icons/logo.svg'
 import WalletIcon from '~/assets/icons/wallet-default.svg'
 import TxIcon from '~/assets/icons/transactions.svg'
 import SettingsIcon from '~/assets/icons/settings.svg'
