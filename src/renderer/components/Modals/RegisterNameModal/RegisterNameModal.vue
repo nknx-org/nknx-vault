@@ -87,7 +87,6 @@ export default {
           self.$emit('toggleRegisterWalletNameModal', false)
         })
         .catch(error => {
-          console.log(error)
           self.$store.dispatch('snackbar/updateSnack', {
             snack: 'walletNameRegError' + error.code,
             color: 'error',

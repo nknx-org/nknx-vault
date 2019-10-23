@@ -97,7 +97,6 @@ export default {
   },
   methods: {
     toggleTransferConfirmModal (bool) {
-      console.log(bool)
       this.isTransferConfirmModal = bool
     }
   }

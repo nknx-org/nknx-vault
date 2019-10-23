@@ -2,11 +2,14 @@
   &-login {
     background-color: $primary;
     overflow: hidden;
+    border-radius: $card-br;
+    height: 855px;
 
     &__wrapper {
       max-width: 1400px;
       margin: 0 auto;
-      min-height: 100vh;
+      min-height: calc(100vh - 32px);
+      padding-top: 32px;
     }
 
     &__content {
@@ -71,14 +74,23 @@
   }
 
   &-dashboard{
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    min-height: 100vh;
+    height: 855px;
+    border-radius: $card-br;
+    background: transparent;
+    
+    &__wrapper {
+      padding-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      min-height: calc(100vh - 32px);
+      border-bottom-right-radius: $card-br;
+    }
     
     &__content{
       padding: 60px $padding-medium 60px calc(#{$padding-medium} + 64px);
       background: $white;
       grid-column: span 8;
+      border-bottom-right-radius: $card-br;
     }
   }
 }

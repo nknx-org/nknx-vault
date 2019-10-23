@@ -83,7 +83,6 @@ export default {
           self.$emit('toggleTransferConfirmModal', false)
         })
         .catch(error => {
-          console.log(error)
           self.$store.dispatch('snackbar/updateSnack', {
             snack: 'walletTransferError' + error.code,
             color: 'error',

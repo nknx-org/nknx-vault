@@ -1,5 +1,6 @@
 <template>
   <div class="layout-login">
+    <Topbar />
     <div class="layout-login__wrapper">
       <div class="layout-login__header">
         <div class="layout-login__logo">
@@ -22,9 +23,10 @@ import { mapGetters } from 'vuex'
 
 import Logo from '~/assets/icons/logo.svg'
 import Snackbar from '~/components/Snackbar/Snackbar.vue'
+import Topbar from '~/components/Topbar/Topbar.vue'
 
 export default {
-  components: { Logo, Snackbar },
+  components: { Logo, Snackbar, Topbar },
   data: () => {
     return {
       updateInterval: 300000
