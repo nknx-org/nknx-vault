@@ -84,5 +84,4 @@ export default {
   registerNameNotice: 'registerNameNotice',
   desiredName: 'desiredName',
   register: 'register'
-
 }
