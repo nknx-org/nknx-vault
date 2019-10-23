@@ -75,6 +75,12 @@
 
     <div class="modal__footer">
       <Button
+        :click="goToCreate"
+        theme="text"
+      >
+        {{ $t('dontHaveAWallet') }}
+      </Button>
+      <Button
         v-if="currentView ==='pk'"
         :click="unlockWalletFromPk"
         theme="secondary"
@@ -134,6 +140,9 @@ export default {
   created () {
   },
   methods: {
+    goToCreate () {
+      this.$router.push('/createWallet')
+    },
     clearData () {
       this.pk = ''
       this.walletFile = false

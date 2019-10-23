@@ -43,6 +43,12 @@
 
     <div class="modal__footer">
       <Button
+        :click="goToImport"
+        theme="text"
+      >
+        {{ $t('alreadyHaveAWallet') }}
+      </Button>
+      <Button
         :click="createWallet"
         theme="success"
         :disabled="!isReadme || !isPassword"
@@ -87,6 +93,9 @@ export default {
     }
   },
   methods: {
+    goToImport () {
+      this.$router.push('/importWallet')
+    },
     changeIsReadme () {
       this.isReadme = !this.isReadme
     },

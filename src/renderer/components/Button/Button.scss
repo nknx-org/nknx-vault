@@ -91,6 +91,21 @@
           color: $white;
       }
     }
+
+    &_text{
+      color: $grey-darkest;
+      border: none;
+      background: transparent;
+      padding: 0;
+
+      &:hover {
+        color: $secondary;
+      }
+
+      &:active {
+        color: $primary;
+      }
+    }
  
 
     &_ghost {
