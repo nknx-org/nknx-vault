@@ -90,7 +90,7 @@
       padding: 60px $padding-medium 60px calc(#{$padding-medium} + 64px);
       background: $white;
       grid-column: span 8;
-      border-bottom-right-radius: $card-br;
+      border-bottom-left-radius: $card-br;
     }
   }
 }
