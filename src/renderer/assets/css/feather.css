@@ -1,10 +1,13 @@
 @font-face {
-  font-family: 'Feather';
-  src: url('../fonts/Feather/Feather.ttf?sdxovp') format('truetype'),
-    url('../fonts/Feather/Feather.woff?sdxovp') format('woff'),
-    url('../fonts/Feather/Feather.svg?sdxovp#Feather') format('svg');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Feather';
+    src: url('../fonts/Feather/Feather.eot');
+    src: url('../fonts/Feather/Feather.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Feather/Feather.woff2') format('woff2'),
+        url('../fonts/Feather/Feather.woff') format('woff'),
+        url('../fonts/Feather/Feather.ttf') format('truetype'),
+        url('../fonts/Feather/Feather.svg#Feather') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .fe {
