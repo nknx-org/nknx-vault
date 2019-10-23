@@ -212,6 +212,7 @@ h6 {
 .modal {
   width: 592px;
   margin: 0 auto;
+  z-index: 1;
   
   &__wrapper{
     position: fixed;

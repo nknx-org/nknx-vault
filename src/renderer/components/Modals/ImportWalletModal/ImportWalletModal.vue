@@ -1,105 +1,108 @@
 <template>
-  <Card class="modal">
-    <h2 class="modal__title">{{ $t('importWallet') }}</h2>
+  <div class="fragment">
+    <Card class="modal">
+      <h2 class="modal__title">{{ $t('importWallet') }}</h2>
 
-    <div class="modal-switch">
-      <div
-        :class="['modal-switch__button', currentView === 'pk' ? 'modal-switch__button_active' : null]"
-        @click="switchView('pk')"
-      >
-        {{ $t('privateKey') }}
+      <div class="modal-switch">
+        <div
+          :class="['modal-switch__button', currentView === 'pk' ? 'modal-switch__button_active' : null]"
+          @click="switchView('pk')"
+        >
+          {{ $t('privateKey') }}
+        </div>
+        <div
+          :class="['modal-switch__button', currentView === 'json' ? 'modal-switch__button_active' : null]"
+          @click="switchView('json')"
+        >
+          {{ $t('walletFile') }}
+        </div>
       </div>
-      <div
-        :class="['modal-switch__button', currentView === 'json' ? 'modal-switch__button_active' : null]"
-        @click="switchView('json')"
-      >
-        {{ $t('walletFile') }}
-      </div>
-    </div>
 
-    <template v-if="currentView === 'pk'">
-      <div class="modal__body">
-        <label class="modal__label">
-          {{ $t('enterYourPrivateKey') }}
-          <div class="modal__input">
-            <input
-              v-model="pk"
-              class="modal__controller"
-              :type="!pkVisible ? 'password' : 'text'"
-            >
-            <span
-              :class="['modal__input-action', pkVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
-              @click="togglePkVisible"
-            />
-          </div>
-        </label>
-      </div>
-    </template>
+      <template v-if="currentView === 'pk'">
+        <div class="modal__body">
+          <label class="modal__label">
+            {{ $t('enterYourPrivateKey') }}
+            <div class="modal__input">
+              <input
+                v-model="pk"
+                class="modal__controller"
+                :type="!pkVisible ? 'password' : 'text'"
+              >
+              <span
+                :class="['modal__input-action', pkVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
+                @click="togglePkVisible"
+              />
+            </div>
+          </label>
+        </div>
+      </template>
 
-    <template v-if="currentView === 'json'">
-      <div class="modal__body">
-        <label class="modal__label">
-          <div class="modal__input">
-            <input
-              class="modal__file"
-              accept=".json"
-              type="file"
-              @change="uploadWallet"
-            >
-            <div class="modal__file-wrapper">
-              <div class="modal__file-content">
-                <WalletIcon class="modal__file-icon" />
-                <div class="modal__file-title"><span v-if="!walletFileName"> {{ $t('dndYourWalletFile') }}</span> <span v-if="isWalletFile && walletFileName">{{ $t('walletFileUploadSuccess') }}</span> <span v-if="!isWalletFile && walletFileName">{{ $t('walletFileUploadFail') }}</span></div>
-                <p v-if="!walletFileName" class="modal__file-descr">{{ $t('or') }} <span class="modal__file-descr_accent">{{ $t('browseFiles') }}</span></p>
-                <p v-else class="modal__file-descr_accent">{{ walletFileName }}</p>
+      <template v-if="currentView === 'json'">
+        <div class="modal__body">
+          <label class="modal__label">
+            <div class="modal__input">
+              <input
+                class="modal__file"
+                accept=".json"
+                type="file"
+                @change="uploadWallet"
+              >
+              <div class="modal__file-wrapper">
+                <div class="modal__file-content">
+                  <WalletIcon class="modal__file-icon" />
+                  <div class="modal__file-title"><span v-if="!walletFileName"> {{ $t('dndYourWalletFile') }}</span> <span v-if="isWalletFile && walletFileName">{{ $t('walletFileUploadSuccess') }}</span> <span v-if="!isWalletFile && walletFileName">{{ $t('walletFileUploadFail') }}</span></div>
+                  <p v-if="!walletFileName" class="modal__file-descr">{{ $t('or') }} <span class="modal__file-descr_accent">{{ $t('browseFiles') }}</span></p>
+                  <p v-else class="modal__file-descr_accent">{{ walletFileName }}</p>
+                </div>
               </div>
             </div>
-          </div>
-        </label>
-        <label class="modal__label">
-          {{ $t('enterWalletFilePassword') }}
-          <div class="modal__input">
-            <input
-              v-model="password"
-              class="modal__controller"
-              :type="!passwordVisible ? 'password' : 'text'"
-            >
-            <span
-              :class="['modal__input-action', passwordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
-              @click="togglePasswordVisible"
-            />
-          </div>
-        </label>
-      </div>
-    </template>
+          </label>
+          <label class="modal__label">
+            {{ $t('enterWalletFilePassword') }}
+            <div class="modal__input">
+              <input
+                v-model="password"
+                class="modal__controller"
+                :type="!passwordVisible ? 'password' : 'text'"
+              >
+              <span
+                :class="['modal__input-action', passwordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
+                @click="togglePasswordVisible"
+              />
+            </div>
+          </label>
+        </div>
+      </template>
 
-    <div class="modal__footer">
-      <Button
-        :click="goToCreate"
-        theme="text"
-      >
-        {{ $t('dontHaveAWallet') }}
-      </Button>
-      <Button
-        v-if="currentView ==='pk'"
-        :click="unlockWalletFromPk"
-        theme="secondary"
-        :disabled="!isPk"
-        icon="unlock"
-      >
-        {{ $t('unlock') }}
-      </Button>
-      <Button
-        v-else
-        :click="unlockWalletFromJson"
-        theme="secondary"
-        :disabled="!isWalletFile || !isPassword"
-        icon="unlock"
-      >
-        {{ $t('unlock') }}
-      </Button>
-    </div>
-  </Card>
+      <div class="modal__footer">
+        <Button
+          :click="goToCreate"
+          theme="text"
+        >
+          {{ $t('dontHaveAWallet') }}
+        </Button>
+        <Button
+          v-if="currentView ==='pk'"
+          :click="unlockWalletFromPk"
+          theme="secondary"
+          :disabled="!isPk"
+          icon="unlock"
+        >
+          {{ $t('unlock') }}
+        </Button>
+        <Button
+          v-else
+          :click="unlockWalletFromJson"
+          theme="secondary"
+          :disabled="!isWalletFile || !isPassword"
+          icon="unlock"
+        >
+          {{ $t('unlock') }}
+        </Button>
+      </div>
+    </Card>
+    <Fragment class="fragment__right" />
+  </div>
 </template>
 
 <script>
@@ -109,9 +112,10 @@ import nknWallet from 'nkn-wallet'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
 import WalletIcon from '~/assets/icons/wallet.svg'
+import Fragment from '~/assets/icons/modal-fragment.svg'
 
 export default {
-  components: { Card, Button, WalletIcon },
+  components: { Card, Button, WalletIcon, Fragment },
   data () {
     return {
       currentView: 'pk',

@@ -1,3 +1,15 @@
+/*========== Fragment ==========*/
+
+.fragment{  
+  &__right{
+    position: absolute;
+    bottom: -45px;
+    right: -100px;
+  }
+}
+
+/*========== Layouts ==========*/
+
 .layout {
   &-login {
     background-color: $primary;
@@ -10,6 +22,7 @@
       margin: 0 auto;
       min-height: calc(100vh - 32px);
       padding-top: 32px;
+      position: relative;
     }
 
     &__content {
