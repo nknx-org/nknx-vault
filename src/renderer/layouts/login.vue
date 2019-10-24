@@ -34,7 +34,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      online: 'online/getOnline'
+      online: 'online/getOnline',
+      exchangeRates: 'currency/getExchangeRates',
+      selectedCurrency: 'settings/getSelectedCurrency'
     })
   },
   watch: {
@@ -64,6 +66,8 @@ export default {
   mounted () {
     this.updatePrice()
     this.updateDailyHistoryPrice()
+    this.updateExchangeRates()
+    this.getSettings()
 
     this.intervalPrice = setInterval(this.updatePrice, this.updateInterval)
     this.intervalDailyHistoryPrice = setInterval(
@@ -77,6 +81,15 @@ export default {
     },
     updateDailyHistoryPrice () {
       this.$store.dispatch('price/updateDailyHistoryPrice')
+    },
+    updateExchangeRates () {
+      this.$store.dispatch('currency/init')
+    },
+    getSettings () {
+      this.$store.dispatch('settings/init')
+    },
+    setExchangeRate () {
+      this.$store.dispatch('settings/setCurrency', 'EUR')
     }
   }
 }

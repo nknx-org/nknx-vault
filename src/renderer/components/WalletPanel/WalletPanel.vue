@@ -27,16 +27,16 @@
           </h3>
         </div>
         <div class="wallet-panel__right">
-          <div class="text__title">{{ $t('marketValue') }} (USD)</div>
-          <h3>${{ usdBalance }}</h3>
+          <div class="text__title">{{ $t('marketValue') }} ({{ selectedCurrency }})</div>
+          <h3>{{ currencyBalance }}</h3>
         </div>
       </div>
     </div>
     <div class="wallet-panel__bot">
       <div class="wallet-panel__row">
         <div class="wallet-panel__left">
-          <div class="text__title">NKN {{ $t('price') }} (USD)</div>
-          <h4>${{ usdPrice }}</h4>
+          <div class="text__title">NKN {{ $t('price') }} ({{ selectedCurrency }})</div>
+          <h4>{{ currencyPrice }}</h4>
         </div>
         <div class="wallet-panel__right">
           <div class="text__title">{{ $t('last7Days') }}</div>
@@ -72,7 +72,9 @@ export default {
       activeWallet: 'wallet/getActiveWallet',
       walletInfo: 'wallet/getWalletInfo',
       price: 'price/getCurrentPrice',
-      dailyHistoryPrice: 'price/getDailyHistoryPrice'
+      dailyHistoryPrice: 'price/getDailyHistoryPrice',
+      exchangeRates: 'currency/getExchangeRates',
+      selectedCurrency: 'settings/getSelectedCurrency'
     }),
     address () {
       if (this.walletInfo !== false) {
@@ -91,11 +93,11 @@ export default {
     name () {
       return this.walletInfo.name || ''
     },
-    usdPrice () {
-      return (this.price.prices[0].price).toFixed(6) || 0
+    currencyPrice () {
+      return (this.price.prices[0].price * this.exchangeRates[this.selectedCurrency]).toFixed(6) || 0
     },
-    usdBalance () {
-      return (this.balance * this.usdPrice).toFixed(2)
+    currencyBalance () {
+      return (this.balance * this.currencyPrice).toFixed(2)
     },
     weeklyChange () {
       return (this.price.prices[0].percent_change_7d).toFixed(2) || 0
