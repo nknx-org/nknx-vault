@@ -15,6 +15,15 @@
       </div>
       <div class="settings__right"><Button theme="ghost-secondary" :click="downloadWallet"> {{ $t('download') }}</Button></div>
     </div>
+    <div class="settings__item">
+      <div class="settings__left">
+        <h3 class="title_color_dark">{{ $t('preferedCurrency') }}</h3>
+        <p class="settings__descr"> {{ $t('currencyChoiceDescr') }}</p>
+      </div>
+      <div class="settings__right">
+        <Select :items="availableCurrencies" :active-item="selectedCurrency" @update="updateCurrency" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,9 +38,10 @@ import { mapGetters } from 'vuex'
 
 import Button from '~/components/Button/Button.vue'
 import RegisterNameModal from '~/components/Modals/RegisterNameModal/RegisterNameModal.vue'
+import Select from '~/components/Controls/Select/Select.vue'
 
 export default {
-  components: { Button, RegisterNameModal },
+  components: { Button, RegisterNameModal, Select },
   data () {
     return {
       isRegisterWalletNameModal: false
@@ -40,13 +50,18 @@ export default {
   computed: {
     ...mapGetters({
       activeWallet: 'wallet/getActiveWallet',
-      walletInfo: 'wallet/getWalletInfo'
+      walletInfo: 'wallet/getWalletInfo',
+      availableCurrencies: 'currency/getAvailableCurrencies',
+      selectedCurrency: 'settings/getSelectedCurrency'
     }),
     walletName () {
       return this.walletInfo.name || ''
     }
   },
   methods: {
+    updateCurrency (currency) {
+      this.$store.dispatch('currency/setCurrency')
+    },
     toggleRegisterWalletNameModal (bool) {
       this.isRegisterWalletNameModal = bool
     },
