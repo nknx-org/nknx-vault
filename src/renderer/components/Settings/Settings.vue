@@ -10,19 +10,19 @@
     <RegisterNameModal :open="isRegisterWalletNameModal" @toggleRegisterWalletNameModal="toggleRegisterWalletNameModal" />
     <div class="settings__item">
       <div class="settings__left">
-        <h3 class="title_color_dark">{{ $t('backup') }}</h3>
-        <p class="settings__descr"> {{ $t('backupDescr') }}</p>
-      </div>
-      <div class="settings__right"><Button theme="ghost-secondary" :click="downloadWallet"> {{ $t('download') }}</Button></div>
-    </div>
-    <div class="settings__item">
-      <div class="settings__left">
-        <h3 class="title_color_dark">{{ $t('preferedCurrency') }}</h3>
+        <h3 class="title_color_dark">{{ $t('preferredCurrency') }}</h3>
         <p class="settings__descr"> {{ $t('currencyChoiceDescr') }}</p>
       </div>
       <div class="settings__right">
         <Select :items="availableCurrencies" :active-item="selectedCurrency" @update="updateCurrency" />
       </div>
+    </div>
+    <div class="settings__item">
+      <div class="settings__left">
+        <h3 class="title_color_dark">{{ $t('backup') }}</h3>
+        <p class="settings__descr"> {{ $t('backupDescr') }}</p>
+      </div>
+      <div class="settings__right"><Button theme="ghost-secondary" :click="downloadWallet"> {{ $t('download') }}</Button></div>
     </div>
   </div>
 </template>
@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     updateCurrency (currency) {
-      this.$store.dispatch('currency/setCurrency')
+      this.$store.dispatch('settings/setCurrency', currency)
     },
     toggleRegisterWalletNameModal (bool) {
       this.isRegisterWalletNameModal = bool

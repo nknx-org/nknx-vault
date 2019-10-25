@@ -90,5 +90,7 @@ export default {
   desiredName: 'desiredName',
   register: 'register',
   alreadyHaveAWallet: 'Already have a wallet?',
-  dontHaveAWallet: 'Don’t have a wallet?'
+  dontHaveAWallet: 'Don’t have a wallet?',
+  preferredCurrency: 'Preferred currency',
+  currencyChoiceDescr: 'Choose which currency you would like to preview your balance in.'
 }
