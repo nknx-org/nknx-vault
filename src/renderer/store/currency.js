@@ -5,8 +5,7 @@ const app = remote.app
 export const state = () => ({
   selectedCurrency: 'USD',
   availableCurrencies: ['USD'],
-  exchangeRates: {}
-
+  exchangeRates: { 'rates': { 'USD': 1 }, 'base': 'USD', 'date': '2019-01-01' }
 })
 
 export const mutations = {
@@ -54,15 +53,19 @@ export const actions = {
       commit('setAvailableCurrencies', currencies)
       commit('setExchangeRates', data.rates)
     } else {
-      const exchangeRates = fs.readFileSync(path)
-      const currentExchangeRatesObj = JSON.parse(exchangeRates)
+      try {
+        const exchangeRates = fs.readFileSync(path)
+        const currentExchangeRatesObj = JSON.parse(exchangeRates)
 
-      for (const rate in currentExchangeRatesObj.rates) {
-        currencies.push(rate)
+        for (const rate in currentExchangeRatesObj.rates) {
+          currencies.push(rate)
+        }
+
+        commit('setAvailableCurrencies', currencies)
+        commit('setExchangeRates', currentExchangeRatesObj.rates)
+      } catch (err) {
+
       }
-
-      commit('setAvailableCurrencies', currencies)
-      commit('setExchangeRates', currentExchangeRatesObj.rates)
     }
   },
   setCurrency ({ commit }, currency) {
