@@ -49,6 +49,7 @@
           </h4>
         </div>
       </div>
+      <PriceChart />
     </div>
   </aside>
 </template>
@@ -60,9 +61,10 @@
 <script>
 import { mapGetters } from 'vuex'
 import PriceArrow from '~/assets/icons/priceArrow.svg'
+import PriceChart from '~/components/charts/PriceChart.vue'
 
 export default {
-  components: { PriceArrow },
+  components: { PriceArrow, PriceChart },
   data: () => {
     return {
     }
@@ -72,7 +74,6 @@ export default {
       activeWallet: 'wallet/getActiveWallet',
       walletInfo: 'wallet/getWalletInfo',
       price: 'price/getCurrentPrice',
-      dailyHistoryPrice: 'price/getDailyHistoryPrice',
       exchangeRates: 'currency/getExchangeRates',
       selectedCurrency: 'settings/getSelectedCurrency'
     }),

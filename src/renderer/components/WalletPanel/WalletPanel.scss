@@ -8,13 +8,18 @@
   justify-content: space-between;
   border-bottom-right-radius: $card-br;
 
+  &__bot{
+    position: relative;
+    padding-bottom: 400px;
+  }
+
   &__row{
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    &:not(:last-child){
-      margin-bottom: $padding-big;
+    &:last-child{
+      margin-top: $padding-big;
     }
   }
 

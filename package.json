@@ -49,6 +49,7 @@
     "webpack-node-externals": "1.7.2"
   },
   "dependencies": {
+    "chart.js": "^2.8.0",
     "file-saver": "^2.0.2",
     "husky": "^3.0.9",
     "is-online": "^8.2.0",
@@ -56,6 +57,7 @@
     "nuxt-clipboard2": "^0.2.1",
     "nuxt-i18n": "^6.3.0",
     "v-tooltip": "^2.0.2",
+    "vue-chartjs": "^3.4.2",
     "vue-content-loader": "^0.2.2"
   }
 }

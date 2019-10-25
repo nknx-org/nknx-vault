@@ -1,61 +1,88 @@
 <template>
-  <div ref="chartdiv" />
+  <div class="priceChart">
+    <LineChart v-if="data.labels.length > 0" :data="data" :options="options" />
+  </div>
 </template>
 
 <script>
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
-import am4themesAnimated from '@amcharts/amcharts4/themes/animated'
 import { mapGetters } from 'vuex'
-am4core.useTheme(am4themesAnimated)
+
+import LineChart from '~/components/Charts/LineChart'
 export default {
-  computed: mapGetters({
-    dailyHistoryPrice: 'price/getDailyHistoryPrice'
-  }),
-  mounted () {
-    const chart = am4core.create(this.$refs.chartdiv, am4charts.XYChart)
-    const data = []
-    const price = this.dailyHistoryPrice.USD
-    const priceArray = price.map(i => i.price)
-    const minPrice = Math.min.apply(0, priceArray)
-    const maxPrice = Math.max.apply(null, priceArray)
-    for (let i = price.length - 1; i >= 0; i--) {
-      data.push({
-        date: new Date(price[i].date),
-        count: price[i].price
-      })
-    }
-    chart.data = data
-    const dateAxis = chart.xAxes.push(new am4charts.DateAxis())
-    dateAxis.renderer.grid.template.disabled = true
-    dateAxis.renderer.labels.template.disabled = true
-    dateAxis.startLocation = 0.5
-    dateAxis.endLocation = 0.5
-    dateAxis.dateFormats.setKey('day', 'dd/MM')
-    dateAxis.periodChangeDateFormats.setKey('day', 'dd/MM')
-    const valueAxis = chart.yAxes.push(new am4charts.ValueAxis())
-    valueAxis.min = minPrice
-    valueAxis.max = maxPrice
-    valueAxis.renderer.grid.template.disabled = true
-    valueAxis.renderer.baseGrid.disabled = true
-    valueAxis.renderer.labels.template.disabled = true
-    const gradient1 = new am4core.LinearGradient()
-    gradient1.addColor(am4core.color('#1791F2'))
-    gradient1.addColor(am4core.color('#1791F2'))
-    const series = chart.series.push(new am4charts.LineSeries())
-    series.dataFields.dateX = 'date'
-    series.dataFields.valueY = 'count'
-    series.stroke = gradient1
-    series.fill = gradient1
-    series.fillOpacity = 0.1
-    series.tensionX = 10
-    series.strokeWidth = 2
-    this.chart = chart
+  components: {
+    LineChart
   },
-  beforeDestroy () {
-    if (this.chart) {
-      this.chart.dispose()
+  data: () => {
+    return {
+      data: {
+        labels: [],
+        datasets: [
+          {
+            data: []
+          }
+        ]
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        bezierCurve: false,
+        legend: {
+          display: false
+        },
+        elements: {
+          line: {
+            borderColor: '#3FFF96',
+            borderWidth: 2,
+            tension: 0,
+            backgroundColor: '#1b2f6b'
+
+          },
+          point: {
+            radius: 0
+          }
+        },
+        tooltips: {
+          enabled: false
+        },
+        scales: {
+          yAxes: [
+            {
+              display: false
+            }
+          ],
+          xAxes: [
+            {
+              display: false
+            }
+          ]
+        } }
     }
+  },
+  computed: {
+    ...mapGetters({
+      dailyHistoryPrice: 'price/getDailyHistoryPrice'
+    })
+  },
+  mounted () {
+    this.dailyHistoryPrice.USD.forEach(day => {
+      this.data.labels.push(day.date)
+      this.data.datasets[0].data.push(day.price)
+    })
   }
 }
 </script>
+
+<style>
+  .priceChart{
+    height: 400px;
+    width: 458px;
+    position: absolute;
+    left: -32px;
+    bottom: -32px;
+  }
+
+  #line-chart{
+    height: 400px;
+    width: 100%;
+  }
+</style>
