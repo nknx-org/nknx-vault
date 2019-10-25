@@ -38,6 +38,8 @@ export default {
         this.$store.dispatch('price/updateCurrentPrice')
         this.$store.dispatch('price/updateDailyHistoryPrice')
         this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)
+        this.$store.dispatch('settings/init')
+        this.$store.dispatch('currency/init')
       } else {
         this.$store.dispatch('snackbar/updateSnack', {
           snack: 'onlineModeAlert',

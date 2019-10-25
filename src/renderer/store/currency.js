@@ -47,6 +47,10 @@ export const actions = {
         currencies.push(rate)
       }
 
+      currencies.sort((a, b) => {
+        return a.localeCompare(b)
+      })
+
       const exchangeRates = JSON.stringify(data)
       fs.writeFileSync(path, exchangeRates)
 
