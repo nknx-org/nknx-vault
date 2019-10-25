@@ -3,7 +3,7 @@
     <Topbar />
     <div class="layout-login__wrapper">
       <div class="layout-login__header">
-        <div class="layout-login__logo">
+        <div class="layout-login__logo" @click="toDefault">
           <Logo />
           <span class="layout-login__title">NKNx<b>VAULT</b> <span class="small">- a new kind of wallet</span></span>
         </div>
@@ -66,6 +66,9 @@ export default {
 
   },
   methods: {
+    toDefault () {
+      this.$router.push('/')
+    },
     initAll () {
       this.updatePrice()
       this.updateDailyHistoryPrice()

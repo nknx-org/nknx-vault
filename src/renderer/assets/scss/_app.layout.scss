@@ -32,8 +32,10 @@
     &__logo {
       display: flex;
       align-items: center;
-      cursor: default;
+      cursor: pointer;
       user-select: none;
+      position: relative;
+      z-index: 1;
     }
 
     &__title {
