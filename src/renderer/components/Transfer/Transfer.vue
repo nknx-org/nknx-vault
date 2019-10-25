@@ -1,6 +1,6 @@
 <template>
   <div class="transfer">
-    <ConfirmTransferModal :open="isTransferConfirmModal" :address="address" :amount="amount" @toggleTransferConfirmModal="toggleTransferConfirmModal" />
+    <ConfirmTransferModal :open="isTransferConfirmModal" :address="address" :amount="parseFloat(amount)" @toggleTransferConfirmModal="toggleTransferConfirmModal" />
 
     <div class="transfer__controls">
       <label class="modal__label transfer__amount">
