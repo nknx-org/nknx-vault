@@ -1,8 +1,8 @@
 <template>
-  <div class="select__wrapper">
+  <div class="select__wrapper" :class="`select__wrapper_${type}`">
     <div
       class="select__button"
-      :class="open ? 'select__button_active' : null"
+      :class="[open ? 'select__button_active' : null, `select__button_${type}`]"
       @click="toggleSelect()"
     >
       {{ activeItem }}
@@ -12,11 +12,12 @@
       />
     </div>
 
-    <ul class="select__list" :class="open ? 'select__list_open' : null">
+    <ul class="select__list" :class="[open ? 'select__list_open' : null, `select__list_${type}`]">
       <li
         v-for="item in items"
         :key="item"
         class="select__item"
+        :class="`select__item_${type}`"
         @click="setSelect(item),toggleSelect()"
       >
         {{ item }}
@@ -37,6 +38,10 @@ export default {
       default: () => []
     },
     activeItem: {
+      type: String,
+      default: ''
+    },
+    type: {
       type: String,
       default: ''
     }

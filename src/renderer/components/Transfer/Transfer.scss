@@ -25,11 +25,21 @@
   &__icon{
     margin: 0 $padding-big;
     position: relative;
-    top: 46px;
+    top: -16px;
   }
 
   &__controls{
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+
+    &:not(:last-of-type){
+      margin-bottom: $padding-normal;
+    }
+  }
+
+  &__fee{
+    flex: 1;
+    margin-left: $padding-big;
   }
 }

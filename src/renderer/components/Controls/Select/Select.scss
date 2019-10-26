@@ -25,6 +25,13 @@
     display: flex;
     justify-content: space-between;
 
+    &_modal{
+      max-height: 49px;
+      border-radius: $card-br;
+      padding: $padding-default;
+      font-weight: $fw-normal;
+    }
+
     &:hover {
       border-color: $secondary;
     }
@@ -49,6 +56,11 @@
     min-width: 140px;
     box-sizing: border-box;
     position: relative;
+
+    &_modal{
+      margin-top: $padding-micro;
+    }
+
   }
 
   &__list {
@@ -68,6 +80,13 @@
     overflow-y: scroll;
     overflow-x: hidden;
 
+    &_modal{
+      top: 54px;
+      border-radius: $card-br;
+      padding: $padding-default 0;
+      font-weight: $fw-normal;
+    }
+
     &_open {
       visibility: visible;
       opacity: 1;
@@ -79,6 +98,10 @@
     padding: $padding-micro $padding-normal;
     transition: $transition-1;
     cursor: pointer;
+
+    &_modal{
+      padding: $padding-micro $padding-default;
+    }
 
     &:hover {
       color: $secondary;

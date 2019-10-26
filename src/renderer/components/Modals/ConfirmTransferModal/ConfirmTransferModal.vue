@@ -9,6 +9,9 @@
       <div class="modal__notice">
         {{ $t('amount') }}: {{ amount }} NKN
       </div>
+      <div class="modal__notice">
+        {{ $t('fee') }}: {{ fee }} NKN
+      </div>
       <div class="modal__footer">
         <Button
           :click="closeModal"
@@ -48,6 +51,10 @@ export default {
     address: {
       type: String,
       default: ''
+    },
+    fee: {
+      type: Number,
+      default: 0
     }
   },
   data () {
@@ -72,8 +79,9 @@ export default {
       const wallet = this.activeWallet
       const address = this.address
       const amount = this.amount
+      const fee = this.fee
 
-      wallet.transferTo(address, amount)
+      wallet.transferTo(address, amount, { fee })
         .then(data => {
           self.$store.dispatch('snackbar/updateSnack', {
             snack: 'walletTransferSuccess',
