@@ -1,5 +1,5 @@
 @mixin size-llg {
-  @media (max-width: $desktop-size-llg) {
+  @media (min-width: $desktop-size-llg) {
     @content;
   }
 }
@@ -8,18 +8,8 @@
   @include size-llg;
 }
 
-@mixin min-size-llg {
-  @media (min-width: $desktop-size-llg) {
-    @content;
-  }
-}
-
-%min-size-llg {
-  @include min-size-llg;
-}
-
 @mixin size-lg {
-  @media (max-width: $desktop-size-lg) {
+  @media (min-width: $desktop-size-lg) {
     @content;
   }
 }
@@ -29,7 +19,7 @@
 }
 
 @mixin size-md {
-  @media (max-width: $desktop-size-md) {
+  @media (min-width: $desktop-size-md) {
     @content;
   }
 }
@@ -38,18 +28,8 @@
   @include size-md;
 }
 
-@mixin min-size-md {
-  @media (min-width: $desktop-size-md) {
-    @content;
-  }
-}
-
-%min-size-md {
-  @include min-size-md;
-}
-
 @mixin size-sm {
-  @media (max-width: $desktop-size-sm) {
+  @media (min-width: $desktop-size-sm) {
     @content;
   }
 }
@@ -59,7 +39,7 @@
 }
 
 @mixin size-xs {
-  @media (max-width: $desktop-size-xs) {
+  @media (min-width: $desktop-size-xs) {
     @content;
   }
 }

@@ -42,9 +42,13 @@ h2 {
 
 h3 {
   font-family: $heading-font;
-  font-size: $h3-fz;
+  font-size: $h4-fz;
   font-weight: $fw-semi-bold;
   line-height: 28px;
+
+  @include size-lg {
+    font-size: $h3-fz;
+  }
 }
 
 h4 {
@@ -547,20 +551,35 @@ table {
 
   &__title,
   th {
-    padding: $padding-lg $padding-default;
+    padding: $padding-lg $padding-small;
     text-align: left;
 
     &:first-child{
       min-width: 150px;
       box-sizing: border-box;
     }
+
+    @include size-lg {
+      padding: $padding-small $padding-default;
+    }
   }
 
   &__item,
   td {
-    padding: $padding-small $padding-default;
+    padding: $padding-small $padding-small;
     position: relative;
     font-weight: $fw-bold;
+    font-size: $fz-xs;
+
+    @include size-lg {
+      font-size: $fz-md;
+      padding: $padding-small $padding-default;
+    }
+
+    @include size-llg {
+      font-size: $fz-base;
+    }
+
 
     &:last-child{
       width: 1%;

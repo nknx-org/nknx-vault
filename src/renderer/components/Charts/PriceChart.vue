@@ -75,7 +75,7 @@ export default {
 <style>
   .priceChart{
     height: 400px;
-    width: 458px;
+    width: calc(100% + 64px);
     position: absolute;
     left: -32px;
     bottom: -32px;

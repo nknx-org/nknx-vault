@@ -9,8 +9,8 @@ const winHandler = new BrowserWinHandler({
   height: 855,
   minHeight: 855,
   maxHeight: 855,
-  width: 1380,
-  minWidth: 1380,
+  width: 1080,
+  minWidth: 1080,
   maxWidth: 1380,
   transparent: true,
   frame: false
