@@ -4,7 +4,8 @@ const app = remote.app
 
 export const state = () => ({
   transactions: false,
-  loading: true
+  loading: true,
+  latestTx: false
 })
 
 export const mutations = {
@@ -13,6 +14,9 @@ export const mutations = {
   },
   setLoading (state, bool) {
     state.loading = bool
+  },
+  setLatestTx (state, tx) {
+    state.latestTx = tx
   }
 }
 
@@ -22,6 +26,9 @@ export const getters = {
   },
   getLoading (state) {
     return state.loading
+  },
+  getLatestTx (state) {
+    return state.latestTx
   }
 }
 
@@ -39,6 +46,7 @@ export const actions = {
       )
 
       if (page === 1) {
+        commit('setLatestTx', data.data[0])
         const jsonTransactions = JSON.stringify(data)
         fs.writeFileSync(path, jsonTransactions)
       }

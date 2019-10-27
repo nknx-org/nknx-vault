@@ -28,8 +28,8 @@ export default {
   computed: {
     ...mapGetters({
       online: 'online/getOnline',
-      activeWallet: 'wallet/getActiveWallet'
-
+      activeWallet: 'wallet/getActiveWallet',
+      latestTx: 'transactions/getLatestTx'
     })
   },
   watch: {
@@ -52,6 +52,19 @@ export default {
           color: 'success',
           timeout: true
         })
+      }
+    },
+    latestTx (newVal, oldVal) {
+      if (this.online === true && oldVal !== false && newVal !== undefined && oldVal !== undefined) {
+        if (oldVal.id !== newVal.id) {
+          const recipientWallet = this.latestTx.recipientWallet
+          const type = recipientWallet === this.activeWallet.address ? 'Recieved' : 'Sent'
+          this.$store.dispatch('snackbar/updateSnack', {
+            snack: `success${type}NewTx`,
+            color: 'success',
+            timeout: true
+          })
+        }
       }
     }
   },
