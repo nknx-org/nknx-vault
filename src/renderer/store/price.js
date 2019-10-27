@@ -4,7 +4,9 @@ const app = remote.app
 
 export const state = () => ({
   currentPrice: false,
-  dailyHistoryPrice: false
+  dailyHistoryPrice: {
+    'USD': []
+  }
 })
 
 export const mutations = {
