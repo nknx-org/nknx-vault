@@ -5,7 +5,7 @@
       :class="[open ? 'select__button_active' : null, `select__button_${type}`]"
       @click="toggleSelect()"
     >
-      {{ activeItem }}
+      {{ $t(activeItem) }}
       <span
         class="select__icon fe fe-chevron-down"
         :class="open ? 'select__icon_open' : null"
@@ -20,7 +20,7 @@
         :class="`select__item_${type}`"
         @click="setSelect(item),toggleSelect()"
       >
-        {{ item }}
+        {{ $t(item) }}
       </li>
     </ul>
   </div>
