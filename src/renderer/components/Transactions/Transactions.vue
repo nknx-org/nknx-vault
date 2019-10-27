@@ -37,7 +37,7 @@
         </tr>
       </template>
     </table>
-    <div v-if="transactions.length > 0" class="page-navigation">
+    <div v-if="isTransactions" class="page-navigation">
       <div
         class="page-navigation__info"
       >
@@ -56,8 +56,7 @@
 </style>
 
 <script>
-import fs from 'fs'
-import { remote, shell } from 'electron'
+import { shell } from 'electron'
 
 import { mapGetters } from 'vuex'
 
@@ -68,22 +67,24 @@ export default {
   components: { Pagination, TableRowLoader },
   data () {
     return {
-      transactions: [],
-      loading: true,
       nextPage: null,
       prevPage: null,
+      isTransactions: false,
       currentPage: 1,
       from: 0,
       to: 0,
       loaders: 11,
-      offlineTxPath: ''
+      offlineTxPath: '',
+      transactions: []
     }
   },
   computed: {
     ...mapGetters({
       activeWallet: 'wallet/getActiveWallet',
       walletInfo: 'wallet/getWalletInfo',
-      online: 'online/getOnline'
+      online: 'online/getOnline',
+      newTransactions: 'transactions/getTransactions',
+      loading: 'transactions/getLoading'
     }),
     totalTransactionsCount () {
       return this.walletInfo.count_transactions || 0
@@ -97,11 +98,12 @@ export default {
     }
   },
   watch: {
-    online () {
-      if (this.online === false) {
-        this.getLocalAddressTransactions()
+    loading () {
+      if (this.loading === true) {
+        this.nextPage = null
+        this.prevPage = null
       } else {
-        this.getAddressTransactions(this.currentPage)
+        this.parseTransactionsData(this.newTransactions)
       }
     }
   },
@@ -109,26 +111,18 @@ export default {
     this.$store.dispatch('online/updateOnline')
     this.$store.dispatch('price/updateCurrentPrice')
     this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)
-
-    this.setLocalDataTxPath()
   },
   mounted () {
-    if (this.online === true) {
-      this.getAddressTransactions(this.currentPage) // get online transactions
-    } else {
-      this.getLocalAddressTransactions()
-    }
+    this.parseTransactionsData(this.newTransactions)
   },
   methods: {
+    getAddressTransactions (page) {
+      this.$store.dispatch('transactions/updateTransactions', page)
+    },
     openExplorer () {
       event.preventDefault()
       const link = event.target.href
       shell.openExternal(link)
-    },
-    setLocalDataTxPath () {
-      const app = remote.app
-      const path = app.getPath('userData') + '\\transactions.json'
-      this.offlineTxPath = path
     },
     parseTransactionsData (response) {
       const {
@@ -145,36 +139,16 @@ export default {
       this.currentPage = currentPage
       this.prevPage = prevPage != null && this.online ? this.currentPage - 1 : null
       this.nextPage = nextPage != null && this.online ? this.currentPage + 1 : null
-      this.loading = false
-    },
-    getLocalAddressTransactions () {
-      const path = this.offlineTxPath
-      const transactionsJson = fs.readFileSync(path)
-      const transactionsObj = JSON.parse(transactionsJson)
 
-      this.parseTransactionsData(transactionsObj)
-    },
-    getAddressTransactions (page) {
-      const self = this
-      // Checking if page exists
-      if (page === null) {
-        return false
+      if (data !== undefined) {
+        if (data.length > 0) {
+          this.isTransactions = true
+        } else {
+          this.isTransactions = false
+        }
+      } else {
+        this.isTransactions = false
       }
-      self.loading = true
-      // Disabling pagination untill data fetched
-      self.nextPage = null
-      self.prevPage = null
-      // Fetcing data
-      this.$axios
-        .$get(`https://api.nknx.nkn.org/addresses/${this.address}/transfers?page=${page}`)
-        .then(response => {
-          if (self.currentPage === 1) {
-            const path = this.offlineTxPath
-            const jsonData = JSON.stringify(response)
-            fs.writeFileSync(path, jsonData)
-          }
-          self.parseTransactionsData(response)
-        })
     }
   }
 }

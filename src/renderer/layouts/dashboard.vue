@@ -20,6 +20,11 @@ import Topbar from '~/components/Topbar/Topbar.vue'
 
 export default {
   components: { Snackbar, Sidebar, WalletPanel, Topbar },
+  data: () => {
+    return {
+      updateInterval: 30000
+    }
+  },
   computed: {
     ...mapGetters({
       online: 'online/getOnline',
@@ -40,6 +45,7 @@ export default {
         this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)
         this.$store.dispatch('settings/init')
         this.$store.dispatch('currency/init')
+        this.updateTransactions()
       } else {
         this.$store.dispatch('snackbar/updateSnack', {
           snack: 'onlineModeAlert',
@@ -51,9 +57,18 @@ export default {
   },
   created () {
     this.$store.dispatch('online/updateOnline')
+    this.updateTransactions()
+  },
+  destroyed () {
+    clearInterval(this.intervalTransactions)
   },
   mounted () {
-
+    this.intervalTransactions = setInterval(this.updateTransactions, this.updateInterval)
+  },
+  methods: {
+    updateTransactions () {
+      this.$store.dispatch('transactions/updateTransactions', 1)
+    }
   }
 }
 </script>

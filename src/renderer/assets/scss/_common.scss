@@ -542,16 +542,30 @@ table {
     border-bottom: $card-border;
 
     &_loader{
-      
+      height: 39px;
+
       &:first-of-type{
-        height: 43px;
+        height: 41px;
+
+        @include size-lg {
+          height: 53px;
+        }
+
+        @include size-llg {
+          height: 43px;
+        }
+      }
+
+      
+      @include size-lg {
+        height: 42px;
       }
     }
   }
 
   &__title,
   th {
-    padding: $padding-lg $padding-small;
+    padding: $padding-small $padding-small;
     text-align: left;
 
     &:first-child{
@@ -560,7 +574,7 @@ table {
     }
 
     @include size-lg {
-      padding: $padding-small $padding-default;
+      padding: $padding-lg $padding-default;
     }
   }
 
@@ -575,11 +589,6 @@ table {
       font-size: $fz-md;
       padding: $padding-small $padding-default;
     }
-
-    @include size-llg {
-      font-size: $fz-base;
-    }
-
 
     &:last-child{
       width: 1%;

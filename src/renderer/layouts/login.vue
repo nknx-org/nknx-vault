@@ -29,7 +29,7 @@ export default {
   components: { Logo, Snackbar, Topbar },
   data: () => {
     return {
-      updateInterval: 300000
+      updateInterval: 30000
     }
   },
   computed: {
