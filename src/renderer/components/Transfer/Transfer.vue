@@ -16,6 +16,7 @@
             class="modal__controller"
             :class="!isAmount && isAmountChange ? 'modal__controller_error' : null"
             type="number"
+            @keydown="numFilter"
           >
         </div>
       </label>
@@ -57,6 +58,7 @@
             class="modal__controller"
             :class="!isFee && isFeeChange ? 'modal__controller_error' : null"
             type="number"
+            @keydown="numFilter"
           >
         </div>
       </label>
@@ -90,16 +92,21 @@ export default {
   data () {
     return {
       isTransferConfirmModal: false,
-      feesTypes: ['high', 'standard', 'low', 'custom'],
+      feesTypes: ['high', 'standard', 'low', 'minimal', 'custom'],
       amount: '',
       address: '',
-      fee: 0.5
+      fee: 0.5,
+      highFee: 0,
+      standardFee: 0,
+      lowFee: 0,
+      minimalFee: 0
     }
   },
   computed: {
     ...mapGetters({
       activeWallet: 'wallet/getActiveWallet',
-      walletInfo: 'wallet/getWalletInfo'
+      walletInfo: 'wallet/getWalletInfo',
+      avgFee: 'transactions/getAvgFee'
     }),
     walletName () {
       return this.walletInfo.name || ''
@@ -113,13 +120,13 @@ export default {
       return this.address.length > 0
     },
     isAmount () {
-      return this.amount > 0 && this.amount < parseFloat(this.walletInfo.balance)
+      return this.amount > 0 && this.amount < parseFloat(this.walletInfo.balance) && this.checkNumLimit(this.amount)
     },
     isAmountChange () {
       return this.amount !== ''
     },
     isFee () {
-      return this.fee >= 0 && parseFloat(this.walletInfo.balance) > this.fee + this.amount
+      return this.fee >= 0 && parseFloat(this.walletInfo.balance) >= this.fee + this.amount && this.checkNumLimit(this.fee)
     },
     isFeeChange () {
       return this.fee !== 0.5
@@ -129,20 +136,51 @@ export default {
     },
     activeFeesType () {
       const fee = this.fee
-      return fee === 1 ? 'high' : fee === 0.5 ? 'standard' : fee === 0.1 ? 'low' : 'custom'
+      return fee === this.highFee ? 'high' : fee === this.standardFee ? 'standard' : fee === this.lowFee ? 'low' : fee === this.minimalFee ? 'minimal' : 'custom'
     }
   },
+  created () {
+    this.calcFees()
+  },
   methods: {
+    numFilter (e) {
+      // prevent: "e", "=", "-"
+      if ([69, 187, 189].includes(e.keyCode)) {
+        e.preventDefault()
+      }
+    },
+    calcFees () {
+      const avgFee = this.avgFee
+      this.fee = this.toMinimalValue(avgFee)
+      this.highFee = this.toMinimalValue(avgFee * 4)
+      this.standardFee = this.toMinimalValue(avgFee)
+      this.lowFee = this.toMinimalValue(avgFee / 2)
+      this.minimalFee = this.toMinimalValue(0.00000001)
+    },
+    toMinimalValue (fee) {
+      return parseFloat(fee).toFixed(8)
+    },
+    checkNumLimit (x) {
+      const limit = ((x.toString().includes('.')) ? (x.toString().split('.').pop().length) : (0))
+      if (limit > 8) {
+        return false
+      } else {
+        return true
+      }
+    },
     updateFeesType (type) {
       switch (type) {
       case 'high':
-        this.fee = 1
+        this.fee = this.highFee
         break
       case 'standard':
-        this.fee = 0.5
+        this.fee = this.standardFee
         break
       case 'low':
-        this.fee = 0.1
+        this.fee = this.lowFee
+        break
+      case 'minimal':
+        this.fee = this.minimalFee
         break
       case 'custom':
         this.fee = ''

@@ -92,14 +92,17 @@ export default {
   alreadyHaveAWallet: 'Already have a wallet?',
   dontHaveAWallet: 'Don’t have a wallet?',
   preferredCurrency: 'Preferred currency',
-  currencyChoiceDescr: 'Choose which currency you would like to preview your balance in.',
+  currencyChoiceDescr:
+    'Choose which currency you would like to preview your balance in.',
   successRecievedNewTx: 'You received a new transfer!',
   successSentNewTx: 'New transfer processed successfully!',
   networkFees: 'Transaction fees',
-  networkFeesTooltip: 'Higher fees usually lead to faster transaction processing.',
+  networkFeesTooltip:
+    'Higher fees usually lead to faster transaction processing.',
   high: 'High',
   standard: 'Standard',
   low: 'Low',
   custom: 'Custom',
-  fee: 'Fee'
+  fee: 'Fee',
+  minimal: 'Minimal'
 }

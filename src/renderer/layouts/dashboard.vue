@@ -70,6 +70,7 @@ export default {
   },
   created () {
     this.$store.dispatch('online/updateOnline')
+    this.$store.dispatch('transactions/updateAvgFee')
     this.updateTransactions()
   },
   destroyed () {

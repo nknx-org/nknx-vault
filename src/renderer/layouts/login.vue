@@ -74,7 +74,7 @@ export default {
       this.updateDailyHistoryPrice()
       this.updateExchangeRates()
       this.getSettings()
-
+      this.updateAvgFee()
       this.intervalPrice = setInterval(this.updatePrice, this.updateInterval)
       this.intervalDailyHistoryPrice = setInterval(
         this.updateDailyHistoryPrice,
@@ -92,6 +92,9 @@ export default {
     },
     getSettings () {
       this.$store.dispatch('settings/init')
+    },
+    updateAvgFee () {
+      this.$store.dispatch('transactions/updateAvgFee')
     }
   }
 }

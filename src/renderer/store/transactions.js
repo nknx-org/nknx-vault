@@ -5,7 +5,8 @@ const app = remote.app
 export const state = () => ({
   transactions: false,
   loading: true,
-  latestTx: false
+  latestTx: false,
+  avgFee: false
 })
 
 export const mutations = {
@@ -17,6 +18,9 @@ export const mutations = {
   },
   setLatestTx (state, tx) {
     state.latestTx = tx
+  },
+  setAvgFee (state, fee) {
+    state.avgFee = fee
   }
 }
 
@@ -29,6 +33,9 @@ export const getters = {
   },
   getLatestTx (state) {
     return state.latestTx
+  },
+  getAvgFee (state) {
+    return state.avgFee
   }
 }
 
@@ -60,6 +67,13 @@ export const actions = {
       commit('setTransactions', transactionsObj)
       commit('setLoading', false)
     }
+  },
+  async updateAvgFee ({ commit }) {
+    const data = await this.$axios.$get(
+      'https://api.nknx.org/statistics/avgtxfee'
+    )
+
+    commit('setAvgFee', data)
   },
   updateLoading ({ commit }, bool) {
     commit('setLoading', bool)
