@@ -41,8 +41,6 @@ export const getters = {
 
 export const actions = {
   async updateTransactions ({ commit }, page) {
-    commit('setLoading', true)
-
     const online = this.state.online.online
     const path = app.getPath('userData') + '\\transactions.json'
     const address = this.state.wallet.activeWallet.address

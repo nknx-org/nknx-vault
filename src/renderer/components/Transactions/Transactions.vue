@@ -84,7 +84,9 @@ export default {
       walletInfo: 'wallet/getWalletInfo',
       online: 'online/getOnline',
       newTransactions: 'transactions/getTransactions',
-      loading: 'transactions/getLoading'
+      loading: 'transactions/getLoading',
+      latestTx: 'transactions/getLatestTx'
+
     }),
     totalTransactionsCount () {
       return this.walletInfo.count_transactions || 0
@@ -105,6 +107,13 @@ export default {
       } else {
         this.parseTransactionsData(this.newTransactions)
       }
+    },
+    latestTx (newVal, oldVal) {
+      if (this.online === true && oldVal !== false && newVal !== undefined && oldVal !== undefined) {
+        if (oldVal.id !== newVal.id) {
+          this.parseTransactionsData(this.newTransactions)
+        }
+      }
     }
   },
   created () {
@@ -117,6 +126,7 @@ export default {
   },
   methods: {
     getAddressTransactions (page) {
+      this.$store.dispatch('transactions/updateLoading', true)
       this.$store.dispatch('transactions/updateTransactions', page)
     },
     openExplorer () {

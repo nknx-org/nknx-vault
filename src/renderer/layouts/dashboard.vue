@@ -45,7 +45,8 @@ export default {
         this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)
         this.$store.dispatch('settings/init')
         this.$store.dispatch('currency/init')
-        this.updateTransactions()
+        this.$store.dispatch('transactions/updateLoading', true)
+        this.$store.dispatch('transactions/updateTransactions', 1)
       } else {
         this.$store.dispatch('snackbar/updateSnack', {
           snack: 'onlineModeAlert',
@@ -71,7 +72,8 @@ export default {
   created () {
     this.$store.dispatch('online/updateOnline')
     this.$store.dispatch('transactions/updateAvgFee')
-    this.updateTransactions()
+    this.$store.dispatch('transactions/updateLoading', true)
+    this.$store.dispatch('transactions/updateTransactions', 1)
   },
   destroyed () {
     clearInterval(this.intervalTransactions)
@@ -81,6 +83,7 @@ export default {
   },
   methods: {
     updateTransactions () {
+      this.$store.dispatch('transactions/updateLoading', false)
       this.$store.dispatch('transactions/updateTransactions', 1)
     }
   }
