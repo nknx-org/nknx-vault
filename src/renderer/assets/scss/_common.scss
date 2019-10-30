@@ -217,6 +217,13 @@ h6 {
   width: 592px;
   margin: 0 auto;
   z-index: 1;
+
+  &__qr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $padding-normal;
+  }
   
   &__wrapper{
     position: fixed;
@@ -246,6 +253,9 @@ h6 {
     font-weight: bold;
     font-size: $fz-lg;
     margin-bottom: $padding-normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &-switch {

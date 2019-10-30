@@ -104,5 +104,14 @@ export default {
   low: 'Low',
   custom: 'Custom',
   fee: 'Fee',
-  minimal: 'Minimal'
+  minimal: 'Minimal',
+  close: 'Close',
+  receive: 'Receive',
+  qrUsageDescr:
+    'This is the QR Code for your wallet. Scan it for quickly getting your wallet address with your camera!',
+  qrCode: 'QR Code',
+  qrCodeDescr:
+    'You can generate a QR Code, which will include your public wallet address.',
+  getNknTokens: 'Get NKN tokens',
+  generateQr: 'Generate QR'
 }

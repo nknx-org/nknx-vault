@@ -56,6 +56,7 @@
     "nkn-wallet": "^0.4.6",
     "nuxt-clipboard2": "^0.2.1",
     "nuxt-i18n": "^6.3.0",
+    "qrcode.vue": "^1.6.3",
     "v-tooltip": "^2.0.2",
     "vue-chartjs": "^3.4.2",
     "vue-content-loader": "^0.2.2"

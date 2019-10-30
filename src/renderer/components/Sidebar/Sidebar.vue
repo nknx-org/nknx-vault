@@ -36,9 +36,10 @@ import WalletIcon from '~/assets/icons/wallet-default.svg'
 import TxIcon from '~/assets/icons/transactions.svg'
 import SettingsIcon from '~/assets/icons/settings.svg'
 import ExitIcon from '~/assets/icons/exit.svg'
+import ReceiveIcon from '~/assets/icons/receive.svg'
 
 export default {
-  components: { LogoNKN, WalletIcon, TxIcon, SettingsIcon, ExitIcon },
+  components: { LogoNKN, WalletIcon, TxIcon, SettingsIcon, ExitIcon, ReceiveIcon },
   data: () => {
     return {
       routes: [
@@ -49,6 +50,10 @@ export default {
         {
           path: '/transactions',
           icon: 'TxIcon'
+        },
+        {
+          path: '/receive',
+          icon: 'ReceiveIcon'
         },
         {
           path: '/settings',
