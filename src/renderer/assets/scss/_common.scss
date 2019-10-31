@@ -601,7 +601,8 @@ table {
     }
 
     &:last-child{
-      width: 1%;
+      display: flex;
+      justify-content: flex-end;
     }
 
     &:nth-child(3){
@@ -610,6 +611,7 @@ table {
 
     &_loader{
       padding: 0;
+      display: table-cell !important;
     }
 
     &_overflow {

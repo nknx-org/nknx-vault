@@ -33,7 +33,9 @@
           <td>{{ $moment(tx.created_at + "Z").format('YYYY-MM-DD HH:mm') }}</td>
           <td><span v-if="address === tx.recipientWallet">{{ $t('recieved') }}</span> <span v-else>{{ $t('sent') }}</span></td>
           <td><span v-if="address === tx.recipientWallet && tx.senderWallet === 'NKNaaaaaaaaaaaaaaaaaaaaaaaaaaaeJ6gxa'">{{ $t('miningReward') }}</span><span v-else-if="address === tx.recipientWallet">{{ tx.senderWallet }}</span> <span v-else>{{ tx.recipientWallet }}</span></td>
-          <td class="text_align_right" :class="address === tx.recipientWallet ? 'table__item_positive' : 'table__item_negative'">{{ tx.amount | nknValue | commaNumber }}</td>
+          <td class="text_align_right" :class="address === tx.recipientWallet ? 'table__item_positive' : 'table__item_negative'">
+            {{ tx.amount | nknValue | commaNumber }} <a :href="`https://explorer.nknx.org/transactions/${tx.transaction.hash}`" target="_blank" class="text__link" @click="openExplorer" />
+          </td>
         </tr>
       </template>
     </table>
