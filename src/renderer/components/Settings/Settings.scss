@@ -15,7 +15,8 @@
   }
 
   &__left{
-    max-width: 480px;
+    flex: 1;
+    margin-right: $padding-default;
   }
 
   &__right{
