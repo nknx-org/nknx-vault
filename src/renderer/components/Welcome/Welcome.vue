@@ -31,7 +31,7 @@
 </template>
 
 <style lang="scss">
-@import "./welcome.scss";
+@import "./Welcome.scss";
 </style>
 
 <script>
