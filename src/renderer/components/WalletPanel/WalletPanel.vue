@@ -61,7 +61,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import PriceArrow from '~/assets/icons/priceArrow.svg'
-import PriceChart from '~/components/charts/PriceChart.vue'
+import PriceChart from '~/components/Charts/PriceChart.vue'
 
 export default {
   components: { PriceArrow, PriceChart },
