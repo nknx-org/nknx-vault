@@ -35,7 +35,7 @@ export const actions = {
 
     if (online === true) {
       const data = await this.$axios.$get(
-        `https://api.nknx.nkn.org/addresses/${address}`
+        `addresses/${address}`
       )
 
       const jsonWalletInfo = JSON.stringify(data)

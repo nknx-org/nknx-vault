@@ -47,7 +47,7 @@ export const actions = {
 
     if (online === true) {
       const data = await this.$axios.$get(
-        `https://api.nknx.nkn.org/addresses/${address}/transfers?page=${page}`
+        `addresses/${address}/transfers?page=${page}`
       )
 
       if (page === 1) {

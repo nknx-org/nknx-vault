@@ -165,7 +165,7 @@ module.exports = {
     ]
   },
   axios: {
-    baseURL: 'https://api.nknx.nkn.org/'
+    baseURL: 'https://api.nknx.org/'
   },
   build: {
     vendor: ['v-tooltip']
