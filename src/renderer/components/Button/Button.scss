@@ -71,6 +71,19 @@
       }
     }
     
+    &_error {
+      color: $white;
+      background: $error;
+
+      &:hover {
+        background: lighten($error, 10%);
+      }
+
+      &:active {
+        background: darken($error, 10%);
+      }
+    }
+
     &_secondary {
       color: $white;
       background: $secondary;

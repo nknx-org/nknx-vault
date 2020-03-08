@@ -1,13 +1,16 @@
 <template>
   <div class="settings">
-    <!-- <div class="settings__item">
+    <div class="settings__item">
       <div class="settings__left">
         <h3 class="title_color_dark">NKN {{ $t('nameService') }}</h3>
         <p class="settings__descr"><span v-if="walletName.length > 0">{{ $t('registeredWalletDescr') }}</span> <span v-else>{{ $t('unregisteredWalletDescr') }}</span> </p>
       </div>
-      <div class="settings__right"><Button theme="ghost-secondary" @click.native="walletName.length > 0 ? openDeleteWalletNameModal : toggleRegisterWalletNameModal(true)"><span v-if="walletName.length > 0">{{ $t('deleteName') }}</span> <span v-else>{{ $t('registerName') }}</span></Button></div>
-    </div> -->
-    <RegisterNameModal :open="isRegisterWalletNameModal" @toggleRegisterWalletNameModal="toggleRegisterWalletNameModal" />
+      <div class="settings__right settings__right_flex">
+        <Button v-if="walletName.length === 0" class="settings__right-item" theme="ghost-secondary" @click.native="toggleRegisterWalletNameModal(true)">{{ $t('registerName') }}</Button>
+        <Button v-else class="settings__right-item" theme="ghost-secondary" @click.native="toggleDeleteWalletNameModal(true)">{{ $t('deleteName') }}</Button>
+        <Button v-if="walletName.length > 0" class="settings__right-item" theme="ghost-secondary" @click.native="toggleTransferWalletNameModal(true)">{{ $t('tranfserName') }}</Button>
+      </div>
+    </div>
     <div class="settings__item">
       <div class="settings__left">
         <h3 class="title_color_dark">{{ $t('preferredCurrency') }}</h3>
@@ -24,6 +27,9 @@
       </div>
       <div class="settings__right"><Button theme="ghost-secondary" :click="downloadWallet"> {{ $t('download') }}</Button></div>
     </div>
+    <RegisterNameModal :open="isRegisterWalletNameModal" @toggleRegisterWalletNameModal="toggleRegisterWalletNameModal" />
+    <DeleteNameModal :open="isDeleteWalletNameModal" @toggleDeleteWalletNameModal="toggleDeleteWalletNameModal" />
+    <TransferNameModal :open="isTransferNameModal" @toggleTransferWalletNameModal="toggleTransferWalletNameModal" />
   </div>
 </template>
 
@@ -38,13 +44,17 @@ import { mapGetters } from 'vuex'
 
 import Button from '~/components/Button/Button.vue'
 import RegisterNameModal from '~/components/Modals/RegisterNameModal/RegisterNameModal.vue'
+import DeleteNameModal from '~/components/Modals/DeleteNameModal/DeleteNameModal.vue'
+import TransferNameModal from '~/components/Modals/TransferNameModal/TransferNameModal.vue'
 import Select from '~/components/Controls/Select/Select.vue'
 
 export default {
-  components: { Button, RegisterNameModal, Select },
+  components: { Button, RegisterNameModal, Select, DeleteNameModal, TransferNameModal },
   data () {
     return {
-      isRegisterWalletNameModal: false
+      isRegisterWalletNameModal: false,
+      isDeleteWalletNameModal: false,
+      isTransferNameModal: false
     }
   },
   computed: {
@@ -64,6 +74,12 @@ export default {
     },
     toggleRegisterWalletNameModal (bool) {
       this.isRegisterWalletNameModal = bool
+    },
+    toggleDeleteWalletNameModal (bool) {
+      this.isDeleteWalletNameModal = bool
+    },
+    toggleTransferWalletNameModal (bool) {
+      this.isTransferNameModal = bool
     },
     downloadWallet () {
       const jsonWallet = this.activeWallet.toJSON()

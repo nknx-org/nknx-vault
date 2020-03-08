@@ -84,7 +84,7 @@ export default {
   backup: 'Backup',
   backupDescr: 'Create a fresh backup of your wallet file.',
   download: 'Download',
-  registerName: 'NKN name service',
+  registerName: 'Register',
   registerNameDecr: 'registerNameDecr',
   registerNameNotice: 'registerNameNotice',
   desiredName: 'desiredName',

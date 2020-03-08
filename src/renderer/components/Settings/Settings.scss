@@ -21,6 +21,15 @@
 
   &__right{
 
+    &_flex{
+      display: flex;
+    }
+
+    &-item{
+      &:not(:last-child){
+        margin-right: $padding-default;
+      }
+    }
   }
 
 
