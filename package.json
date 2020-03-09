@@ -1,6 +1,6 @@
 {
   "name": "nknx-vault",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The NKN desktop wallet",
   "main": "./dist/main/index.js",
   "scripts": {
@@ -40,7 +40,7 @@
     "eslint": "5.16.0",
     "eslint-friendly-formatter": "4.0.1",
     "eslint-loader": "3.0.2",
-    "node-sass": "4.12.0",
+    "node-sass": "4.13.0",
     "nuxt": "2.8.1",
     "nuxt-svg-loader": "^1.0.1",
     "sass-loader": "8.0.0",
