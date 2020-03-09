@@ -17,7 +17,7 @@
           {{ $t('deleteName') }}
         </Button>
         <Button v-if="walletName.length > 0" class="settings__right-item" theme="ghost-secondary" @click.native="toggleTransferWalletNameModal(true)">
-          {{ $t('tranfserName') }}
+          {{ $t('transferName') }}
         </Button>
       </div>
     </div>
