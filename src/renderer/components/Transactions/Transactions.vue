@@ -120,12 +120,14 @@ export default {
         this.prevPage = null
       } else {
         this.parseTransactionsData(this.newTransactions)
+        this.updateWalletInfo()
       }
     },
     latestTx (newVal, oldVal) {
       if (this.online === true && oldVal !== false && newVal !== undefined && oldVal !== undefined) {
         if (oldVal.id !== newVal.id) {
           this.parseTransactionsData(this.newTransactions)
+          this.updateWalletInfo()
         }
       }
     }
@@ -133,12 +135,15 @@ export default {
   created () {
     this.$store.dispatch('online/updateOnline')
     this.$store.dispatch('price/updateCurrentPrice')
-    this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)
+    this.updateWalletInfo()
   },
   mounted () {
     this.parseTransactionsData(this.newTransactions)
   },
   methods: {
+    updateWalletInfo () {
+      this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)
+    },
     getAddressTransactions (page) {
       this.$store.dispatch('transactions/updateLoading', true)
       this.$store.dispatch('transactions/updateTransactions', page)
