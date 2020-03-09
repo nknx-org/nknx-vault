@@ -1,8 +1,12 @@
 <template>
   <div class="modal__wrapper" :class="isOpen ? 'modal__wrapper_open' : null">
     <Card class="modal" shadow="mini">
-      <h2 class="modal__title">{{ $t('deleteName') }}: {{ walletName }}</h2>
-      <p class="modal__descr">{{ $t('deleteNameDescr') }}</p>
+      <h2 class="modal__title">
+        {{ $t('deleteName') }}: {{ walletName }}
+      </h2>
+      <p class="modal__descr">
+        {{ $t('deleteNameDescr') }}
+      </p>
       <div class="modal__notice">
         {{ $t('deleteNameNotice') }}
       </div>
@@ -27,7 +31,6 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import nknWallet from 'nkn-wallet'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
 
@@ -59,16 +62,14 @@ export default {
   methods: {
     deleteName () {
       const self = this
-      nknWallet.configure({
-        rpcAddr: 'https://mainnet-rpc-node-0001.nkn.org/mainnet/api/wallet'
-      })
+
       const wallet = this.activeWallet
       const name = this.walletName
 
       wallet.deleteName(name)
         .then(data => {
           self.$store.dispatch('snackbar/updateSnack', {
-            snack: 'walletNameDeleteSuccess' + data,
+            snack: 'walletNameDeleteSuccess',
             color: 'success',
             timeout: true
           })

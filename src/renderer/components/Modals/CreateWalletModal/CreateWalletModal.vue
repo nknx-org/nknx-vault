@@ -1,8 +1,12 @@
 <template>
   <div class="fragment">
     <Card class="modal">
-      <h2 class="modal__title">{{ $t('createNewWallet') }}</h2>
-      <p class="modal__descr">{{ $t('createNewWalletDescription') }}</p>
+      <h2 class="modal__title">
+        {{ $t('createNewWallet') }}
+      </h2>
+      <p class="modal__descr">
+        {{ $t('createNewWalletDescription') }}
+      </p>
       <div class="modal__body">
         <label class="modal__label">
           {{ $t('choosePassword') }}
@@ -63,7 +67,7 @@
 </template>
 
 <script>
-import nknWallet from 'nkn-wallet'
+import * as nkn from 'nkn-sdk'
 import Fragment from '~/assets/icons/modal-fragment.svg'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
@@ -110,11 +114,8 @@ export default {
       this.passwordConfirmVisible = !this.passwordConfirmVisible
     },
     createWallet () {
-      nknWallet.configure({
-        rpcAddr: 'https://mainnet-rpc-node-0001.nkn.org/mainnet/api/wallet'
-      })
       const password = this.password
-      const wallet = nknWallet.newWallet(password)
+      const wallet = new nkn.Wallet({ password })
       this.$emit('getWallet', { wallet, password })
     }
   }

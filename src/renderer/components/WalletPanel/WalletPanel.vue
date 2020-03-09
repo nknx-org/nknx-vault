@@ -3,8 +3,12 @@
     <div class="wallet-panel__top">
       <div class="wallet-panel__row">
         <div class="wallet-panel__left">
-          <div class="text__title">{{ $t('name') }}/{{ $t('address') }}</div>
-          <h3 v-if="name.length > 0" class="wallet-panel__name">{{ name }}</h3>
+          <div class="text__title">
+            {{ $t('name') }}/{{ $t('address') }}
+          </div>
+          <h3 v-if="name.length > 0" class="wallet-panel__name">
+            {{ name }}
+          </h3>
           <div class="text__heading wallet-panel__address">
             {{ address }} <span
               v-tooltip="{
@@ -20,14 +24,18 @@
       </div>
       <div class="wallet-panel__row">
         <div class="wallet-panel__left">
-          <div class="text__title">{{ $t('currentBalance') }}</div>
+          <div class="text__title">
+            {{ $t('currentBalance') }}
+          </div>
           <h3>
             {{ balance | commaNumber }}
             <span class="wallet-panel__symbol">NKN</span>
           </h3>
         </div>
         <div class="wallet-panel__right">
-          <div class="text__title">{{ $t('marketValue') }} ({{ selectedCurrency }})</div>
+          <div class="text__title">
+            {{ $t('marketValue') }} ({{ selectedCurrency }})
+          </div>
           <h3>{{ currencyBalance }}</h3>
         </div>
       </div>
@@ -35,11 +43,15 @@
     <div class="wallet-panel__bot">
       <div class="wallet-panel__row">
         <div class="wallet-panel__left">
-          <div class="text__title">NKN {{ $t('price') }} ({{ selectedCurrency }})</div>
+          <div class="text__title">
+            NKN {{ $t('price') }} ({{ selectedCurrency }})
+          </div>
           <h4>{{ currencyPrice }}</h4>
         </div>
         <div class="wallet-panel__right">
-          <div class="text__title">{{ $t('last7Days') }}</div>
+          <div class="text__title">
+            {{ $t('last7Days') }}
+          </div>
           <h4
             class="wallet-panel__change"
             :class="weeklyChange > 0 ? 'wallet-panel__change_positive' : 'wallet-panel__change_negative'"

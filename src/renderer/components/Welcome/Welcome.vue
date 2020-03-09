@@ -4,8 +4,12 @@
       <div class="welcome__content">
         <div class="welcome__left">
           <back class="welcome__back" />
-          <h2 class="title_color_light">{{ $t('welcomeHeading') }}</h2>
-          <p class="welcome__descr">{{ $t('welcomeDescription') }}</p>
+          <h2 class="title_color_light">
+            {{ $t('welcomeHeading') }}
+          </h2>
+          <p class="welcome__descr">
+            {{ $t('welcomeDescription') }}
+          </p>
           <div class="welcome__controls">
             <Button
               class="welcome__btn"
@@ -24,7 +28,9 @@
       </div>
       <div class="welcome__disclaimer">
         <Fragment class="welcome__disclaimer-fragment" />
-        <p class="welcome__disclaimer-text">{{ $t('welcomeDisclaimer') }}</p>
+        <p class="welcome__disclaimer-text">
+          {{ $t('welcomeDisclaimer') }}
+        </p>
       </div>
     </div>
   </div>

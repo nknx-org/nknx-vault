@@ -4,11 +4,13 @@
 
     <div class="transfer__controls">
       <label class="modal__label transfer__amount">
-        {{ $t('amount') }} <span v-tooltip="{
-          content: $t('sendAmountTooltip'),
-          placement: 'top-center',
-          offset: 5,
-        }" class="transfer__info fe fe-info"
+        {{ $t('amount') }} <span
+          v-tooltip="{
+            content: $t('sendAmountTooltip'),
+            placement: 'top-center',
+            offset: 5,
+          }"
+          class="transfer__info fe fe-info"
         />
         <div class="modal__input modal__input_nkn">
           <input
@@ -22,11 +24,13 @@
       </label>
       <TxIcon class="transfer__icon" />
       <label class="modal__label transfer__address">
-        {{ $t('toWalletAddress') }} <span v-tooltip="{
-          content: $t('toWalletAddressTooltip'),
-          placement: 'top-center',
-          offset: 5,
-        }" class="transfer__info fe fe-info"
+        {{ $t('toWalletAddress') }} <span
+          v-tooltip="{
+            content: $t('toWalletAddressTooltip'),
+            placement: 'top-center',
+            offset: 5,
+          }"
+          class="transfer__info fe fe-info"
         />
         <div class="modal__input">
           <input
@@ -41,11 +45,13 @@
 
     <div class="transfer__controls">
       <label class="modal__label transfer__amount">
-        {{ $t('networkFees') }} <span v-tooltip="{
-          content: $t('networkFeesTooltip'),
-          placement: 'top-center',
-          offset: 5,
-        }" class="transfer__info fe fe-info"
+        {{ $t('networkFees') }} <span
+          v-tooltip="{
+            content: $t('networkFeesTooltip'),
+            placement: 'top-center',
+            offset: 5,
+          }"
+          class="transfer__info fe fe-info"
         />
         <Select type="modal" :items="feesTypes" :active-item="activeFeesType" @update="updateFeesType" />
 

@@ -1,8 +1,12 @@
 <template>
   <div class="fragment">
     <Card class="modal">
-      <h2 class="modal__title">{{ $t('walletCreated') }}</h2>
-      <p class="modal__descr">{{ $t('walletCreatedDescription') }}</p>
+      <h2 class="modal__title">
+        {{ $t('walletCreated') }}
+      </h2>
+      <p class="modal__descr">
+        {{ $t('walletCreatedDescription') }}
+      </p>
       <div class="modal__body">
         <label class="modal__label">
           {{ $t('publicAddress') }}
@@ -52,7 +56,9 @@
       </div>
 
       <div class="modal__footer">
-        <Button theme="success" :click="downloadWallet">{{ $t('downloadWallet') }}</Button>
+        <Button theme="success" :click="downloadWallet">
+          {{ $t('downloadWallet') }}
+        </Button>
       </div>
     </Card>
     <Fragment class="fragment__right" />

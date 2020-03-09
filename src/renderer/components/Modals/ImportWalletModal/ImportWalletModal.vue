@@ -1,7 +1,9 @@
 <template>
   <div class="fragment">
     <Card class="modal">
-      <h2 class="modal__title">{{ $t('importWallet') }}</h2>
+      <h2 class="modal__title">
+        {{ $t('importWallet') }}
+      </h2>
 
       <div class="modal-switch">
         <div
@@ -107,8 +109,7 @@
 
 <script>
 import fs from 'fs'
-import nknWallet from 'nkn-wallet'
-
+import * as nkn from 'nkn-sdk'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
 import WalletIcon from '~/assets/icons/wallet.svg'
@@ -176,11 +177,11 @@ export default {
       this.walletFile = walletJson
     },
     unlockWalletFromPk () {
-      const pk = this.pk
-
+      const seed = this.pk
+      const password = 'nknx-password'
       let wallet = null
       try {
-        wallet = nknWallet.restoreWalletBySeed(pk, 'nknx-password')
+        wallet = new nkn.Wallet({ seed, password })
         this.logIn(wallet)
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {
@@ -196,7 +197,7 @@ export default {
 
       let wallet = null
       try {
-        wallet = nknWallet.loadJsonWallet(walletJson, password)
+        wallet = nkn.Wallet.fromJSON(walletJson, { password })
         this.logIn(wallet)
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {

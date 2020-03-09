@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div class="text__title">{{ $t('general') }}</div>
-    <h2 class="title_color_dark title__page">{{ $t('settings') }}</h2>
+    <div class="text__title">
+      {{ $t('general') }}
+    </div>
+    <h2 class="title_color_dark title__page">
+      {{ $t('settings') }}
+    </h2>
     <Settings />
   </div>
 </template>

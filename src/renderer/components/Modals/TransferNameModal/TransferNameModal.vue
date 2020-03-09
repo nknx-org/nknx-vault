@@ -1,10 +1,30 @@
 <template>
   <div class="modal__wrapper" :class="isOpen ? 'modal__wrapper_open' : null">
     <Card class="modal" shadow="mini">
-      <h2 class="modal__title">{{ $t('transferName') }}: {{ walletName }}</h2>
-      <p class="modal__descr">{{ $t('transferNameDecr') }}</p>
+      <h2 class="modal__title">
+        {{ $t('transferName') }}: {{ walletName }}
+      </h2>
+      <p class="modal__descr">
+        {{ $t('transferNameDecr') }}
+      </p>
       <div class="modal__notice">
         {{ $t('transferNameNotice') }}
+      </div>
+      <div class="modal__body">
+        <label class="modal__label">
+          {{ $t('recipientPk') }}
+          <div class="modal__input">
+            <input
+              v-model="pk"
+              class="modal__controller"
+              :type="!pkVisible ? 'password' : 'text'"
+            >
+            <span
+              :class="['modal__input-action', pkVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
+              @click="togglePkVisible"
+            />
+          </div>
+        </label>
       </div>
       <div class="modal__footer">
         <Button
@@ -16,6 +36,7 @@
         <Button
           :click="transferName"
           theme="success"
+          :disabled="!isPk"
         >
           {{ $t('transfer') }}
         </Button>
@@ -27,7 +48,6 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import nknWallet from 'nkn-wallet'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
 
@@ -41,6 +61,8 @@ export default {
   },
   data () {
     return {
+      pk: '',
+      pkVisible: false
     }
   },
   computed: {
@@ -54,20 +76,26 @@ export default {
     },
     walletName () {
       return this.walletInfo.name || ''
+    },
+    isPk () {
+      return this.pk.length === 64
     }
   },
   methods: {
+    togglePkVisible () {
+      this.pkVisible = !this.pkVisible
+    },
     transferName () {
       const self = this
-      nknWallet.configure({
-        rpcAddr: 'https://mainnet-rpc-node-0001.nkn.org/mainnet/api/wallet'
-      })
-      const name = this.name
-      const wallet = this.walletName
-      wallet.transferName(name)
+
+      const name = this.walletName
+      const wallet = this.activeWallet
+      const pk = this.pk
+
+      wallet.transferName(name, pk)
         .then(data => {
           self.$store.dispatch('snackbar/updateSnack', {
-            snack: 'walletNameTransferSuccess' + data,
+            snack: 'walletNameTransferSuccess',
             color: 'success',
             timeout: true
           })

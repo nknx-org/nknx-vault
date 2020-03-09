@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div class="text__title">{{ $t('transactions') }}</div>
-    <h2 class="title_color_dark title__page">{{ $t('sendTokens') }}</h2>
+    <div class="text__title">
+      {{ $t('transactions') }}
+    </div>
+    <h2 class="title_color_dark title__page">
+      {{ $t('sendTokens') }}
+    </h2>
     <Transfer />
   </div>
 </template>

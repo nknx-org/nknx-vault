@@ -2,10 +2,18 @@
   <div class="receive">
     <div class="settings__item">
       <div class="settings__left">
-        <h3 class="title_color_dark">{{ $t('qrCode') }}</h3>
-        <p class="settings__descr"> {{ $t('qrCodeDescr') }}</p>
+        <h3 class="title_color_dark">
+          {{ $t('qrCode') }}
+        </h3>
+        <p class="settings__descr">
+          {{ $t('qrCodeDescr') }}
+        </p>
       </div>
-      <div class="settings__right"><Button theme="ghost-secondary" @click.native="toggleGenerateQrModal(true)"> {{ $t('generateQr') }}</Button></div>
+      <div class="settings__right">
+        <Button theme="ghost-secondary" @click.native="toggleGenerateQrModal(true)">
+          {{ $t('generateQr') }}
+        </Button>
+      </div>
     </div>
     <GenerateQrModal :open="isGenerateQeModal" :address="activeWallet.address" @toggleGenerateQrModal="toggleGenerateQrModal" />
   </div>

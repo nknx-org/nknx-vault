@@ -8,8 +8,12 @@
           <span class="layout-login__title">NKNx<b>VAULT</b> <span class="small">- a new kind of wallet</span></span>
         </div>
         <div class="layout-login__menu">
-          <nuxt-link class="layout-login__btn" to="/createWallet">{{ $t('create') }}</nuxt-link>
-          <nuxt-link class="layout-login__btn" to="/importWallet">{{ $t('import') }}</nuxt-link>
+          <nuxt-link class="layout-login__btn" to="/createWallet">
+            {{ $t('create') }}
+          </nuxt-link>
+          <nuxt-link class="layout-login__btn" to="/importWallet">
+            {{ $t('import') }}
+          </nuxt-link>
         </div>
       </div>
       <nuxt class="layout-login__content" />

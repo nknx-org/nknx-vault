@@ -1,8 +1,12 @@
 <template>
   <div class="modal__wrapper" :class="isOpen ? 'modal__wrapper_open' : null">
     <Card class="modal" shadow="mini">
-      <h2 class="modal__title">{{ $t('registerName') }}</h2>
-      <p class="modal__descr">{{ $t('registerNameDecr') }}</p>
+      <h2 class="modal__title">
+        {{ $t('registerName') }}
+      </h2>
+      <p class="modal__descr">
+        {{ $t('registerNameDecr') }}
+      </p>
       <div class="modal__notice">
         {{ $t('registerNameNotice') }}
       </div>
@@ -41,7 +45,6 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import nknWallet from 'nkn-wallet'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
 
@@ -72,15 +75,13 @@ export default {
   methods: {
     registerName () {
       const self = this
-      nknWallet.configure({
-        rpcAddr: 'https://mainnet-rpc-node-0001.nkn.org/mainnet/api/wallet'
-      })
+
       const name = this.name
       const wallet = this.activeWallet
       wallet.registerName(name)
         .then(data => {
           self.$store.dispatch('snackbar/updateSnack', {
-            snack: 'walletNameRegSuccess' + data,
+            snack: 'walletNameRegSuccess',
             color: 'success',
             timeout: true
           })

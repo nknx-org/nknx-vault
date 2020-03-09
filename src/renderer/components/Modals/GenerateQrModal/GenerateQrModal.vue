@@ -1,8 +1,12 @@
 <template>
   <div class="modal__wrapper" :class="isOpen ? 'modal__wrapper_open' : null">
     <Card class="modal" shadow="mini">
-      <h2 class="modal__title">{{ $t('receive') }} NKN</h2>
-      <p class="modal__descr">{{ $t('qrUsageDescr') }}</p>
+      <h2 class="modal__title">
+        {{ $t('receive') }} NKN
+      </h2>
+      <p class="modal__descr">
+        {{ $t('qrUsageDescr') }}
+      </p>
       <vueQr class="modal__qr" :value="address" :size="250" />
       <div class="modal__notice">
         {{ address }} <span
