@@ -67,11 +67,11 @@
 </template>
 
 <script>
-import * as nkn from 'nkn-sdk'
 import Fragment from '~/assets/icons/modal-fragment.svg'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
 import Checkbox from '~/components/Controls/Checkbox/Checkbox.vue'
+require('~/assets/nkn.min.js')
 
 export default {
   components: { Card, Checkbox, Button, Fragment },
@@ -115,6 +115,7 @@ export default {
     },
     createWallet () {
       const password = this.password
+      // eslint-disable-next-line no-undef
       const wallet = new nkn.Wallet({ password })
       this.$emit('getWallet', { wallet, password })
     }

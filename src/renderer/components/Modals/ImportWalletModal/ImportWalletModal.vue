@@ -109,11 +109,11 @@
 
 <script>
 import fs from 'fs'
-import * as nkn from 'nkn-sdk'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
 import WalletIcon from '~/assets/icons/wallet.svg'
 import Fragment from '~/assets/icons/modal-fragment.svg'
+require('~/assets/nkn.min.js')
 
 export default {
   components: { Card, Button, WalletIcon, Fragment },
@@ -181,6 +181,7 @@ export default {
       const password = 'nknx-password'
       let wallet = null
       try {
+        // eslint-disable-next-line no-undef
         wallet = new nkn.Wallet({ seed, password })
         this.logIn(wallet)
       } catch (e) {
@@ -197,6 +198,7 @@ export default {
 
       let wallet = null
       try {
+        // eslint-disable-next-line no-undef
         wallet = nkn.Wallet.fromJSON(walletJson, { password })
         this.logIn(wallet)
       } catch (e) {
