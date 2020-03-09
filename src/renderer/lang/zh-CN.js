@@ -84,11 +84,7 @@ export default {
   backup: 'Backup',
   backupDescr: 'Create a fresh backup of your wallet file.',
   download: 'Download',
-  registerName: 'NKN name service',
-  registerNameDecr: 'registerNameDecr',
-  registerNameNotice: 'registerNameNotice',
-  desiredName: 'desiredName',
-  register: 'register',
+  register: 'Register',
   alreadyHaveAWallet: 'Already have a wallet?',
   dontHaveAWallet: 'Don’t have a wallet?',
   preferredCurrency: 'Preferred currency',
@@ -113,5 +109,31 @@ export default {
   qrCodeDescr:
     'You can generate a QR Code, which will include your public wallet address.',
   getNknTokens: 'Get NKN tokens',
-  generateQr: 'Generate QR'
+  generateQr: 'Generate QR',
+  deleteName: 'Delete name',
+  deleteNameDescr:
+    "By deleting this wallets' assigned name you will not be able to use this unique identifier instead of the default address code. It can be re-registered by anyone in the network again.",
+  deleteNameNotice: 'Notice: You cannot undo this.',
+  transferName: 'Transfer Name',
+  transferNameDecr:
+    'Here you can transfer your wallet name to another wallet. Please mind that you need the public key of the recipients wallet to successfully do this operation.',
+  transferNameNotice: 'Notice: You cannot undo this.',
+  nameService: 'Name Service',
+  registerName: 'Register',
+  registerNameDecr:
+    'By registering a new name you will be able to manage your digital assets on the network with this unique identifier instead of your default address code.',
+  registerNameNotice: 'Notice: The fee for this action is 10 NKN.',
+  unregisteredWalletDescr:
+    'You do not have a name associated with your wallet.',
+  registeredWalletDescr: 'You already have a name associated with your wallet',
+  desiredName: 'Desired name',
+  nameTransfer: 'Name transfer',
+  walletNameRegError45021: 'Error on creating wallet name.',
+  walletNameRegSuccess: 'Wallet name successfully registered.',
+  walletNameDeleteSuccess: 'Wallet name successfully deleted.',
+  walletNameDelError45021: 'Error on deleting wallet name.',
+  walletNameTransferSuccess: 'Wallet name successfully transferred.',
+  walletNameTransferError45021: 'Error on transferring wallet name.',
+  recipientPk: "Recipient's public key",
+  delete: 'Delete'
 }
