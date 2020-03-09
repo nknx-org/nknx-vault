@@ -135,5 +135,7 @@ export default {
   walletNameTransferSuccess: 'Wallet name successfully transferred.',
   walletNameTransferError45021: 'Error on transferring wallet name.',
   recipientPk: "Recipient's public key",
-  delete: 'Delete'
+  delete: 'Delete',
+  nameRegistration: 'Name registration',
+  nameDeletion: 'Name deletion'
 }
