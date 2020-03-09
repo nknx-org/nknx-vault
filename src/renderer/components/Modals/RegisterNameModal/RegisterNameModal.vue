@@ -89,7 +89,7 @@ export default {
         })
         .catch(error => {
           self.$store.dispatch('snackbar/updateSnack', {
-            snack: 'walletNameRegError' + error.code,
+            snack: error,
             color: 'error',
             timeout: true
           })

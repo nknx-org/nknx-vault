@@ -186,7 +186,7 @@ export default {
         this.logIn(wallet)
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {
-          snack: 'walletErr' + e.code,
+          snack: e,
           color: 'error',
           timeout: true
         })
@@ -203,7 +203,7 @@ export default {
         this.logIn(wallet)
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {
-          snack: 'walletErr' + e.code,
+          snack: e,
           color: 'error',
           timeout: true
         })
