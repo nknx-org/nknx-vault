@@ -4,8 +4,7 @@
     src: url('../fonts/Feather/Feather.eot?#iefix') format('embedded-opentype'),
         url('../fonts/Feather/Feather.woff2') format('woff2'),
         url('../fonts/Feather/Feather.woff') format('woff'),
-        url('../fonts/Feather/Feather.ttf') format('truetype'),
-        url('../fonts/Feather/Feather.svg#Feather') format('svg');
+        url('../fonts/Feather/Feather.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
