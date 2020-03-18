@@ -3,21 +3,60 @@
     <div class="settings__item">
       <div class="settings__left">
         <h3 class="title_color_dark">
-          NKN {{ $t('nameService') }}
+          NKN {{ $t('nameRegistration') }}
         </h3>
         <p class="settings__descr">
-          <span v-if="walletName.length > 0">{{ $t('registeredWalletDescr') }}</span> <span v-else>{{ $t('unregisteredWalletDescr') }}</span>
+          {{ $t('walletNameRegistrationDescr') }}
         </p>
       </div>
-      <div class="settings__right settings__right_flex">
-        <Button v-if="walletName.length === 0" class="settings__right-item" theme="ghost-secondary" @click.native="toggleRegisterWalletNameModal(true)">
+      <div class="settings__right">
+        <Button class="settings__right-item" theme="ghost-secondary" @click.native="toggleRegisterWalletNameModal(true)">
           {{ $t('registerName') }}
         </Button>
-        <Button v-else class="settings__right-item" theme="ghost-secondary" @click.native="toggleDeleteWalletNameModal(true)">
-          {{ $t('deleteName') }}
+      </div>
+    </div>
+    <div v-if="walletName.length > 0" class="settings__item">
+      <div class="settings__left">
+        <h3 class="title_color_dark">
+          NKN {{ $t('nameTransfer') }}
+        </h3>
+        <p class="settings__descr">
+          {{ $t('walletNameTransferDescr') }}
+        </p>
+      </div>
+      <div class="settings__right">
+        <Button class="settings__right-item" theme="ghost-secondary" @click.native="toggleTransferWalletNameModal(true)">
+          {{ $t('transfer') }}
         </Button>
-        <Button v-if="walletName.length > 0" class="settings__right-item" theme="ghost-secondary" @click.native="toggleTransferWalletNameModal(true)">
-          {{ $t('transferName') }}
+      </div>
+    </div>
+    <div v-if="walletName.length > 0" class="settings__item">
+      <div class="settings__left">
+        <h3 class="title_color_dark">
+          NKN {{ $t('nameDeletion') }}
+        </h3>
+        <p class="settings__descr">
+          {{ $t('walletNameDeletionDescr') }}
+        </p>
+      </div>
+      <div class="settings__right">
+        <Button class="settings__right-item" theme="ghost-secondary" @click.native="toggleDeleteWalletNameModal(true)">
+          {{ $t('delete') }}
+        </Button>
+      </div>
+    </div>
+    <div class="settings__item">
+      <div class="settings__left">
+        <h3 class="title_color_dark">
+          {{ $t('backup') }}
+        </h3>
+        <p class="settings__descr">
+          {{ $t('backupDescr') }}
+        </p>
+      </div>
+      <div class="settings__right">
+        <Button class="settings__right-item" theme="ghost-secondary" :click="downloadWallet">
+          {{ $t('download') }}
         </Button>
       </div>
     </div>
@@ -34,21 +73,7 @@
         <Select :items="availableCurrencies" :active-item="selectedCurrency" @update="updateCurrency" />
       </div>
     </div>
-    <div class="settings__item">
-      <div class="settings__left">
-        <h3 class="title_color_dark">
-          {{ $t('backup') }}
-        </h3>
-        <p class="settings__descr">
-          {{ $t('backupDescr') }}
-        </p>
-      </div>
-      <div class="settings__right">
-        <Button theme="ghost-secondary" :click="downloadWallet">
-          {{ $t('download') }}
-        </Button>
-      </div>
-    </div>
+
     <RegisterNameModal :open="isRegisterWalletNameModal" @toggleRegisterWalletNameModal="toggleRegisterWalletNameModal" />
     <DeleteNameModal :open="isDeleteWalletNameModal" @toggleDeleteWalletNameModal="toggleDeleteWalletNameModal" />
     <TransferNameModal :open="isTransferNameModal" @toggleTransferWalletNameModal="toggleTransferWalletNameModal" />
@@ -87,7 +112,7 @@ export default {
       selectedCurrency: 'settings/getSelectedCurrency'
     }),
     walletName () {
-      return this.walletInfo.name || ''
+      return this.walletInfo.name || []
     }
   },
   methods: {

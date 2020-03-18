@@ -20,12 +20,15 @@
   }
 
   &__right{
+    min-width: 180px;
 
     &_flex{
       display: flex;
     }
 
     &-item{
+      width: 100%;
+      
       &:not(:last-child){
         margin-right: $padding-default;
       }

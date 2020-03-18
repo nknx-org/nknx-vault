@@ -66,7 +66,7 @@ export default {
       activeWallet: 'wallet/getActiveWallet'
     }),
     isName () {
-      return this.name.length > 0
+      return this.name.length > 6
     },
     isOpen () {
       return this.open

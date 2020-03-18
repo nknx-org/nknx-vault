@@ -72,6 +72,12 @@ h6 {
   line-height: 21px;
 }
 
+.overflow{
+  &_auto{
+    overflow: auto;
+  }
+}
+
 .title {
   &_color {
     &_dark {
@@ -92,11 +98,6 @@ h6 {
   width: 4px;
   height: 6px;
   transition: $transition-1;
-
-  @include size-md {
-    width: 0px;
-    height: 0px;
-  }
 }
 
 ::-webkit-scrollbar-thumb {
@@ -304,6 +305,11 @@ h6 {
     }
   }
 
+  &__select{
+    font-size: $fz-md;
+    margin-top: $padding-micro;
+  }
+  
   &__input {
     position: relative;
     box-sizing: border-box;

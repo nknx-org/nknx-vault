@@ -1,14 +1,22 @@
 <template>
-  <div class="modal__wrapper" :class="isOpen ? 'modal__wrapper_open' : null">
+  <div class="modal__wrapper overflow_auto" :class="isOpen ? 'modal__wrapper_open' : null">
     <Card class="modal" shadow="mini">
       <h2 class="modal__title">
-        {{ $t('deleteName') }}: {{ walletName }}
+        {{ $t('deleteName') }}
       </h2>
       <p class="modal__descr">
         {{ $t('deleteNameDescr') }}
       </p>
       <div class="modal__notice">
         {{ $t('deleteNameNotice') }}
+      </div>
+      <div class="modal__body">
+        <label class="modal__label">
+          {{ $t('name') }}
+          <div class="modal__input">
+            <Select class="modal__select" type="modal" :items="names" :active-item="selectedName" @update="updateName" />
+          </div>
+        </label>
       </div>
       <div class="modal__footer">
         <Button
@@ -33,9 +41,10 @@ import { mapGetters } from 'vuex'
 
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
+import Select from '~/components/Controls/Select/Select.vue'
 
 export default {
-  components: { Card, Button },
+  components: { Card, Button, Select },
   props: {
     open: {
       type: Boolean,
@@ -44,6 +53,8 @@ export default {
   },
   data () {
     return {
+      selectedName: '',
+      names: []
     }
   },
   computed: {
@@ -56,15 +67,22 @@ export default {
       return this.open
     },
     walletName () {
-      return this.walletInfo.name || ''
+      return this.walletInfo.name || []
     }
   },
+  created () {
+    this.names = this.walletInfo.name
+    this.selectedName = this.walletInfo.name[0]
+  },
   methods: {
+    updateName (name) {
+      this.selectedName = name
+    },
     deleteName () {
       const self = this
 
       const wallet = this.activeWallet
-      const name = this.walletName
+      const name = this.selectedName
 
       wallet.deleteName(name)
         .then(data => {
@@ -77,7 +95,7 @@ export default {
         })
         .catch(error => {
           self.$store.dispatch('snackbar/updateSnack', {
-            snack: 'walletNameDelError' + error.code,
+            snack: 'walletNameDelError' + error,
             color: 'error',
             timeout: true
           })

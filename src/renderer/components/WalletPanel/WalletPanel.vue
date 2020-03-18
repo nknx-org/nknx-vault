@@ -4,10 +4,10 @@
       <div class="wallet-panel__row">
         <div class="wallet-panel__left">
           <div class="text__title">
-            {{ $t('name') }}/{{ $t('address') }}
+            {{ $t('names') }}/{{ $t('address') }}
           </div>
           <h3 v-if="name.length > 0" class="wallet-panel__name">
-            {{ name }}
+            {{ name.join(', ') }}
           </h3>
           <div class="text__heading wallet-panel__address">
             {{ address }} <span
@@ -104,7 +104,7 @@ export default {
       }
     },
     name () {
-      return this.walletInfo.name || ''
+      return this.walletInfo.name || []
     },
     currencyPrice () {
       return (this.price.prices[0].price * this.exchangeRates[this.selectedCurrency]).toFixed(6) || 0
