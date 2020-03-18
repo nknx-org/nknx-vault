@@ -86,11 +86,19 @@ export default {
       return this.pk.length === 64
     }
   },
-  created () {
-    this.names = this.walletInfo.name
-    this.selectedName = this.walletInfo.name[0]
+  watch: {
+    isOpen () {
+      if (this.isOpen === true) {
+        this.init()
+      }
+    }
   },
   methods: {
+    init () {
+      this.names = this.walletInfo.name
+      this.selectedName = this.walletInfo.name[0]
+      this.pk = ''
+    },
     updateName (name) {
       this.selectedName = name
     },

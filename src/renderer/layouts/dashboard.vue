@@ -40,9 +40,10 @@ export default {
           color: 'alert',
           timeout: false
         })
+
+        this.updateWalletInfo()
         this.$store.dispatch('price/updateCurrentPrice')
         this.$store.dispatch('price/updateDailyHistoryPrice')
-        this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)
         this.$store.dispatch('settings/init')
         this.$store.dispatch('currency/init')
         this.$store.dispatch('transactions/updateLoading', true)
@@ -77,14 +78,19 @@ export default {
   },
   destroyed () {
     clearInterval(this.intervalTransactions)
+    clearInterval(this.intervalWalletInfo)
   },
   mounted () {
     this.intervalTransactions = setInterval(this.updateTransactions, this.updateInterval)
+    this.intervalWalletInfo = setInterval(this.updateWalletInfo, this.updateInterval)
   },
   methods: {
     updateTransactions () {
       this.$store.dispatch('transactions/updateLoading', false)
       this.$store.dispatch('transactions/updateTransactions', 1)
+    },
+    updateWalletInfo () {
+      this.$store.dispatch('wallet/updateWalletInfo', this.activeWallet.address)
     }
   }
 }

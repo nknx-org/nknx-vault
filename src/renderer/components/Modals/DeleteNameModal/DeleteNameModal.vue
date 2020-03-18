@@ -70,11 +70,18 @@ export default {
       return this.walletInfo.name || []
     }
   },
-  created () {
-    this.names = this.walletInfo.name
-    this.selectedName = this.walletInfo.name[0]
+  watch: {
+    isOpen () {
+      if (this.isOpen === true) {
+        this.init()
+      }
+    }
   },
   methods: {
+    init () {
+      this.names = this.walletInfo.name
+      this.selectedName = this.walletInfo.name[0]
+    },
     updateName (name) {
       this.selectedName = name
     },

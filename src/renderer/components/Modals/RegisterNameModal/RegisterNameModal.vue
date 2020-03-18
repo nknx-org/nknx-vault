@@ -73,6 +73,9 @@ export default {
     }
   },
   methods: {
+    clear () {
+      this.name = ''
+    },
     registerName () {
       const self = this
 
@@ -98,6 +101,7 @@ export default {
     },
     closeModal () {
       this.$emit('toggleRegisterWalletNameModal', false)
+      this.clear()
     }
   }
 }
