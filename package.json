@@ -1,6 +1,6 @@
 {
   "name": "nknx-vault",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "The NKN desktop wallet",
   "main": "./dist/main/index.js",
   "scripts": {
