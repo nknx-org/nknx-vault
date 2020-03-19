@@ -118,7 +118,7 @@ export default {
   nameService: 'Name Service',
   registerName: 'Register',
   registerNameDecr: 'By registering a new name you will be able to manage your digital assets on the network with this unique identifier instead of your default address code.',
-  registerNameNotice: 'Notice: The fee for this action is 10 NKN.',
+  registerNameNotice: 'Notice: The fee for this action is 10 NKN',
   unregisteredWalletDescr: 'You do not have a name associated with your wallet.',
   registeredWalletDescr: 'You already have a name associated with your wallet',
   desiredName: 'Desired name',
