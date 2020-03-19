@@ -24,3 +24,9 @@ Vue.filter('hexConverter', function (hex) {
   for (let i = 0; i < hex.length && hex.substr(i, 2) !== '00'; i += 2) { str += String.fromCharCode(parseInt(hex.substr(i, 2), 16)) }
   return str
 })
+
+Vue.filter('sdkErrors', function (x) {
+  const a = x.toString()
+  const regexp = /^([\w-]+)/
+  return a.match(regexp)[0].trim()
+})

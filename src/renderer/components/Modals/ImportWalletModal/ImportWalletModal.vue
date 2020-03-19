@@ -186,7 +186,7 @@ export default {
         this.logIn(wallet)
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {
-          snack: e,
+          snack: this.$options.filters.sdkErrors(e),
           color: 'error',
           timeout: true
         })
@@ -203,7 +203,7 @@ export default {
         this.logIn(wallet)
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {
-          snack: e,
+          snack: this.$options.filters.sdkErrors(e),
           color: 'error',
           timeout: true
         })

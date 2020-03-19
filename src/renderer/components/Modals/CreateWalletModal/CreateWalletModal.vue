@@ -115,9 +115,17 @@ export default {
     },
     createWallet () {
       const password = this.password
-      // eslint-disable-next-line no-undef
-      const wallet = new nkn.Wallet({ password })
-      this.$emit('getWallet', { wallet, password })
+      try {
+        // eslint-disable-next-line no-undef
+        const wallet = new nkn.Wallet({ password })
+        this.$emit('getWallet', { wallet, password })
+      } catch (e) {
+        this.$store.dispatch('snackbar/updateSnack', {
+          snack: this.$options.filters.sdkErrors(e),
+          color: 'error',
+          timeout: true
+        })
+      }
     }
   }
 }
