@@ -136,5 +136,20 @@ export default {
   walletNameRegistrationDescr: 'Register as many names for your wallet as you like.',
   walletNameTransferDescr: 'Transfer any registered name to another public key.',
   walletNameDeletionDescr: 'Delete any of your registered names.',
-  names: 'Names'
+  names: 'Names',
+  InvalidDestinationError: 'Error: The given destination is invalid.',
+  ServerError: 'Error: Server Error',
+  InvalidResponseError: 'Error: Received an invalid response',
+  InvalidArgumentError: 'Error: Invalid argument passed.',
+  InvalidWalletVersionError: 'Error: Your wallet has got an invalid version.',
+  InvalidWalletFormatError: 'Error: Your wallet format is wrong.',
+  InvalidAddressError: 'Error: Invalid address.',
+  WrongPasswordError: 'Error: Your password is wrong.',
+  NotEnoughBalanceError: 'Error: Not enough balance to proceed with this action.',
+  UnknownError: 'Error: Unknown error.',
+  DecryptionError: 'Error: Decryption error',
+  DataSizeTooLargeError: 'Error: Data size is too large.',
+  ClientNotReadyError: 'Error: client is not ready.',
+  AddrNotAllowedError: 'Error: Address not allowed.',
+  rpcRespErrCodes: 'Error: RPC ran into an error.'
 }
