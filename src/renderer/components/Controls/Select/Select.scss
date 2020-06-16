@@ -74,14 +74,17 @@
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     box-sizing: border-box;
-    display: none;
     opacity: 0;
     transition: $transition-1;
     width: 100%;
     max-height: 160PX;
     overflow-y: scroll;
     overflow-x: hidden;
-
+    transition: transform .2s ease-in-out,opacity .2s ease-in-out,width .2s ease-in-out,height .2s ease-in-out;
+    padding: 12px 0;
+    transform: translate3d(0,-8px,0);
+    pointer-events: none;
+    
     &_modal{
       top: 54px;
       border-radius: $card-br;
@@ -90,9 +93,9 @@
     }
 
     &_open {
-      display: block;
+      transform: translateZ(0);
       opacity: 1;
-      padding: 12px 0;
+      pointer-events: auto;
     }
   }
 

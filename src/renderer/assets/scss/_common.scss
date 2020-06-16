@@ -237,13 +237,26 @@ h6 {
     align-items: center;
     justify-content: center;
     transition: $transition-1;
-    opacity: 0;
     visibility: hidden;
     z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+
+    .modal{
+      transform: translate(0, -25%);
+      opacity: 0;
+      transition: $transition-2;
+    }
 
     &_open{
       opacity: 1;
       visibility: visible;
+      pointer-events: auto;
+
+      .modal{
+        opacity: 1;
+        transform: translate(0,0);
+      }
     }
   }
 
