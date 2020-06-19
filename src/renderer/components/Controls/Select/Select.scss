@@ -82,7 +82,8 @@
     overflow-x: hidden;
     transition: transform .2s ease-in-out,opacity .2s ease-in-out,width .2s ease-in-out,height .2s ease-in-out;
     padding: 12px 0;
-    transform: translate3d(0,-8px,0);
+    transform: translate3d(0,-10px,0);
+    box-shadow: $shadow-3;
     pointer-events: none;
     
     &_modal{
