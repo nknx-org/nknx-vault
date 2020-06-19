@@ -12,7 +12,7 @@
             {{ $t('create') }}
           </nuxt-link>
           <nuxt-link class="layout-login__btn" to="/importWallet">
-            {{ $t('import') }}
+            {{ $t('login') }}
           </nuxt-link>
         </div>
       </div>
@@ -79,11 +79,15 @@ export default {
       this.updateExchangeRates()
       this.getSettings()
       this.updateAvgFee()
+      this.initSavedWallets()
       this.intervalPrice = setInterval(this.updatePrice, this.updateInterval)
       this.intervalDailyHistoryPrice = setInterval(
         this.updateDailyHistoryPrice,
         this.updateInterval
       )
+    },
+    initSavedWallets () {
+      this.$store.dispatch('wallet/initSavedWallets')
     },
     updatePrice () {
       this.$store.dispatch('price/updateCurrentPrice')

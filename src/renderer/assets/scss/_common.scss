@@ -219,6 +219,19 @@ h6 {
   margin: 0 auto;
   z-index: 1;
 
+  &__info{
+    color: $secondary;
+    margin-left: 4px;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+    transition: $transition-1;
+
+    &:hover{
+      color: $primary;
+    }
+  }
+
   &__qr{
     display: flex;
     align-items: center;

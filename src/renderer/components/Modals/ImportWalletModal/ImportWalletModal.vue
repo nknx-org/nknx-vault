@@ -2,10 +2,16 @@
   <div class="fragment">
     <Card class="modal">
       <h2 class="modal__title">
-        {{ $t('importWallet') }}
+        {{ $t('login') }}
       </h2>
 
       <div class="modal-switch">
+        <div v-if="savedWallets.length"
+             :class="['modal-switch__button', currentView === 'saved' ? 'modal-switch__button_active' : null]"
+             @click="switchView('saved')"
+        >
+          {{ $t('savedWallets') }}
+        </div>
         <div
           :class="['modal-switch__button', currentView === 'pk' ? 'modal-switch__button_active' : null]"
           @click="switchView('pk')"
@@ -20,10 +26,60 @@
         </div>
       </div>
 
+      <template v-if="currentView === 'saved'">
+        <div class="modal__body">
+          <label class="modal__label">
+            {{ $t('selectSavedWallet') }}
+            <span
+              v-tooltip="{
+                content: $t('selectSavedWalletInfo'),
+                placement: 'top-center',
+                offset: 5
+              }"
+              class="modal__info fe fe-info"
+            />
+            <div class="modal__input">
+              <Select :items="savedWalletsNames" :active-item="selectedWallet" type="modal" @update="updateSelectedWallet" />
+            </div>
+          </label>
+
+          <label class="modal__label">
+            {{ $t('enterSecurityPassword') }}
+            <span
+              v-tooltip="{
+                content: $t('securityPasswordInfo'),
+                placement: 'top-center',
+                offset: 5
+              }"
+              class="modal__info fe fe-info"
+            />
+            <div class="modal__input">
+              <input
+                v-model="securityPasswordConfirm"
+                class="modal__controller"
+                :type="!securityPasswordConfirmVisible ? 'password' : 'text'"
+              >
+              <span
+                :class="['modal__input-action', securityPasswordConfirmVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
+                @click="toggleSecurityPasswordConfirmVisible"
+              />
+            </div>
+          </label>
+        </div>
+      </template>
+
       <template v-if="currentView === 'pk'">
         <div class="modal__body">
           <label class="modal__label">
             {{ $t('enterYourPrivateKey') }}
+            <span
+              v-tooltip="{
+                content: $t('secretSeedInfo'),
+                placement: 'top-center',
+                offset: 5
+              }"
+              class="modal__info fe fe-info"
+            />
             <div class="modal__input">
               <input
                 v-model="pk"
@@ -33,6 +89,46 @@
               <span
                 :class="['modal__input-action', pkVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
                 @click="togglePkVisible"
+              />
+            </div>
+          </label>
+          <label class="modal__label">
+            {{ $t('createWalletName') }}
+            <span
+              v-tooltip="{
+                content: $t('walletNameInfo'),
+                placement: 'top-center',
+                offset: 5
+              }"
+              class="modal__info fe fe-info"
+            />
+            <div class="modal__input">
+              <input
+                v-model="walletName"
+                class="modal__controller"
+                type="text"
+              >
+            </div>
+          </label>
+          <label class="modal__label">
+            {{ $t('createSecurityPassword') }}
+            <span
+              v-tooltip="{
+                content: $t('createSecurityPasswordInfo'),
+                placement: 'top-center',
+                offset: 5
+              }"
+              class="modal__info fe fe-info"
+            />
+            <div class="modal__input">
+              <input
+                v-model="securityPassword"
+                class="modal__controller"
+                :type="!securityPasswordVisible ? 'password' : 'text'"
+              >
+              <span
+                :class="['modal__input-action', securityPasswordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
+                @click="toggleSecurityPasswordVisible"
               />
             </div>
           </label>
@@ -61,6 +157,14 @@
           </label>
           <label class="modal__label">
             {{ $t('enterWalletFilePassword') }}
+            <span
+              v-tooltip="{
+                content: $t('walletFilePasswordInfo'),
+                placement: 'top-center',
+                offset: 5
+              }"
+              class="modal__info fe fe-info"
+            />
             <div class="modal__input">
               <input
                 v-model="password"
@@ -70,6 +174,46 @@
               <span
                 :class="['modal__input-action', passwordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
                 @click="togglePasswordVisible"
+              />
+            </div>
+          </label>
+          <label class="modal__label">
+            {{ $t('createWalletName') }}
+            <span
+              v-tooltip="{
+                content: $t('walletNameInfo'),
+                placement: 'top-center',
+                offset: 5
+              }"
+              class="modal__info fe fe-info"
+            />
+            <div class="modal__input">
+              <input
+                v-model="walletName"
+                class="modal__controller"
+                type="text"
+              >
+            </div>
+          </label>
+          <label class="modal__label">
+            {{ $t('createSecurityPassword') }}
+            <span
+              v-tooltip="{
+                content: $t('createSecurityPasswordInfo'),
+                placement: 'top-center',
+                offset: 5
+              }"
+              class="modal__info fe fe-info"
+            />
+            <div class="modal__input">
+              <input
+                v-model="securityPassword"
+                class="modal__controller"
+                :type="!securityPasswordVisible ? 'password' : 'text'"
+              >
+              <span
+                :class="['modal__input-action', securityPasswordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
+                @click="toggleSecurityPasswordVisible"
               />
             </div>
           </label>
@@ -87,16 +231,25 @@
           v-if="currentView ==='pk'"
           :click="unlockWalletFromPk"
           theme="secondary"
-          :disabled="!isPk"
+          :disabled="!isPk || !isSecurityPassword || !isWalletName"
+          icon="unlock"
+        >
+          {{ $t('unlock') }}
+        </Button>
+        <Button
+          v-else-if="currentView ==='json'"
+          :click="unlockWalletFromJson"
+          theme="secondary"
+          :disabled="!isWalletFile || !isPassword || !isSecurityPassword || !isWalletName"
           icon="unlock"
         >
           {{ $t('unlock') }}
         </Button>
         <Button
           v-else
-          :click="unlockWalletFromJson"
+          :click="unlockWalletFromPk"
           theme="secondary"
-          :disabled="!isWalletFile || !isPassword"
+          :disabled="!isSecurityPasswordConfirm"
           icon="unlock"
         >
           {{ $t('unlock') }}
@@ -109,14 +262,18 @@
 
 <script>
 import fs from 'fs'
+import { mapGetters } from 'vuex'
+
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
+import Select from '~/components/Controls/Select/Select.vue'
 import WalletIcon from '~/assets/icons/wallet.svg'
 import Fragment from '~/assets/icons/modal-fragment.svg'
+
 require('~/assets/nkn.min.js')
 
 export default {
-  components: { Card, Button, WalletIcon, Fragment },
+  components: { Card, Button, WalletIcon, Fragment, Select },
   data () {
     return {
       currentView: 'pk',
@@ -125,10 +282,23 @@ export default {
       walletFile: false,
       walletFileName: false,
       passwordVisible: false,
-      password: ''
+      password: '',
+      securityPassword: '',
+      securityPasswordVisible: false,
+      selectedWallet: '',
+      securityPasswordConfirm: '',
+      securityPasswordConfirmVisible: false,
+      walletName: ''
     }
   },
   computed: {
+    ...mapGetters({
+      savedWallets: 'wallet/getSavedWallets'
+    }),
+    savedWalletsNames () {
+      const savedWallets = this.savedWallets
+      return savedWallets.length ? savedWallets.map(wallet => wallet.walletName) : []
+    },
     isPk () {
       const pk = this.pk.trim()
       return pk.length === 64
@@ -140,11 +310,38 @@ export default {
     isPassword () {
       const password = this.password
       return password.length > 1
+    },
+    isSecurityPassword () {
+      const securityPassword = this.securityPassword
+      return securityPassword.length > 0
+    },
+    isSecurityPasswordConfirm () {
+      const securityPassword = this.securityPasswordConfirm
+      const selectedWallet = this.selectedWallet
+      const walletPassword = this.savedWallets.filter(wallet => wallet.walletName === selectedWallet)[0].securityPassword
+      return walletPassword === securityPassword
+    },
+    isWalletName () {
+      const walletName = this.walletName
+      return walletName.length > 0
     }
   },
   created () {
+    this.init()
   },
   methods: {
+    init () {
+      if (this.savedWallets.length) {
+        this.currentView = 'saved'
+        this.selectedWallet = this.savedWallets[0].walletName
+      }
+    },
+    updateSelectedWallet (wallet) {
+      this.selectedWallet = wallet
+    },
+    updateName (name) {
+      this.selectedName = name
+    },
     goToCreate () {
       this.$router.push('/createWallet')
     },
@@ -152,6 +349,10 @@ export default {
       this.pk = ''
       this.walletFile = false
       this.walletFileName = false
+      this.password = ''
+      this.securityPassword = ''
+      this.walletName = ''
+      this.securityPasswordConfirm = ''
     },
     switchView (val) {
       this.currentView = val
@@ -162,6 +363,12 @@ export default {
     },
     togglePasswordVisible () {
       this.passwordVisible = !this.passwordVisible
+    },
+    toggleSecurityPasswordVisible () {
+      this.securityPasswordVisible = !this.securityPasswordVisible
+    },
+    toggleSecurityPasswordConfirmVisible () {
+      this.securityPasswordConfirmVisible = !this.securityPasswordConfirmVisible
     },
     uploadWallet (file) {
       if (file.target.files.length < 1) {
@@ -177,13 +384,19 @@ export default {
       this.walletFile = walletJson
     },
     unlockWalletFromPk () {
-      const seed = this.pk
+      const currentView = this.currentView
       const password = 'nknx-password'
+      const securityPassword = this.securityPassword
+
+      const walletName = currentView !== 'saved' ? this.walletName : this.selectedWallet
+      const seed = currentView !== 'saved' ? this.pk : this.savedWallets.filter(wallet => wallet.walletName === walletName)[0].pk
+
       let wallet = null
+
       try {
         // eslint-disable-next-line no-undef
         wallet = new nkn.Wallet({ seed, password })
-        this.logIn(wallet)
+        this.logIn(wallet, walletName, securityPassword)
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {
           snack: this.$options.filters.sdkErrors(e),
@@ -195,12 +408,14 @@ export default {
     unlockWalletFromJson () {
       const walletJson = JSON.stringify(this.walletFile)
       const password = this.password
+      const walletName = this.walletName
+      const securityPassword = this.securityPassword
 
       let wallet = null
       try {
         // eslint-disable-next-line no-undef
         wallet = nkn.Wallet.fromJSON(walletJson, { password })
-        this.logIn(wallet)
+        this.logIn(wallet, walletName, securityPassword)
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {
           snack: this.$options.filters.sdkErrors(e),
@@ -209,10 +424,30 @@ export default {
         })
       }
     },
-    logIn (wallet) {
-      this.$store.dispatch('wallet/updateActiveWallet', wallet)
-      this.$store.dispatch('wallet/updateWalletInfo', wallet.address)
-      this.$router.push('/dashboard')
+    logIn (wallet, walletName, securityPassword) {
+      const currentView = this.currentView !== 'saved'
+
+      const isWalletName = this.savedWallets.filter(x => x.walletName === walletName).length
+      const isWalletSeed = this.savedWallets.filter(x => x.pk === wallet.account.key.seed).length
+
+      if (isWalletName && currentView) {
+        this.$store.dispatch('snackbar/updateSnack', {
+          snack: 'savedWalletNameDuplicate',
+          color: 'error',
+          timeout: true
+        })
+      } else if (isWalletSeed && currentView) {
+        this.$store.dispatch('snackbar/updateSnack', {
+          snack: 'savedWalletSeedDuplicate',
+          color: 'error',
+          timeout: true
+        })
+      } else {
+        this.$store.dispatch('wallet/updateActiveWallet', wallet)
+        this.$store.dispatch('wallet/updateSavedWallets', { wallet, walletName, securityPassword })
+        this.$store.dispatch('wallet/updateWalletInfo', wallet.address)
+        this.$router.push('/dashboard')
+      }
     }
   }
 }

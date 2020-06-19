@@ -4,7 +4,8 @@ const app = remote.app
 
 export const state = () => ({
   activeWallet: false,
-  walletInfo: false
+  walletInfo: false,
+  savedWallets: false
 })
 
 export const mutations = {
@@ -13,6 +14,9 @@ export const mutations = {
   },
   setWalletInfo (state, walletInfoObj) {
     state.walletInfo = walletInfoObj
+  },
+  setSavedWallets (state, savedWalletsObj) {
+    state.savedWallets = savedWalletsObj
   }
 }
 
@@ -22,12 +26,52 @@ export const getters = {
   },
   getWalletInfo (state) {
     return state.walletInfo
+  },
+  getSavedWallets (state) {
+    return state.savedWallets
   }
 }
 
 export const actions = {
   updateActiveWallet ({ commit }, wallet) {
     commit('setActiveWallet', wallet)
+  },
+  updateSavedWallets ({ commit }, payload) {
+    const { wallet, walletName, securityPassword } = payload
+    const path = app.getPath('userData') + '\\savedWallets.json'
+    const walletObj = { address: wallet.account.address, pk: wallet.account.key.seed, walletName, securityPassword }
+
+    try {
+      const savedWallets = fs.readFileSync(path)
+      const savedWalletsObj = JSON.parse(savedWallets)
+
+      if (savedWalletsObj) {
+        // check if already exists
+        const isNameFree = savedWalletsObj.filter(wallet => wallet.walletName === walletName).length
+
+        if (!isNameFree) {
+          savedWalletsObj.push(walletObj)
+          commit('setSavedWallets', savedWalletsObj)
+          fs.writeFileSync(path, JSON.stringify(savedWalletsObj))
+        }
+      }
+    } catch (err) {
+      commit('setSavedWallets', [walletObj])
+      fs.writeFileSync(path, JSON.stringify([walletObj]))
+    }
+  },
+  async initSavedWallets ({ commit }) {
+    const path = app.getPath('userData') + '\\savedWallets.json'
+    try {
+      const savedWallets = fs.readFileSync(path)
+      const savedWalletsObj = JSON.parse(savedWallets)
+
+      if (savedWalletsObj) {
+        commit('setSavedWallets', savedWalletsObj)
+      }
+    } catch (err) {
+      commit('setSavedWallets', false)
+    }
   },
   async updateWalletInfo ({ commit }, address) {
     const online = this.state.online.online
