@@ -415,6 +415,7 @@ export default {
       try {
         // eslint-disable-next-line no-undef
         wallet = nkn.Wallet.fromJSON(walletJson, { password })
+
         this.logIn(wallet, walletName, securityPassword)
       } catch (e) {
         this.$store.dispatch('snackbar/updateSnack', {
@@ -427,8 +428,8 @@ export default {
     logIn (wallet, walletName, securityPassword) {
       const currentView = this.currentView !== 'saved'
 
-      const isWalletName = this.savedWallets.filter(x => x.walletName === walletName).length
-      const isWalletSeed = this.savedWallets.filter(x => x.pk === wallet.account.key.seed).length
+      const isWalletName = this.savedWallets ? this.savedWallets.filter(x => x.walletName === walletName).length : false
+      const isWalletSeed = this.savedWallets ? this.savedWallets.filter(x => x.pk === wallet.account.key.seed).length : false
 
       if (isWalletName && currentView) {
         this.$store.dispatch('snackbar/updateSnack', {
