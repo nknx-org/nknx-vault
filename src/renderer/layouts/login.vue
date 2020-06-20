@@ -12,7 +12,7 @@
             {{ $t('create') }}
           </nuxt-link>
           <nuxt-link class="layout-login__btn" to="/importWallet">
-            {{ $t('login') }}
+            {{ $t('openWallet') }}
           </nuxt-link>
         </div>
       </div>

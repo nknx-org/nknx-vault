@@ -219,6 +219,18 @@ h6 {
   margin: 0 auto;
   z-index: 1;
 
+  &__body{
+
+    &_flex{
+      display: flex;
+      flex-flow: row wrap;
+
+      label{
+        width: 100%;;
+      }
+    }
+  }
+
   &__info{
     color: $secondary;
     margin-left: 4px;
@@ -328,6 +340,14 @@ h6 {
 
     &:not(:last-of-type) {
       margin-bottom: $padding-default;
+    }
+
+    &_half{
+      flex: 1;
+
+      &:not(:last-of-type) {
+        margin-right: $padding-default;
+      }
     }
   }
 
@@ -474,12 +494,26 @@ h6 {
 
   &__checkbox {
     margin-top: $padding-normal;
+
+    &_footer{
+      margin-bottom: 0 !important;
+    }
   }
 
   &__footer {
     margin-top: $padding-medium;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+
+    &_end{
+      justify-content: space-between;
+    }
+
+    &-controls{
+      display: flex;
+      align-items: center;
+    }
 
     .button{
       &:not(:last-child){

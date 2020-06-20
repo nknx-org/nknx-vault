@@ -20,7 +20,7 @@
               {{ $t('createWallet') }}
             </Button>
             <Button class="welcome__btn" type="router" url="importWallet" theme="ghost">
-              {{ $t('login') }}
+              {{ $t('openWallet') }}
             </Button>
           </div>
         </div>

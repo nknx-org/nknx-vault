@@ -2,7 +2,7 @@
   <div class="fragment">
     <Card class="modal">
       <h2 class="modal__title">
-        {{ $t('login') }}
+        {{ $t('openWallet') }}
       </h2>
 
       <div class="modal-switch">
@@ -42,7 +42,6 @@
               <Select :items="savedWalletsNames" :active-item="selectedWallet" type="modal" @update="updateSelectedWallet" />
             </div>
           </label>
-
           <label class="modal__label">
             {{ $t('enterSecurityPassword') }}
             <span
@@ -69,7 +68,7 @@
       </template>
 
       <template v-if="currentView === 'pk'">
-        <div class="modal__body">
+        <div class="modal__body modal__body_flex">
           <label class="modal__label">
             {{ $t('enterYourPrivateKey') }}
             <span
@@ -92,51 +91,53 @@
               />
             </div>
           </label>
-          <label class="modal__label">
-            {{ $t('createWalletName') }}
-            <span
-              v-tooltip="{
-                content: $t('walletNameInfo'),
-                placement: 'top-center',
-                offset: 5
-              }"
-              class="modal__info fe fe-info"
-            />
-            <div class="modal__input">
-              <input
-                v-model="walletName"
-                class="modal__controller"
-                type="text"
-              >
-            </div>
-          </label>
-          <label class="modal__label">
-            {{ $t('createSecurityPassword') }}
-            <span
-              v-tooltip="{
-                content: $t('createSecurityPasswordInfo'),
-                placement: 'top-center',
-                offset: 5
-              }"
-              class="modal__info fe fe-info"
-            />
-            <div class="modal__input">
-              <input
-                v-model="securityPassword"
-                class="modal__controller"
-                :type="!securityPasswordVisible ? 'password' : 'text'"
-              >
+          <template v-if="isSave">
+            <label class="modal__label  modal__label_half">
+              {{ $t('createWalletName') }}
               <span
-                :class="['modal__input-action', securityPasswordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
-                @click="toggleSecurityPasswordVisible"
+                v-tooltip="{
+                  content: $t('walletNameInfo'),
+                  placement: 'top-center',
+                  offset: 5
+                }"
+                class="modal__info fe fe-info"
               />
-            </div>
-          </label>
+              <div class="modal__input">
+                <input
+                  v-model="walletName"
+                  class="modal__controller"
+                  type="text"
+                >
+              </div>
+            </label>
+            <label class="modal__label  modal__label_half">
+              {{ $t('createSecurityPassword') }}
+              <span
+                v-tooltip="{
+                  content: $t('createSecurityPasswordInfo'),
+                  placement: 'top-center',
+                  offset: 5
+                }"
+                class="modal__info fe fe-info"
+              />
+              <div class="modal__input">
+                <input
+                  v-model="securityPassword"
+                  class="modal__controller"
+                  :type="!securityPasswordVisible ? 'password' : 'text'"
+                >
+                <span
+                  :class="['modal__input-action', securityPasswordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
+                  @click="toggleSecurityPasswordVisible"
+                />
+              </div>
+            </label>
+          </template>
         </div>
       </template>
 
       <template v-if="currentView === 'json'">
-        <div class="modal__body">
+        <div class="modal__body modal__body_flex">
           <label class="modal__label">
             <div class="modal__input">
               <input
@@ -177,83 +178,99 @@
               />
             </div>
           </label>
-          <label class="modal__label">
-            {{ $t('createWalletName') }}
-            <span
-              v-tooltip="{
-                content: $t('walletNameInfo'),
-                placement: 'top-center',
-                offset: 5
-              }"
-              class="modal__info fe fe-info"
-            />
-            <div class="modal__input">
-              <input
-                v-model="walletName"
-                class="modal__controller"
-                type="text"
-              >
-            </div>
-          </label>
-          <label class="modal__label">
-            {{ $t('createSecurityPassword') }}
-            <span
-              v-tooltip="{
-                content: $t('createSecurityPasswordInfo'),
-                placement: 'top-center',
-                offset: 5
-              }"
-              class="modal__info fe fe-info"
-            />
-            <div class="modal__input">
-              <input
-                v-model="securityPassword"
-                class="modal__controller"
-                :type="!securityPasswordVisible ? 'password' : 'text'"
-              >
+          <template v-if="isSave">
+            <label class="modal__label  modal__label_half">
+              {{ $t('createWalletName') }}
               <span
-                :class="['modal__input-action', securityPasswordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
-                @click="toggleSecurityPasswordVisible"
+                v-tooltip="{
+                  content: $t('walletNameInfo'),
+                  placement: 'top-center',
+                  offset: 5
+                }"
+                class="modal__info fe fe-info"
               />
-            </div>
-          </label>
+              <div class="modal__input">
+                <input
+                  v-model="walletName"
+                  class="modal__controller"
+                  type="text"
+                >
+              </div>
+            </label>
+            <label class="modal__label modal__label_half">
+              {{ $t('createSecurityPassword') }}
+              <span
+                v-tooltip="{
+                  content: $t('createSecurityPasswordInfo'),
+                  placement: 'top-center',
+                  offset: 5
+                }"
+                class="modal__info fe fe-info"
+              />
+              <div class="modal__input">
+                <input
+                  v-model="securityPassword"
+                  class="modal__controller"
+                  :type="!securityPasswordVisible ? 'password' : 'text'"
+                >
+                <span
+                  :class="['modal__input-action', securityPasswordVisible ? 'fe fe-eye-off' : 'fe fe-eye']"
+                  @click="toggleSecurityPasswordVisible"
+                />
+              </div>
+            </label>
+          </template>
         </div>
       </template>
 
-      <div class="modal__footer">
-        <Button
-          :click="goToCreate"
-          theme="text"
-        >
-          {{ $t('dontHaveAWallet') }}
-        </Button>
-        <Button
-          v-if="currentView ==='pk'"
-          :click="unlockWalletFromPk"
-          theme="secondary"
-          :disabled="!isPk || !isSecurityPassword || !isWalletName"
-          icon="unlock"
-        >
-          {{ $t('unlock') }}
-        </Button>
-        <Button
-          v-else-if="currentView ==='json'"
-          :click="unlockWalletFromJson"
-          theme="secondary"
-          :disabled="!isWalletFile || !isPassword || !isSecurityPassword || !isWalletName"
-          icon="unlock"
-        >
-          {{ $t('unlock') }}
-        </Button>
-        <Button
-          v-else
-          :click="unlockWalletFromPk"
-          theme="secondary"
-          :disabled="!isSecurityPasswordConfirm"
-          icon="unlock"
-        >
-          {{ $t('unlock') }}
-        </Button>
+      <div class="modal__footer modal__footer_end">
+        <div>
+          <Checkbox
+            v-if="currentView !== 'saved'"
+            class="modal__checkbox_footer"
+            name="isSave"
+            :value="isSave"
+            @change="changeIsSave"
+          >
+            {{ $t('saveMyWallet') }}
+          </Checkbox>
+        </div>
+
+        <div class="modal__footer-controls">
+          <Button
+            :click="goToCreate"
+            theme="text"
+          >
+            {{ $t('dontHaveAWallet') }}
+          </Button>
+          <Button
+            v-if="currentView ==='pk'"
+            :click="unlockWalletFromPk"
+            theme="secondary"
+            :disabled="!isPk || !isSecurityPassword || !isWalletName"
+            icon="unlock"
+          >
+            {{ $t('unlock') }}
+          </Button>
+          <Button
+            v-else-if="currentView ==='json'"
+            :click="unlockWalletFromJson"
+            theme="secondary"
+            :disabled="!isWalletFile || !isPassword || !isSecurityPassword || !isWalletName"
+            icon="unlock"
+          >
+            {{ $t('unlock') }}
+          </Button>
+          <Button
+            v-else
+            :click="unlockWalletFromPk"
+            theme="secondary"
+            :disabled="!isSecurityPasswordConfirm"
+            icon="unlock"
+          >
+            {{ $t('unlock') }}
+          </Button>
+        </div>
       </div>
     </Card>
     <Fragment class="fragment__right" />
@@ -267,13 +284,14 @@ import { mapGetters } from 'vuex'
 import Card from '~/components/Card/Card.vue'
 import Button from '~/components/Button/Button.vue'
 import Select from '~/components/Controls/Select/Select.vue'
+import Checkbox from '~/components/Controls/Checkbox/Checkbox.vue'
 import WalletIcon from '~/assets/icons/wallet.svg'
 import Fragment from '~/assets/icons/modal-fragment.svg'
 
 require('~/assets/nkn.min.js')
 
 export default {
-  components: { Card, Button, WalletIcon, Fragment, Select },
+  components: { Card, Button, WalletIcon, Fragment, Select, Checkbox },
   data () {
     return {
       currentView: 'pk',
@@ -288,7 +306,8 @@ export default {
       selectedWallet: '',
       securityPasswordConfirm: '',
       securityPasswordConfirmVisible: false,
-      walletName: ''
+      walletName: '',
+      isSave: true
     }
   },
   computed: {
@@ -312,8 +331,10 @@ export default {
       return password.length > 1
     },
     isSecurityPassword () {
+      const isSave = this.isSave
       const securityPassword = this.securityPassword
-      return securityPassword.length > 0
+
+      return isSave ? securityPassword.length > 0 : true
     },
     isSecurityPasswordConfirm () {
       const securityPassword = this.securityPasswordConfirm
@@ -322,8 +343,9 @@ export default {
       return walletPassword === securityPassword
     },
     isWalletName () {
+      const isSave = this.isSave
       const walletName = this.walletName
-      return walletName.length > 0
+      return isSave ? walletName.length > 0 : true
     }
   },
   created () {
@@ -335,6 +357,9 @@ export default {
         this.currentView = 'saved'
         this.selectedWallet = this.savedWallets[0].walletName
       }
+    },
+    changeIsSave () {
+      this.isSave = !this.isSave
     },
     updateSelectedWallet (wallet) {
       this.selectedWallet = wallet
@@ -427,25 +452,29 @@ export default {
     },
     logIn (wallet, walletName, securityPassword) {
       const currentView = this.currentView !== 'saved'
+      const isSave = this.isSave
 
       const isWalletName = this.savedWallets ? this.savedWallets.filter(x => x.walletName === walletName).length : false
       const isWalletSeed = this.savedWallets ? this.savedWallets.filter(x => x.pk === wallet.account.key.seed).length : false
 
-      if (isWalletName && currentView) {
+      if (isWalletName && currentView && isSave) {
         this.$store.dispatch('snackbar/updateSnack', {
           snack: 'savedWalletNameDuplicate',
           color: 'error',
           timeout: true
         })
-      } else if (isWalletSeed && currentView) {
+      } else if (isWalletSeed && currentView && isSave) {
         this.$store.dispatch('snackbar/updateSnack', {
           snack: 'savedWalletSeedDuplicate',
           color: 'error',
           timeout: true
         })
       } else {
+        if (isSave) {
+          this.$store.dispatch('wallet/updateSavedWallets', { wallet, walletName, securityPassword })
+        }
+
         this.$store.dispatch('wallet/updateActiveWallet', wallet)
-        this.$store.dispatch('wallet/updateSavedWallets', { wallet, walletName, securityPassword })
         this.$store.dispatch('wallet/updateWalletInfo', wallet.address)
         this.$router.push('/dashboard')
       }
