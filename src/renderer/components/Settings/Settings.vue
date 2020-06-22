@@ -1,6 +1,6 @@
 <template>
   <div class="settings">
-    <div v-if="savedWallets" class="settings__item">
+    <div v-if="savedWallets.length" class="settings__item">
       <div class="settings__left">
         <h3 class="title_color_dark">
           {{ $t('manageWallets') }}

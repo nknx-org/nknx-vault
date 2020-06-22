@@ -1,6 +1,6 @@
 <template>
   <div class="modal__wrapper overflow_auto" :class="isOpen ? 'modal__wrapper_open' : null">
-    <Card class="modal" shadow="mini">
+    <Card class="modal overflow_auto" shadow="mini">
       <h2 class="modal__title">
         {{ $t('deleteSavedWallet') }}
       </h2>
