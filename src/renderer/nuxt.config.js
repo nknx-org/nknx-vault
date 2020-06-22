@@ -3,6 +3,7 @@
  * This default configuration can be overwritten in this file
  * @link {https://nuxtjs.org/guide/configuration/}
  */
+require('dotenv').config()
 
 module.exports = {
   mode: 'spa', // or 'universal'
@@ -28,13 +29,15 @@ module.exports = {
   plugins: [
     '~plugins/i18n',
     '~plugins/v-tooltip',
-    '~plugins/filters'
+    '~plugins/filters',
+    '~plugins/pusher'
   ],
   modules: [
     '@nuxtjs/style-resources',
     'nuxt-svg-loader',
     '@nuxtjs/axios',
     'nuxt-clipboard2',
+    '@nuxtjs/dotenv',
     [
       '@nuxtjs/moment',
       {

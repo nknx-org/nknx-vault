@@ -75,14 +75,11 @@ export default {
     this.$store.dispatch('transactions/updateAvgFee')
     this.$store.dispatch('transactions/updateLoading', true)
     this.$store.dispatch('transactions/updateTransactions', 1)
+    this.$store.dispatch('transactions/initPusher')
   },
   destroyed () {
-    clearInterval(this.intervalTransactions)
-    clearInterval(this.intervalWalletInfo)
   },
   mounted () {
-    this.intervalTransactions = setInterval(this.updateTransactions, this.updateInterval)
-    this.intervalWalletInfo = setInterval(this.updateWalletInfo, this.updateInterval)
   },
   methods: {
     updateTransactions () {

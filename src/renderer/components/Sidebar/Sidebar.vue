@@ -68,6 +68,7 @@ export default {
   },
   methods: {
     logout () {
+      this.$store.dispatch('transactions/clearPusher')
       this.$store.dispatch('wallet/updateActiveWallet', false)
       this.$router.push('/')
     },

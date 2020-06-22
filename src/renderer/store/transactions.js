@@ -40,6 +40,22 @@ export const getters = {
 }
 
 export const actions = {
+  initPusher ({ dispatch }) {
+    const address = this.state.wallet.activeWallet.address
+    const channel = this._vm.$pusher.subscribe(`address.${address}`)
+    const eventNames = ['address-coinbase-update', 'address-delete-name-update', 'address-receive-update', 'address-receive-name-update', 'address-send-update', 'address-send-name-update', 'address-register-name-update']
+
+    eventNames.forEach(event => {
+      channel.bind(event, transaction => {
+        dispatch('updateTransactions', 1)
+        dispatch('wallet/updateWalletInfo', address, { root: true })
+      })
+    })
+  },
+  clearPusher () {
+    const address = this.state.wallet.activeWallet.address
+    this._vm.$pusher.unsubscribe(`address.${address}`)
+  },
   async updateTransactions ({ commit }, page) {
     const online = this.state.online.online
     const path = app.getPath('userData') + '\\transactions.json'
