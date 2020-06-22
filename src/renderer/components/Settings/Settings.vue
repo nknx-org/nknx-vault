@@ -1,5 +1,20 @@
 <template>
   <div class="settings">
+    <div v-if="savedWallets" class="settings__item">
+      <div class="settings__left">
+        <h3 class="title_color_dark">
+          {{ $t('manageWallets') }}
+        </h3>
+        <p class="settings__descr">
+          {{ $t('manageWalletsDescr') }}
+        </p>
+      </div>
+      <div class="settings__right">
+        <Button class="settings__right-item" theme="ghost-secondary" @click.native="toggleManageWalletsModal(true)">
+          {{ $t('manage') }}
+        </Button>
+      </div>
+    </div>
     <div class="settings__item">
       <div class="settings__left">
         <h3 class="title_color_dark">
@@ -73,7 +88,7 @@
         <Select :items="availableCurrencies" :active-item="selectedCurrency" @update="updateCurrency" />
       </div>
     </div>
-
+    <ManageWalletsModal :open="isManageWalletsModal" @toggleManageWalletsModal="toggleManageWalletsModal" />
     <RegisterNameModal :open="isRegisterWalletNameModal" @toggleRegisterWalletNameModal="toggleRegisterWalletNameModal" />
     <DeleteNameModal :open="isDeleteWalletNameModal" @toggleDeleteWalletNameModal="toggleDeleteWalletNameModal" />
     <TransferNameModal :open="isTransferNameModal" @toggleTransferWalletNameModal="toggleTransferWalletNameModal" />
@@ -93,15 +108,17 @@ import Button from '~/components/Button/Button.vue'
 import RegisterNameModal from '~/components/Modals/RegisterNameModal/RegisterNameModal.vue'
 import DeleteNameModal from '~/components/Modals/DeleteNameModal/DeleteNameModal.vue'
 import TransferNameModal from '~/components/Modals/TransferNameModal/TransferNameModal.vue'
+import ManageWalletsModal from '~/components/Modals/ManageWalletsModal/ManageWalletsModal.vue'
 import Select from '~/components/Controls/Select/Select.vue'
 
 export default {
-  components: { Button, RegisterNameModal, Select, DeleteNameModal, TransferNameModal },
+  components: { Button, RegisterNameModal, Select, DeleteNameModal, TransferNameModal, ManageWalletsModal },
   data () {
     return {
       isRegisterWalletNameModal: false,
       isDeleteWalletNameModal: false,
-      isTransferNameModal: false
+      isTransferNameModal: false,
+      isManageWalletsModal: false
     }
   },
   computed: {
@@ -109,7 +126,8 @@ export default {
       activeWallet: 'wallet/getActiveWallet',
       walletInfo: 'wallet/getWalletInfo',
       availableCurrencies: 'currency/getAvailableCurrencies',
-      selectedCurrency: 'settings/getSelectedCurrency'
+      selectedCurrency: 'settings/getSelectedCurrency',
+      savedWallets: 'wallet/getSavedWallets'
     }),
     walletName () {
       return this.walletInfo.name || []
@@ -127,6 +145,9 @@ export default {
     },
     toggleTransferWalletNameModal (bool) {
       this.isTransferNameModal = bool
+    },
+    toggleManageWalletsModal (bool) {
+      this.isManageWalletsModal = bool
     },
     downloadWallet () {
       const jsonWallet = this.activeWallet.toJSON()

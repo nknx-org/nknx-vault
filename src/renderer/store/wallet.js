@@ -60,6 +60,13 @@ export const actions = {
       fs.writeFileSync(path, JSON.stringify([walletObj]))
     }
   },
+  deleteSavedWallet ({ commit }, name) {
+    const path = app.getPath('userData') + '\\savedWallets.json'
+    const savedWallets = fs.readFileSync(path)
+    const savedWalletsObj = JSON.parse(savedWallets).filter(wallet => wallet.walletName !== name)
+    commit('setSavedWallets', savedWalletsObj)
+    fs.writeFileSync(path, JSON.stringify(savedWalletsObj))
+  },
   async initSavedWallets ({ commit }) {
     const path = app.getPath('userData') + '\\savedWallets.json'
     try {
