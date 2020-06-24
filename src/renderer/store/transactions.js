@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { remote } from 'electron'
-import Pusher from 'pusher-js'
 const app = remote.app
+
 export const state = () => ({
   transactions: false,
   loading: true,
@@ -41,28 +41,15 @@ export const getters = {
 
 export const actions = {
   initPusher ({ dispatch }) {
-    const pusher = new Pusher(process.env.PUSHER_SECRET, {
-      cluster: process.env.PUSHER_CLUSTER,
-      forceTLS: true,
-      wsHost: process.env.PUSHER_HOST,
-      wssPort: process.env.PUSHER_PORT,
-      wsPort: process.env.PUSHER_PORT
-    })
-    Pusher.log = function (message) {
-      console.log(message)
-    }
     const address = this.state.wallet.activeWallet.address
-    const channel = pusher.subscribe(`address.${address}`)
+    const channel = this._vm.$pusher.subscribe(`address.${address}`)
     const eventNames = ['coinbase-tx', 'delete-name-tx', 'transfer-asset-tx', 'transfer-name-tx', 'register-name-tx']
 
     eventNames.forEach(event => {
       channel.bind(event, transaction => {
-        console.log(transaction)
         dispatch('updateTransactions', 1)
-        dispatch('wallet/updateWalletInfo', address, { root: true })
       })
     })
-    console.log(channel)
   },
   clearPusher () {
     const address = this.state.wallet.activeWallet.address
@@ -75,7 +62,7 @@ export const actions = {
 
     if (online === true) {
       const data = await this.$axios.$get(
-        `addresses/${address}/transfers?page=${page}`
+        `addresses/${address}/transactions?page=${page}&txType=COINBASE_TYPE,TRANSFER_ASSET_TYPE,REGISTER_NAME_TYPE,TRANSFER_NAME_TYPE,DELETE_NAME_TYPE`
       )
 
       if (page === 1) {
@@ -96,7 +83,7 @@ export const actions = {
   },
   async updateAvgFee ({ commit }) {
     const data = await this.$axios.$get(
-      'https://api.nknx.org/statistics/avgtxfee'
+      'statistics/avgtxfee'
     )
 
     commit('setAvgFee', data)

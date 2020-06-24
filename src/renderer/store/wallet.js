@@ -89,6 +89,7 @@ export const actions = {
         `addresses/${address}`
       )
 
+      data.balance = data.balance / 100000000
       const jsonWalletInfo = JSON.stringify(data)
       fs.writeFileSync(path, jsonWalletInfo)
 

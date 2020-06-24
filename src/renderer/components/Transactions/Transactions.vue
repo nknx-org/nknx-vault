@@ -33,20 +33,20 @@
       <template v-else>
         <tr v-for="tx in transactions" :key="tx.id">
           <td>{{ $moment(tx.created_at + "Z").format('YYYY-MM-DD HH:mm') }}</td>
-          <td><span v-if="address === tx.recipientWallet">{{ $t('recieved') }}</span> <span v-else>{{ $t('sent') }}</span></td>
+          <td><span v-if="address === tx.payload.recipientWallet">{{ $t('recieved') }}</span> <span v-else>{{ $t('sent') }}</span></td>
           <td>
-            <span v-if="tx.payloadType === 'REGISTER_NAME_TYPE'">{{ $t('nameRegistration') }}</span>
-            <span v-else-if="tx.payloadType === 'DELETE_NAME_TYPE'">{{ $t('nameDeletion') }}</span>
-            <span v-else-if="tx.payloadType === 'TRANSFER_NAME_TYPE'">{{ $t('nameTransfer') }}</span>
-            <span v-else-if="address === tx.recipientWallet && tx.senderWallet === 'NKNaaaaaaaaaaaaaaaaaaaaaaaaaaaeJ6gxa'">{{ $t('miningReward') }}</span>
-            <span v-else-if="address === tx.recipientWallet">{{ tx.senderWallet }}</span> <span v-else>{{ tx.recipientWallet }}</span>
+            <span v-if="tx.payload.payloadType === 'REGISTER_NAME_TYPE'">{{ $t('nameRegistration') }}</span>
+            <span v-else-if="tx.payload.payloadType === 'DELETE_NAME_TYPE'">{{ $t('nameDeletion') }}</span>
+            <span v-else-if="tx.payload.payloadType === 'TRANSFER_NAME_TYPE'">{{ $t('nameTransfer') }}</span>
+            <span v-else-if="address === tx.payload.recipientWallet && tx.payload.senderWallet === 'NKNaaaaaaaaaaaaaaaaaaaaaaaaaaaeJ6gxa'">{{ $t('miningReward') }}</span>
+            <span v-else-if="address === tx.payload.recipientWallet">{{ tx.payload.senderWallet }}</span> <span v-else>{{ tx.payload.recipientWallet }}</span>
           </td>
-          <td class="text_align_right" :class="address === tx.recipientWallet ? 'table__item_positive' : 'table__item_negative'">
-            <span v-if="tx.registrantWallet === null">{{ tx.amount | nknValue | commaNumber }}</span>
-            <span v-else-if="tx.payloadType === 'REGISTER_NAME_TYPE'">{{ tx.registration_fee | nknValue | commaNumber }}</span>
-            <span v-else-if="tx.payloadType === 'DELETE_NAME_TYPE'">0 </span>
-            <span v-else-if="tx.payloadType === 'TRANSFER_NAME_TYPE'">0</span>
-            <a :href="`https://explorer.nknx.org/transactions/${tx.transaction.hash}`" target="_blank" class="text__link" @click="openExplorer" />
+          <td class="text_align_right" :class="address === tx.payload.recipientWallet ? 'table__item_positive' : 'table__item_negative'">
+            <span v-if="tx.payload.registrantWallet === null">{{ tx.payload.amount | nknValue | commaNumber }}</span>
+            <span v-else-if="tx.payload.payloadType === 'REGISTER_NAME_TYPE'">{{ tx.payload.registration_fee | nknValue | commaNumber }}</span>
+            <span v-else-if="tx.payload.payloadType === 'DELETE_NAME_TYPE'">0 </span>
+            <span v-else-if="tx.payload.payloadType === 'TRANSFER_NAME_TYPE'">0</span>
+            <a :href="`https://explorer.nknx.org/transactions/${tx.hash}`" target="_blank" class="text__link" @click="openExplorer" />
           </td>
         </tr>
       </template>
