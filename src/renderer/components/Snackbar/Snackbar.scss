@@ -2,8 +2,8 @@
   position: fixed;
   bottom: 0;
   box-shadow: $shadow-2;
-  width: 500px;
-  left: calc(50% - (500px / 2));
+  width: 550px;
+  left: calc(50% - (550px / 2));
   z-index: 10000;
   border-top-left-radius: $card-br;
   border-top-right-radius: $card-br;
@@ -44,7 +44,7 @@
 
   &__close{
     color: $white;
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
     transition: $transition-1;
 

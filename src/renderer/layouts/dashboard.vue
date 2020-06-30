@@ -29,7 +29,8 @@ export default {
     ...mapGetters({
       online: 'online/getOnline',
       activeWallet: 'wallet/getActiveWallet',
-      latestTx: 'transactions/getLatestTx'
+      latestTx: 'transactions/getLatestTx',
+      isNewVersion: 'version/getIsNewVersion'
     })
   },
   watch: {
@@ -80,8 +81,18 @@ export default {
   destroyed () {
   },
   mounted () {
+    this.newVersionAlert()
   },
   methods: {
+    newVersionAlert () {
+      if (this.isNewVersion) {
+        this.$store.dispatch('snackbar/updateSnack', {
+          snack: `newVersionAlert`,
+          color: 'alert',
+          timeout: false
+        })
+      }
+    },
     updateTransactions () {
       this.$store.dispatch('transactions/updateLoading', false)
       this.$store.dispatch('transactions/updateTransactions', 1)

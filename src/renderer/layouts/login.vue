@@ -80,6 +80,7 @@ export default {
       this.getSettings()
       this.updateAvgFee()
       this.initSavedWallets()
+      this.updateRemoteVersion()
       this.intervalPrice = setInterval(this.updatePrice, this.updateInterval)
       this.intervalDailyHistoryPrice = setInterval(
         this.updateDailyHistoryPrice,
@@ -103,6 +104,9 @@ export default {
     },
     updateAvgFee () {
       this.$store.dispatch('transactions/updateAvgFee')
+    },
+    updateRemoteVersion () {
+      this.$store.dispatch('version/updateRemoteVersion')
     }
   }
 }

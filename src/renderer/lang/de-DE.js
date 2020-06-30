@@ -151,5 +151,7 @@ export default {
   DataSizeTooLargeError: 'Error: Data size is too large.',
   ClientNotReadyError: 'Error: client is not ready.',
   AddrNotAllowedError: 'Error: Address not allowed.',
-  rpcRespErrCodes: 'Error: RPC ran into an error.'
+  rpcRespErrCodes: 'Error: RPC ran into an error.',
+  newVersionAlert: 'Your wallet is out of date! Please download the latest version from https://github.com/nknx-org/nknx-vault/releases'
+
 }

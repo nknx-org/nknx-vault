@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "chart.js": "^2.8.0",
+    "compare-versions": "^3.6.0",
     "file-saver": "^2.0.2",
     "husky": "^3.0.9",
     "is-online": "^8.2.0",

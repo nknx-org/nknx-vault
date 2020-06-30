@@ -3,7 +3,7 @@
     <p class="snackbar__text">
       {{ $t(message) }}
     </p>
-    <button v-if="timeout === true" class="snackbar__button" @click="show = false">
+    <button v-if="!timeout" class="snackbar__button" @click="show = false">
       <span class="snackbar__close fe fe-x" />
     </button>
   </div>
