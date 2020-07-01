@@ -1,5 +1,4 @@
-# NKNxVault - A NKN desktop wallet for all plattforms
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f6398223d574cbcb7abd79358fffeb7)](https://www.codacy.com/manual/thesheepman/nknx-vault?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nknx-org/nknx-vault&amp;utm_campaign=Badge_Grade)
+# Vault - A multi platform desktop wallet for the NKN blockchain
 
 ## About
 This is the electron port of the official NKN wallet.js available at [https://vault.rule110.io](https://vault.rule110.io). It also uses open queries available through the [NKN Open API](https://github.com/rule110-io/nkn-open-api).

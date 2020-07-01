@@ -1,9 +1,9 @@
 export default {
-  welcomeHeading: 'Store and send NKN on your terms with NKNxVault',
+  welcomeHeading: 'Store and send NKN on your terms with Vault',
   welcomeDescription:
     'No sign up. No catch. Just an effective, community driven desktop-based wallet, putting the control in your hands ready to join the networking revolution.',
   welcomeDisclaimer:
-    'Disclaimer: Use this service at your own risk. Please make a backup of your wallet and store your password in a safe place. If you lose or forget the password to your generated wallet file you will lose access to your funds. NKNx Vault is not held responsible for any losses that may occur.',
+    'Disclaimer: Use this service at your own risk. Please make a backup of your wallet and store your password in a safe place. If you lose or forget the password to your generated wallet file you will lose access to your funds. Vault is not held responsible for any losses that may occur.',
   createWallet: 'Create Wallet',
   create: 'Create',
   import: 'Import',
@@ -152,5 +152,5 @@ export default {
   ClientNotReadyError: 'Error: client is not ready.',
   AddrNotAllowedError: 'Error: Address not allowed.',
   rpcRespErrCodes: 'Error: RPC ran into an error.',
-  newVersionAlert: 'Your wallet is out of date! Please download the latest version from https://github.com/nknx-org/nknx-vault/releases'
+  newVersionAlert: 'Your wallet is out of date! Please download the latest version from https://github.com/rule110-io/vault/releases'
 }

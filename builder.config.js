@@ -3,7 +3,7 @@ const ICONS_DIR = 'build/icons/'
 const windowsOS = {
   win: {
     icon: ICONS_DIR + 'icon.ico',
-    publisherName: 'nknx',
+    publisherName: 'rule110',
     target: 'nsis'
   },
 
@@ -43,9 +43,9 @@ const macOS = {
 
 module.exports = {
   asar: false,
-  productName: 'NKNx Vault',
-  appId: 'org.nknxorg.nknx-vault',
-  artifactName: 'nknx-vault-${version}.${ext}',
+  productName: 'Vault',
+  appId: 'org.rule110io.vault',
+  artifactName: 'vault-${version}.${ext}',
   directories: {
     output: 'build'
   },

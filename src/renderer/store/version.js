@@ -33,7 +33,7 @@ export const actions = {
 
     if (online === true) {
       const data = await this.$axios.$get(
-        'https://api.github.com/repos/nknx-org/nknx-vault/releases'
+        'https://api.github.com/repos/rule110-io/vault/releases'
       )
       const currentVersion = this.state.version.currentVersion
 

@@ -11,7 +11,7 @@
     "postinstall": "electron-builder install-app-deps & npm run lint:fix"
   },
   "keywords": [],
-  "author": "NKNx Team <hello@nknx.org>",
+  "author": "Rule110 <hello@rule110.io>",
   "license": "MIT",
   "homepage": "https://github.com/michalzaq12/electron-nuxt/blob/master/README.md",
   "engines": {

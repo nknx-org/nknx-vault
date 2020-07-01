@@ -8,7 +8,7 @@ require('dotenv').config()
 module.exports = {
   mode: 'spa', // or 'universal'
   head: {
-    title: 'nknx-vault',
+    title: 'vault',
     link: [
       {
         rel: 'stylesheet',

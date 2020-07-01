@@ -5,7 +5,7 @@
         <h3 class="title_color_dark">
           {{ $t('transactionsHistory') }}
         </h3>
-        <a href="https://explorer.nknx.org/" target="_blank" class="text__link" @click="openExplorer">{{ $t('blockchainExplorer') }}</a>
+        <a href="https://nscan.io/" target="_blank" class="text__link" @click="openExplorer">{{ $t('blockchainExplorer') }}</a>
       </div>
     </div>
     <table>
@@ -46,7 +46,7 @@
             <span v-else-if="tx.payload.payloadType === 'REGISTER_NAME_TYPE'">{{ tx.payload.registration_fee | nknValue | commaNumber }}</span>
             <span v-else-if="tx.payload.payloadType === 'DELETE_NAME_TYPE'">0 </span>
             <span v-else-if="tx.payload.payloadType === 'TRANSFER_NAME_TYPE'">0</span>
-            <a :href="`https://explorer.nknx.org/transactions/${tx.hash}`" target="_blank" class="text__link" @click="openExplorer" />
+            <a :href="`https://nscan.io/transactions/${tx.hash}`" target="_blank" class="text__link" @click="openExplorer" />
           </td>
         </tr>
       </template>
