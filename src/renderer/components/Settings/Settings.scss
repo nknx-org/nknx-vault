@@ -4,9 +4,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: $padding-big;
 
-    &:not(:last-child){
-      margin-bottom: $padding-big;
+    &_last{
+      margin-bottom: 0;
     }
   }
 

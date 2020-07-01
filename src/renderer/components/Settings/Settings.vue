@@ -1,5 +1,18 @@
 <template>
   <div class="settings">
+    <div class="settings__item">
+      <div class="settings__left">
+        <h3 class="title_color_dark">
+          {{ $t('preferredCurrency') }}
+        </h3>
+        <p class="settings__descr">
+          {{ $t('currencyChoiceDescr') }}
+        </p>
+      </div>
+      <div class="settings__right">
+        <Select :items="availableCurrencies" :active-item="selectedCurrency" @update="updateCurrency" />
+      </div>
+    </div>
     <div v-if="savedWallets.length" class="settings__item">
       <div class="settings__left">
         <h3 class="title_color_dark">
@@ -60,7 +73,7 @@
         </Button>
       </div>
     </div>
-    <div class="settings__item">
+    <div class="settings__item settings__item_last">
       <div class="settings__left">
         <h3 class="title_color_dark">
           {{ $t('backup') }}
@@ -75,19 +88,7 @@
         </Button>
       </div>
     </div>
-    <div class="settings__item">
-      <div class="settings__left">
-        <h3 class="title_color_dark">
-          {{ $t('preferredCurrency') }}
-        </h3>
-        <p class="settings__descr">
-          {{ $t('currencyChoiceDescr') }}
-        </p>
-      </div>
-      <div class="settings__right">
-        <Select :items="availableCurrencies" :active-item="selectedCurrency" @update="updateCurrency" />
-      </div>
-    </div>
+
     <ManageWalletsModal :open="isManageWalletsModal" @toggleManageWalletsModal="toggleManageWalletsModal" />
     <RegisterNameModal :open="isRegisterWalletNameModal" @toggleRegisterWalletNameModal="toggleRegisterWalletNameModal" />
     <DeleteNameModal :open="isDeleteWalletNameModal" @toggleDeleteWalletNameModal="toggleDeleteWalletNameModal" />
