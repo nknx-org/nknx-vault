@@ -1,7 +1,7 @@
 {
-  "name": "nknx-vault",
-  "version": "0.1.1",
-  "description": "The NKN desktop wallet",
+  "name": "vault",
+  "version": "1.0.0",
+  "description": "A multi platform desktop wallet for the NKN blockchain",
   "main": "./dist/main/index.js",
   "scripts": {
     "dev": "cross-env-shell NODE_ENV=development node .electron-nuxt/index.js",
